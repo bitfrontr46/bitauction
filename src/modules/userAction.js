@@ -34,3 +34,5 @@ export const stateToProps = (state) => {
 export const dispatchToProps = (dispatch) => ({
     
 })
+
+export default login_reducer;
