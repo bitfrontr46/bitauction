@@ -7,7 +7,7 @@ const passport = require('passport');
 router.use(passport.initialize());
 router.use(passport.session());
 router.use('/Enroll',productEnroll)
-router.get('/', (req, res) => res.json({data:'this is index.'}));
+router.get('/', (req, res) => res.json({data:'hi.'}));
 
 
 
