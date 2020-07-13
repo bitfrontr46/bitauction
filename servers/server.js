@@ -11,8 +11,8 @@ const route = require('../routes/index');
 const port = 3001;
 const connection = require('../src/connection');
 
-var whitelist = ['http://localhost:3000', 'http://localhost:3001']
-var corsOptions = {
+let whitelist = ['http://localhost:3000', 'http://localhost:3001']
+let corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
       callback(null, true)

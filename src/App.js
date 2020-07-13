@@ -1,7 +1,6 @@
 import React from "react";
 import "./App.css";
 import { Route } from "react-router-dom";
-import Enroll from "./project/Enroll";
 import PostListPage from "./pages/PostListPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
@@ -16,7 +15,6 @@ const App = () => {
       <Route component={RegisterPage} path="/register" />
       <Route component={WritePage} path="/write" />
       <Route component={PostPage} path="/@:username:postId" />
-      {/* <Enroll /> */}
     </>
   );
 };
