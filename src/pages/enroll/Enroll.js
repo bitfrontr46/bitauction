@@ -1,13 +1,12 @@
-import React from 'react';
-import Stepper from './EnrollStepper';
+import React from "react";
+import Stepper from "./EnrollStepper";
 
-function Enroll(){
-
-    return(
-        <div>
-            <Stepper/>
-        </div>
-    )
+function Enroll() {
+  return (
+    <div>
+      <Stepper />
+    </div>
+  );
 }
 
 export default Enroll;
