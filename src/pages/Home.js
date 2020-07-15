@@ -5,6 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { useHistory } from "react-router-dom";
+import HomeChart from './HomeChart';
 
 const useStyles = makeStyles((theme) => ({
   heroContent: {
@@ -22,6 +23,7 @@ export default function Album() {
   return (
     <div>
       <main>
+      <HomeChart/>
         <div className={classes.heroContent}>
           <Container maxWidth="sm">
             <Typography
@@ -31,7 +33,7 @@ export default function Album() {
               color="textPrimary"
               gutterBottom
             >
-              Album layout
+              제작소 - 웹 비즈니스의 고민을 해결해드립니다.
             </Typography>
             <Typography
               variant="h5"
@@ -53,7 +55,7 @@ export default function Album() {
                       history.push("/list");
                     }}
                   >
-                    LIST
+                    목록
                   </Button>
                 </Grid>
                 <Grid item>
@@ -64,7 +66,7 @@ export default function Album() {
                       history.push("/enroll");
                     }}
                   >
-                    ENROLL
+                    요청하기
                   </Button>
                 </Grid>
               </Grid>

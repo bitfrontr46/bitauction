@@ -58,7 +58,7 @@ function Navigation() {
     return (
         <div>
             <Typography className={classes.title}>
-                HELL
+                제작소
             </Typography>
             <div className={classes.navStyle}>
                 {menuList.map((obj, index) => {
