@@ -5,7 +5,8 @@ import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import { makeStyles } from "@material-ui/core/styles";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import ProductListDrawer from './ProductListDrawer'
+import ProductListDrawer from "./ProductListDrawer";
+import ProductSearch from "./ProductSearch";
 
 const useStyles = makeStyles((theme) => ({
   cardGrid: {
@@ -70,7 +71,9 @@ function ProductList() {
 
   return (
     <div className={classes.backgroundStyle}>
-    <ProductListDrawer/>
+      {/* inputs */}
+      <ProductListDrawer />
+      <ProductSearch/>
       <input
         type="radio"
         name="category"
