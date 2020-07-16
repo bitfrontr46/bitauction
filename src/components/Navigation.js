@@ -53,6 +53,10 @@ function Navigation() {
             url: '/join',
             name: 'JOIN',
         },
+        {
+            url: '/adminlogin',
+            name: 'ADMIN',
+        },
     ]
 
     return (
