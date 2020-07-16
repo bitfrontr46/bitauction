@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { PieChart, Pie, Sector } from 'recharts';
 
-const data = [
+const roundChartData = [
   { name: 'Group A', value: 400 },
   { name: 'Group B', value: 300 },
   { name: 'Group C', value: 300 },
@@ -74,7 +74,7 @@ export default class HomeChart2 extends PureComponent {
         <Pie
           activeIndex={this.state.activeIndex}
           activeShape={renderActiveShape}
-          data={data}
+          data={roundChartData}
           cx={200}
           cy={200}
           innerRadius={60}

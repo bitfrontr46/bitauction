@@ -7,7 +7,7 @@ import {
   CartesianGrid,
   Tooltip,
 } from "recharts";
-const data = [
+const graphChartData = [
   { name: "Page A", pv: 1209 },
   { name: "Page B", pv: 2500 },
   { name: "Page C", pv: 3200 },
@@ -25,7 +25,7 @@ const HomeChart = () => {
       <AreaChart
         width={600}
         height={200}
-        data={data}
+        data={graphChartData}
         syncId="anyId"
         margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
       >

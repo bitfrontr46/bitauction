@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import ProductItem from "./ProductItem";
+import ProductItem from "../ProductItem";
 import Axios from "axios";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
