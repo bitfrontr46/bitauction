@@ -7,6 +7,7 @@ import Container from "@material-ui/core/Container";
 import { useHistory } from "react-router-dom";
 
 
+
 const useStyles = makeStyles((theme) => ({
   heroContent: {
     padding: theme.spacing(8, 0, 6),
@@ -22,6 +23,7 @@ export default function Album() {
 
   return (
     <div>
+
       <main>
         <div className={classes.heroContent}>
           <Container maxWidth="sm">

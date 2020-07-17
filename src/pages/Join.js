@@ -11,8 +11,12 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { Link as RLink } from "react-router-dom";
 import Axios from "axios";
+import Navigation from "../components/Navigation";
 
 const useStyles = makeStyles((theme) => ({
+  navigation: {
+    display: "flex",
+  },
   paper: {
     marginTop: theme.spacing(8),
     display: "flex",
@@ -63,6 +67,13 @@ export default function Join() {
 
   return (
     <Container component="main" maxWidth="xs">
+      <header>
+        {/* Navigation의 좌측 정렬이 안됨
+        ++ TT 파일 Style-component 정리하자.
+        ++ 각각의 파일에 Navigation 넣을 수 있는 더 좋은 방법은? */}
+        <Navigation />
+      </header>
+
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
