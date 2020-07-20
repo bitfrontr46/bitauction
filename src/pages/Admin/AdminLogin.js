@@ -7,6 +7,8 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Axios from "axios";
+import Navigation from "../../components/Navigation";
+import Footer from "../../components/Footer";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -58,6 +60,7 @@ export default function Login() {
 
   return (
     <Container component="main" maxWidth="xs">
+    <Navigation/>
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
@@ -100,6 +103,7 @@ export default function Login() {
         </form>
         <br />
       </div>
+      <Footer/>
     </Container>
   );
 }

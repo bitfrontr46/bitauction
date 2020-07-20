@@ -11,10 +11,10 @@ postiion: absolute;
 display: flex;
 `;
 
-const TT = ({ obj }) => {
+const Styles = ({ obj }) => {
   return (<Block>
     {obj}
     </Block>)
 };
 
-export default TT;
+export default Styles;

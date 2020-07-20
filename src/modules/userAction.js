@@ -1,10 +1,10 @@
-const { combineReducers } = require("redux");
+//const { combineReducers } = require("redux");
 
 const LOGIN = 'LOGIN';
 const LOGOUT = 'LOGOUT';
 
-const user_login = () => ({type : LOGIN});
-const user_logout = () => ({type : LOGIN});
+//const user_login = () => ({type : LOGIN});
+//const user_logout = () => ({type : LOGIN});
 
 const initailState = {
     is_login : false,

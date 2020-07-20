@@ -1,12 +1,12 @@
 import React from "react";
 import Box from "@material-ui/core/Box";
-import TT from "./tt";
+import Styles from "./Style";
 
 const Test = () => {
   return (
-        <TT>
+        <Styles>
       <Box color="secondary.main">Primary</Box>
-    </TT>
+    </Styles>
   );
 };
 

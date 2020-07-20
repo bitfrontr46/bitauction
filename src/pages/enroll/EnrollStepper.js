@@ -59,7 +59,7 @@ export default function EnrollStepper() {
     tags: [],
   });
 
-  const { category, deadLine, detail, tags } = enrollData;
+  const { category, deadLine, detail } = enrollData;
 
   const handleEnrollData = (name, value) => {
     setEnrollData({

@@ -8,7 +8,6 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Chip from "@material-ui/core/Chip";
-import CardMedia from "@material-ui/core/CardMedia";
 import { Divider } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({

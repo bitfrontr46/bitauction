@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Doughnut } from "react-chartjs-2";
+import { Polar } from "react-chartjs-2";
 
 const AdminHomeChart1 = () => {
   //Hooks
@@ -7,12 +7,11 @@ const AdminHomeChart1 = () => {
 
   const chart = () => {
     setChartData({
-      labels: ["웹사이트", "앱", "쇼핑몰", "iPhone", "Android"],
+      labels: ["1st", "2nd", "3rd", "4th", "5th"],
       datasets: [
         {
-          label: "Visitors",
-          data: [32, 45, 120, 76, 69],
-          //labels data 순서대로 색깔 지정됨
+          label: "Scale",
+          data: [320, 450, 120, 760, 690],
           backgroundColor: [
             "#1f77b4",
             "#ff7f0e",
@@ -20,7 +19,7 @@ const AdminHomeChart1 = () => {
             "#17becf",
             "#d7df01",
           ],
-          borderWidth: 4,
+          borderWidth: 0,
         },
       ],
     });
@@ -31,12 +30,12 @@ const AdminHomeChart1 = () => {
   }, []);
   return (
     <div style={{ height: "500px", width: "500px" }}>
-      <Doughnut
+      <Polar
         data={chartData}
         options={{
           //반응형
           responsive: true,
-          title: { text: "Tags", display: true, fontSize: 20 },
+          title: { text: "Majority", display: true, fontSize: 20 },
         }}
       />
     </div>

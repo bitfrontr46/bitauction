@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 function Bidding(props) {
   const history = useHistory();
   const [price, setPrice] = useState();
-  const [data, setData] = useState(props.location.state.data);
+  const [data] = useState(props.location.state.data);
 
   const onChangePrice = (e) => {
     setPrice(e.target.value);
