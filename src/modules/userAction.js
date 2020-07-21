@@ -1,36 +1,30 @@
-const { combineReducers } = require("redux");
-
-const LOGIN = 'LOGIN';
-const LOGOUT = 'LOGOUT';
-
-const user_login = () => ({type : LOGIN});
-const user_logout = () => ({type : LOGIN});
 
 const initailState = {
     is_login : false,
+    user_id : '',
+    userName : '',
+    is_seller : null,
 }
 
 const login_reducer = (state = initailState, action) => {
     switch(action.type){
-        case LOGIN:
+        case 'LOGIN':
             return {
                 is_login : true,
+                user_id : action.payload.user_id,
+                userName : action.payload.userName,
+                is_seller : action.payload.is_seller,
             }
-        case LOGOUT:
+        case 'LOGOUT':
             return{
                 is_login : false,
+                user_id : '',
+                is_seller : null,
             }
         default:
             return state;
     }
 }
 
-export const stateToProps = (state) => {
-    return {
-        is_login : state.userAction.is_login
-    }
-}
 
-export const dispatchToProps = (dispatch) => ({
-    
-})
+export default login_reducer;

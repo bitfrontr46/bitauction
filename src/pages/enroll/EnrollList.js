@@ -11,6 +11,7 @@ import { TextField } from '@material-ui/core';
 import Chip from '@material-ui/core/Chip';
 import LabelIcon from '@material-ui/icons/Label';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import Checkbox from '@material-ui/core/Checkbox';
 
 const useStyles = makeStyles((theme) => ({
@@ -89,6 +90,13 @@ function EnrollList({ stepIndex, handleEnrollData }) {
 
     const { deadLine, deadLineIndex } = deadLineInput;
 
+    const [hopeDateInput, setHopeDateInput] = useState({
+        hopeDate: '',
+        hopeDateIndex: null,
+    });
+
+    const { hopeDate, hopeDateIndex } = hopeDateInput;
+
     const onChangeTime = (index, value) => {
         const now = new Date()
         let str = value.slice(0, -2);
@@ -107,6 +115,15 @@ function EnrollList({ stepIndex, handleEnrollData }) {
         });
         handleEnrollData('category', value)
     };
+
+    const onChangeHopeDate = (index, value) => {
+        setHopeDateInput({
+            hopeDate: value,
+            hopeDateIndex: index
+        });
+        handleEnrollData('hopeDate', value)
+    };
+
 
     const [tag, setTag] = useState('');
 
@@ -198,6 +215,54 @@ function EnrollList({ stepIndex, handleEnrollData }) {
         case 2:
             return (
                 <div className={classes.rootList}>
+                    <h1><CalendarTodayIcon /> 희망 작업 완료일을 선택해주세요.</h1>
+                    {hopeDate}
+                    <p>
+                        전문가와 협의도 가능합니다!
+                    </p>
+                    <List className={classes.backgroundStyle} component="nav" aria-label="main mailbox folders">
+                        <ListItem button selected={hopeDateIndex === 0} onClick={() => onChangeHopeDate(0, '전문가와 협의')}>
+                            <ListItemIcon>
+                                <Checkbox
+                                    checked={hopeDateIndex === 0}
+                                />
+                            </ListItemIcon>
+                            <ListItemText primary='전문가와 협의' />
+                        </ListItem>
+                        <ListItem button selected={hopeDateIndex === 1} onClick={() => onChangeHopeDate(1)}>
+                            <ListItemIcon>
+                                <Checkbox
+                                    checked={hopeDateIndex === 1}
+                                />
+                            </ListItemIcon>
+                            <ListItemText primary='날짜 선택' />
+                            {hopeDateIndex === 1
+                                ? <TextField
+                                    id="date"
+                                    label="date"
+                                    type="date"
+                                    defaultValue={new Date().toDateString()}
+                                    className={classes.textField}
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                    onChange={(e) => {
+                                        if(new Date(e.target.value) < new Date()){
+                                            alert('이미 지난 날짜입니다. 다시 선택해 주세요')
+                                        } else {
+                                            onChangeHopeDate(1, e.target.value)
+                                        }
+                                    }}
+                                />
+                                : <></>
+                            }
+                        </ListItem>
+                    </List>
+                </div>
+            )
+        case 3:
+            return (
+                <div className={classes.rootList}>
                     <h1><LabelIcon /> 아이디어가 있으신가요?</h1>
                     <p>
                         아이디어의 키워드를 태그형식으로 입력해주세요!<br />
@@ -216,7 +281,7 @@ function EnrollList({ stepIndex, handleEnrollData }) {
                     {showTagList}<br /><br />
                 </div>
             )
-        case 3:
+        case 4:
             return (
                 <div className={classes.rootList}>
                     <h1><AddCircleOutlineIcon /> 조금 더 자세한 설명을 적어주세요!</h1>
@@ -236,7 +301,7 @@ function EnrollList({ stepIndex, handleEnrollData }) {
                     />
                 </div>
             )
-        case 4:
+        case 5:
             return (
                 <div className={classes.rootList}>
                     <h1>작성하신 견적서를 확인해주세요!</h1>
@@ -257,8 +322,12 @@ function EnrollList({ stepIndex, handleEnrollData }) {
                             {
                                 icon: () => <LabelIcon />,
                                 text: tagList.map((obj) => {
-                                    return <span key={obj}><Chip variant="outlined" size="small" label={obj}/>&nbsp;</span>
+                                    return <span key={obj}><Chip variant="outlined" size="small" label={obj} />&nbsp;</span>
                                 })
+                            },
+                            {
+                                icon: () => <CalendarTodayIcon />,
+                                text: hopeDate
                             },
                         ].map((obj, index) => {
                             return (

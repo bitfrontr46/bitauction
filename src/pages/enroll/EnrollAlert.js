@@ -30,7 +30,7 @@ export default function CustomizedSnackbars({open,setOpen}) {
     <div className={classes.root}>
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="error">
-            빈 항목이 존재합니다!
+          빈 항목이 존재합니다!
         </Alert>
       </Snackbar>
     </div>

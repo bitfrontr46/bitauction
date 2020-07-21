@@ -1,16 +1,17 @@
 const express = require('express');
 const router = express.Router();
 
-const productController = require('../controller/productController')
-const userController = require('../controller/userController')
-const biddingController = require('../controller/biddingController')
+const requestController = require('../controller/request')
+const userController = require('../controller/user')
+const biddingController = require('../controller/bidding')
 
 
-router.post('/enroll',productController.enroll);
-router.get('/list', productController.list);
+router.post('/enroll',requestController.enroll);
+router.get('/list', requestController.list);
 
 router.post('/bidding', biddingController.bidding);
 router.get('/ctn', biddingController.ctn);
+router.post('/biddingList', biddingController.list);
 
 router.post('/login',userController.login);
 router.post('/join',userController.join);

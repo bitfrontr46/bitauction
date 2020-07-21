@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
@@ -33,7 +32,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Join() {
+export default function JoinForm(props) {
+
   const classes = useStyles();
 
   const [userInfo, setInfo] = useState({
@@ -41,6 +41,9 @@ export default function Join() {
       userEmail : '',
       userPassword : '',
   })
+
+  const [is_seller] = useState(props.location.state.is_seller);
+
 
   const onChangeInfo = (e) => {
       setInfo({
@@ -52,7 +55,8 @@ export default function Join() {
   const onSubmitForm = (e) => {
       e.preventDefault()
       Axios.post('http://localhost:4000/api/join',{
-          ...userInfo
+          ...userInfo,
+          is_seller : is_seller
       })
       .then(res => {
           alert(res.data.result)
@@ -64,7 +68,6 @@ export default function Join() {
 
   return (
     <Container component="main" maxWidth="xs">
-      <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />

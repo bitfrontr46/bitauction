@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -8,8 +8,9 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import {Link as RLink} from 'react-router-dom'
+import {Link as RLink, useHistory} from 'react-router-dom'
 import Axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -34,6 +35,15 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Login() {
   const classes = useStyles();
+  const history = useHistory();
+  const is_login = useSelector(state => state.userAction.is_login);
+  const dispatch = useDispatch();
+
+  useEffect(()=>{
+    if(is_login){
+      history.push('/');
+    }
+  },[history,is_login])
 
   const [user, setUser] = useState({
     userEmail : '',
@@ -49,11 +59,23 @@ export default function Login() {
 
   const onSubmitForm = (e) => {
     e.preventDefault()
+    
     Axios.post('http://localhost:4000/api/login',{
       ...user
     })
     .then( res => {
-      alert(res.data.result);
+      if(res.data.authentication){
+        console.log(res.data);
+        dispatch({type:'LOGIN', payload : {user_id : res.data.user_id, is_seller : res.data.is_seller, userName : res.data.userName}});
+        localStorage.setItem('is_login',true);
+        localStorage.setItem('is_seller',res.data.is_seller);
+        localStorage.setItem('user_id',res.data.user_id);
+        localStorage.setItem('userName',res.data.userName);
+        alert(res.data.result);
+        history.push('/');
+      } else {
+        alert(res.data.result);
+      }
     })
     .catch( err => {
       console.log(err);

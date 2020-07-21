@@ -1,12 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
+import { useSelector, useDispatch } from 'react-redux';
+import { Divider } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        flexGrow: 1,
+        padding: '10px'
     },
     title: {
         flexGrow: 1,
@@ -16,8 +18,9 @@ const useStyles = makeStyles((theme) => ({
         paddingLeft: '10px',
     },
     navStyle: {
+        paddingTop : '5px',
         display: 'inline-block',
-        float : 'right',
+        float: 'right',
     },
     menuStyle: {
         color: 'black',
@@ -31,40 +34,58 @@ const useStyles = makeStyles((theme) => ({
 function Navigation() {
 
     const classes = useStyles();
-
-    const menuList = [
-        {
-            url: '/',
-            name: 'HOME',
-        },
-        {
-            url: '/list',
-            name: 'LIST',
-        },
-        {
-            url: '/enroll',
-            name: 'ENROLL',
-        },
-        {
-            url: '/login',
-            name: 'LOGIN',
-        },
-        {
-            url: '/join',
-            name: 'JOIN',
-        },
-    ]
+    const is_login = useSelector(state => state.userAction.is_login);
+    const is_seller = useSelector(state => state.userAction.is_seller);
+    const history = useHistory();
+    const dispatch = useDispatch();
+    const logout = () => {
+        localStorage.clear();
+        dispatch({ type: 'LOGOUT' })
+        history.push('/');
+        alert('로그아웃');
+    }
+    const loginMenu = () => {
+        console.log('is_seller',is_seller);
+        if (is_login) {
+            if (is_seller) {
+                return (
+                    <>
+                        <Link className={classes.menuStyle} to='/'><Button color="inherit">HOME</Button></Link>
+                        <Link className={classes.menuStyle} to='/list'><Button color="inherit">LIST</Button></Link>
+                        <Link className={classes.menuStyle} to='/mypage'><Button color="inherit">MYPAGE</Button></Link>
+                        <Link className={classes.menuStyle}><Button onClick={logout} color="inherit">LOGOUT</Button></Link>
+                    </>
+                )
+            } else {
+                return (
+                    <>
+                        <Link className={classes.menuStyle} to='/'><Button color="inherit">HOME</Button></Link>
+                        <Link className={classes.menuStyle} to='/enroll'><Button color="inherit">ENROLL</Button></Link>
+                        <Link className={classes.menuStyle} to='/mypage'><Button color="inherit">MYPAGE</Button></Link>
+                        <Link className={classes.menuStyle}><Button onClick={logout} color="inherit">LOGOUT</Button></Link>
+                    </>
+                )
+            }
+        } else {
+            return (
+                <>
+                    <Link className={classes.menuStyle} to='/'><Button color="inherit">HOME</Button></Link>
+                    <Link className={classes.menuStyle} to='/login'><Button color="inherit">LOGIN</Button></Link>
+                    <Link className={classes.menuStyle} to='/join'><Button color="inherit">JOIN</Button></Link>
+                </>
+            )
+        }
+    }
 
     return (
-        <div>
+        <div className={classes.root}>
             <Typography className={classes.title}>
                 HELL
             </Typography>
             <div className={classes.navStyle}>
-                {menuList.map((obj, index) => {
-                    return <Link className={classes.menuStyle} to={obj.url} key={index}><Button color="inherit">{obj.name}</Button></Link>
-                })}
+                {loginMenu()}
             </div>
+            <Divider style={{marginTop : '10px', width : '100%'}} variant="middle" />
         </div>
     )
 }

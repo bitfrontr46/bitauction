@@ -8,7 +8,8 @@ import Button from '@material-ui/core/Button';
 import EnrollList from './EnrollList';
 import EnrollDialog from './EnrollDialog';
 import EnrollAlert from './EnrollAlert';
-import {useHistory} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -25,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function getSteps() {
-    return ['카테고리 설정', '마감 시간 설정', '태그 입력', '상세 설명 입력', '작성완료'];
+    return ['카테고리 설정', '마감 시간 설정', '희망 작업 완료일 설정', '태그 입력', '상세 설명 입력', '작성완료'];
 }
 
 export default function EnrollStepper() {
@@ -49,11 +50,12 @@ export default function EnrollStepper() {
     const [enrollData, setEnrollData] = useState({
         category: '',
         deadLine: '',
+        hopeDate: '',
         detail: '',
         tags: [],
     })
 
-    const { category, deadLine, detail, tags } = enrollData;
+    const { category, deadLine, detail, hopeDate } = enrollData;
 
     const handleEnrollData = (name, value) => {
         setEnrollData({
@@ -66,19 +68,22 @@ export default function EnrollStepper() {
     const [alertOpen, setAlertOpen] = useState(false);
 
     const onClickCheck = () => {
-        if (category === '' || deadLine === '' || detail === '') {
+        console.log(hopeDate);
+        if (category === '' || deadLine === '' || detail === '' || hopeDate === undefined) {
             setAlertOpen(true);
         } else {
             setOpen(true);
         }
     }
 
+    const userID = useSelector(state => state.userAction.userID);
+
     const onClickAxios = () => {
         Axios.post('http://localhost:4000/api/enroll', {
             ...enrollData,
             // id : localStorage.getItem('userID'),
             // token : localStorage.getItem('userToken'),
-            userId: "testID",
+            author: userID,
         })
             .then(res => {
                 setOpen(false);
@@ -136,8 +141,8 @@ export default function EnrollStepper() {
                         </div>
                     )}
             </div>
-            <EnrollDialog open={open} onClickAxios={onClickAxios} setOpen={setOpen}/>
-            <EnrollAlert open={alertOpen} setOpen={setAlertOpen}/>
+            <EnrollDialog open={open} onClickAxios={onClickAxios} setOpen={setOpen} />
+            <EnrollAlert open={alertOpen} setOpen={setAlertOpen} />
         </div>
     );
 }
