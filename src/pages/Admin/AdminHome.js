@@ -4,7 +4,7 @@ import AdminNavigation from "../../components/AdminComponents/AdminNavigation";
 import AdminHomeChart1 from "./AdminHomeChart1";
 import AdminHomeChart2 from "./AdminHomeChart2";
 import AdminHomeChart3 from "./AdminHomeChart3";
-import AdminDrawer from "./AdminDrawer";
+import AdminDrawer from "../../components/AdminComponents/AdminDrawer";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -18,14 +18,14 @@ const useStyles = makeStyles((theme) => ({
 const AdminHome = () => {
   const classes = useStyles();
   return (
-    <>
-      <aside style={{float:"left"}}>
+    <div className={classes.paper}>
+      <aside style={{ float: "left" }}>
         <AdminDrawer />
       </aside>
-      <div style={{position:"relative", marginLeft:150}}>
-      <AdminNavigation />
+      <div style={{ position: "relative", marginLeft: 150 }}>
+        <AdminNavigation />
       </div>
-      <table style={{position:"relative", marginLeft:150}}>
+      <table style={{ position: "relative", marginLeft: 150 }}>
         <thead />
         <tbody>
           <tr>
@@ -43,8 +43,7 @@ const AdminHome = () => {
           </tr>
         </tbody>
       </table>
-      <div className={classes.paper}></div>
-    </>
+    </div>
   );
 };
 

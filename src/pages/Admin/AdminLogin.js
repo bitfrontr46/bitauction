@@ -8,7 +8,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Axios from "axios";
 import Navigation from "../../components/Navigation";
-import Footer from "../../components/Footer";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -103,7 +102,6 @@ export default function Login() {
         </form>
         <br />
       </div>
-      <Footer/>
     </Container>
   );
 }

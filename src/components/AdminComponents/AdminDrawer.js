@@ -8,7 +8,10 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-
+import { Link } from "react-router-dom";
+//Responsive Drawer
+// material UI 디자인 나오게 하기
+//divied 된 곳 변수 따로 지정해 같이 실행되게 만들 것
 const drawerWidth = 150;
 
 const useStyles = makeStyles((theme) => ({
@@ -54,29 +57,67 @@ function ResponsiveDrawer(props) {
     setMobileOpen(!mobileOpen);
   };
 
-  const drawer = (
-    <div>
-      <div className={classes.toolbar} />
-      <Divider />
-      <List>
-        {["목록", "호랑이", "사자", "원숭이"].map((text, index) => (
-          <ListItem button key={text}>
+  //구분선 위 메뉴 목록
+  const upperMenuList = [
+    {
+      url: "/accountlist",
+      name: "회원목록",
+    },
+    {
+      url: "/tiger",
+      name: "호랑이",
+    },
+    {
+      url: "/lion",
+      name: "사자",
+    },
+    {
+      url: "/monkey",
+      name: "원숭이",
+    },
+  ];
 
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {["Tiger", "Lion", "Monkey"].map((text, index) => (
-          <ListItem button key={text}>
+  //구분선 아래 메뉴 목록
+ /*  const lowerMenuList = [
+    {
+      url: "/accountlist",
+      name: "회원목록",
+    },
+    {
+      url: "/tiger",
+      name: "호랑이",
+    },
+    {
+      url: "/lion",
+      name: "사자",
+    },
+  ]; */
 
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
-    </div>
-  );
+  const DrawerList = () => {
+    return (
+      <div>
+        <div className={classes.toolbar} />
+        <Divider />
+        <List>
+          {upperMenuList.map((obj, index) => (
+            <Link to={obj.url} key={index}>
+              <ListItem>
+                <ListItemText primary={obj.name} />
+              </ListItem>
+            </Link>
+          ))}
+        </List>
+        <Divider />
+        {/* <List>
+          {lowerMenuList.map((text, index) => (
+            <ListItem button key={text}>
+              <ListItemText primary={text} />
+            </ListItem>
+          ))}
+        </List> */}
+      </div>
+    );
+  };
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
@@ -100,7 +141,7 @@ function ResponsiveDrawer(props) {
               keepMounted: true, // Better open performance on mobile.
             }}
           >
-            {drawer}
+            <DrawerList/>
           </Drawer>
         </Hidden>
         <Hidden xsDown implementation="css">
@@ -111,7 +152,7 @@ function ResponsiveDrawer(props) {
             variant="permanent"
             open
           >
-            {drawer}
+            <DrawerList/>
           </Drawer>
         </Hidden>
       </nav>

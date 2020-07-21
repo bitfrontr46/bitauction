@@ -9,6 +9,7 @@ import Login from "./pages/Login";
 import Join from "./pages/Join";
 import AdminLogin from "./pages/Admin/AdminLogin";
 import AdminHome from "./pages/Admin/AdminHome";
+import AdminSettings from './pages/Admin/AdminSettings';
 import Test from "./Test";
 
 
@@ -32,6 +33,7 @@ function App() {
         <Route path="/adminlogin" component={AdminLogin} exact />
         <Route path="/adminhome" component={AdminHome} exact />
         <Route path="/test" component={Test} exact />
+        <Route path="/adminsettings" component={AdminSettings} exact />
       </div>
     </>
   );
