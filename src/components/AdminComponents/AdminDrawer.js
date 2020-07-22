@@ -9,9 +9,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
-//Responsive Drawer
-// material UI 디자인 나오게 하기
-//divied 된 곳 변수 따로 지정해 같이 실행되게 만들 것
+
 const drawerWidth = 150;
 
 const useStyles = makeStyles((theme) => ({
@@ -78,20 +76,20 @@ function ResponsiveDrawer(props) {
   ];
 
   //구분선 아래 메뉴 목록
- /*  const lowerMenuList = [
+  const lowerMenuList = [
     {
-      url: "/accountlist",
-      name: "회원목록",
+      url: "/adminsettings",
+      name: "설정",
     },
     {
-      url: "/tiger",
-      name: "호랑이",
+      url: "/dog",
+      name: "강아지",
     },
     {
-      url: "/lion",
-      name: "사자",
+      url: "/cat",
+      name: "고양이",
     },
-  ]; */
+  ];
 
   const DrawerList = () => {
     return (
@@ -99,22 +97,21 @@ function ResponsiveDrawer(props) {
         <div className={classes.toolbar} />
         <Divider />
         <List>
+          {/* 컴포넌트 묶어서 링크와 디자인 따로 둚 https://stackoverflow.com/questions/47206639/how-to-add-a-link-to-a-list-in-material-ui-1-0/48252439#48252439 */}
           {upperMenuList.map((obj, index) => (
-            <Link to={obj.url} key={index}>
-              <ListItem>
-                <ListItemText primary={obj.name} />
-              </ListItem>
-            </Link>
+            <ListItem button component={Link} to={obj.url} key={index}>
+              <ListItemText primary={obj.name} />
+            </ListItem>
           ))}
         </List>
         <Divider />
-        {/* <List>
-          {lowerMenuList.map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemText primary={text} />
+        <List>
+          {lowerMenuList.map((obj, index) => (
+            <ListItem button component={Link} to={obj.url} key={index}>
+              <ListItemText primary={obj.name} />
             </ListItem>
           ))}
-        </List> */}
+        </List>
       </div>
     );
   };
@@ -141,7 +138,7 @@ function ResponsiveDrawer(props) {
               keepMounted: true, // Better open performance on mobile.
             }}
           >
-            <DrawerList/>
+            <DrawerList />
           </Drawer>
         </Hidden>
         <Hidden xsDown implementation="css">
@@ -152,7 +149,7 @@ function ResponsiveDrawer(props) {
             variant="permanent"
             open
           >
-            <DrawerList/>
+            <DrawerList />
           </Drawer>
         </Hidden>
       </nav>
