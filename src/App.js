@@ -9,9 +9,9 @@ import Login from "./pages/Login";
 import Join from "./pages/Join";
 import AdminLogin from "./pages/Admin/AdminLogin";
 import AdminHome from "./pages/Admin/AdminHome";
-import AdminSettings from './pages/Admin/AdminSettings';
+import AdminSettings from "./pages/Admin/AdminSettings";
+import AdminAccountList from "./pages/Admin/AdminAccountList";
 import Test from "./Test";
-
 
 function App() {
   return (
@@ -26,7 +26,6 @@ function App() {
         <Route path="/enroll" component={Enroll} exact />
         <Route path="/login" component={Login} exact />
         <Route path="/join" component={Join} exact />
-
       </div>
       <div>
         {/* 관리자 페이지 */}
@@ -34,6 +33,7 @@ function App() {
         <Route path="/adminhome" component={AdminHome} exact />
         <Route path="/test" component={Test} exact />
         <Route path="/adminsettings" component={AdminSettings} exact />
+        <Route path="/adminaccountlist" component={AdminAccountList} exact />
       </div>
     </>
   );

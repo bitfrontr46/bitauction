@@ -41,7 +41,6 @@ function AdminNavigation() {
       url: "/adminsettings",
       name: "SETTINGS",
     },
-
   ];
 
   return (

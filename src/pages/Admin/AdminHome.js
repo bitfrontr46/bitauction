@@ -7,42 +7,62 @@ import AdminHomeChart3 from "./AdminHomeChart3";
 import AdminDrawer from "../../components/AdminComponents/AdminDrawer";
 
 const useStyles = makeStyles((theme) => ({
-  paper: {
+  //왼쪽 바
+  header: {
+    position: "absolute",
+    display: "flex ",
+    flexDirection: "column",
+    float: "left",
+  },
+  //윗쪽 제목
+  nav: {
+    position: "relative",
+    display: "flex",
+    flexDirection: "column",
+    marginLeft: "150px",
+  },
+  //내용
+  section: {
+    position: "relative",
     marginTop: theme.spacing(10),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    float: "left",
+    marginLeft: "180px",
   },
 }));
 
 const AdminHome = () => {
   const classes = useStyles();
   return (
-    <div className={classes.paper}>
-      <aside style={{ float: "left" }}>
+    <div>
+      <header className={classes.header}>
         <AdminDrawer />
-      </aside>
-      <div style={{ position: "relative", marginLeft: 150 }}>
+      </header>
+      <nav className={classes.nav}>
         <AdminNavigation />
-      </div>
-      <table style={{ position: "relative", marginLeft: 150 }}>
-        <thead />
-        <tbody>
-          <tr>
-            <td>
-              <AdminHomeChart1 />
-            </td>
-            <td>
-              <AdminHomeChart2 />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <AdminHomeChart3 />
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      </nav>
+      <section className={classes.section}>
+        <table>
+          <thead />
+          <tbody>
+            <tr>
+              <td>
+                <AdminHomeChart1 />
+              </td>
+              <td>
+                <AdminHomeChart2 />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <AdminHomeChart3 />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
     </div>
   );
 };
