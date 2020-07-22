@@ -27,6 +27,7 @@ function createData(name, joindate, postcount, amount, rank) {
   return { name, joindate, postcount, amount, rank };
 }
 
+//일단 대충 넣어본 데이터
 const rows = [
   createData("AA", "2019/07/12", 10, 100000, 1),
   createData("BB", "2018/10/21", 10, 100000, 1),
@@ -200,6 +201,7 @@ const EnhancedTableToolbar = (props) => {
           </IconButton>
         </Tooltip>
       ) : (
+        // 필터 기능 미구현함..
         <Tooltip title="Filter list">
           <IconButton aria-label="filter list">
             <FilterListIcon />
@@ -411,7 +413,7 @@ export default function EnhancedTable() {
         </Paper>
         <FormControlLabel
           control={<Switch checked={dense} onChange={handleChangeDense} />}
-          label="Dense padding"
+          label="좁은 행 너비"
         />
       </div>
     </>
