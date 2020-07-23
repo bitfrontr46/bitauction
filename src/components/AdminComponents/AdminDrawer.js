@@ -62,8 +62,8 @@ function ResponsiveDrawer(props) {
       name: "회원목록",
     },
     {
-      url: "/tiger",
-      name: "호랑이",
+      url: "/admintagslist",
+      name: "Tags",
     },
     {
       url: "/lion",

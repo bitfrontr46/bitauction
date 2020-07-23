@@ -1,4 +1,5 @@
 import React from "react";
+import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 
 //Bubble Chart 사용 위한 다른 차트 API
@@ -8,6 +9,9 @@ const options={
   title: {
     text: "태그 구성"
   },
+  series: [{
+    
+  }]
 }
 
 const AdminHomeChart4 = () => {

@@ -1,37 +1,12 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import useStyles from "../../styles/Style"
 import AdminNavigation from "../../components/AdminComponents/AdminNavigation";
 import AdminHomeChart1 from "./AdminHomeChart1";
 import AdminHomeChart2 from "./AdminHomeChart2";
 import AdminHomeChart3 from "./AdminHomeChart3";
 import AdminDrawer from "../../components/AdminComponents/AdminDrawer";
 
-const useStyles = makeStyles((theme) => ({
-  //왼쪽 바
-  header: {
-    position: "absolute",
-    display: "flex ",
-    flexDirection: "column",
-    float: "left",
-  },
-  //윗쪽 제목
-  nav: {
-    position: "relative",
-    display: "flex",
-    flexDirection: "column",
-    marginLeft: "150px",
-  },
-  //내용
-  section: {
-    position: "relative",
-    marginTop: theme.spacing(10),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    float: "left",
-    marginLeft: "180px",
-  },
-}));
+// style는 styles 폴더의 style.js로 옮김.
 
 const AdminHome = () => {
   const classes = useStyles();
