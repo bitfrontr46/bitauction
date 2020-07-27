@@ -7,7 +7,7 @@ import ProductList from "./pages/ProductList/ProductList";
 import ProductShow from "./pages/ProductShow";
 import Bidding from "./pages/bidding/Bidding";
 import Login from "./pages/Login";
-import Join from "./pages/join/JoinForm";
+import Join from "./pages/join/JoinHome";
 import AdminLogin from "./pages/Admin/AdminLogin";
 import AdminHome from "./pages/Admin/AdminHome";
 import AdminSettings from "./pages/Admin/AdminSettings";
