@@ -1,3 +1,3 @@
-import Enroll from './Enroll';
+import Enroll from "./Enroll";
 
 export default Enroll;

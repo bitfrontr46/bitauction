@@ -1,3 +1,3 @@
-import MyPage from './Mypage';
+import MyPage from "./Mypage";
 
 export default MyPage;

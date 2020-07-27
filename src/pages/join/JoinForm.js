@@ -1,30 +1,32 @@
-import React, { useState } from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import { Link as RLink } from 'react-router-dom';
-import Axios from 'axios';
-
+import React, { useState } from "react";
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import Link from "@material-ui/core/Link";
+import Grid from "@material-ui/core/Grid";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
+import { Link as RLink } from "react-router-dom";
+import Axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
+  navigation: {
+    display: "flex",
+  },
   paper: {
     marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(3),
   },
   submit: {
@@ -33,38 +35,32 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function JoinForm(props) {
-
   const classes = useStyles();
 
   const [userInfo, setInfo] = useState({
-      userName : '',
-      userEmail : '',
-      userPassword : '',
-  })
+    userName: "",
+    userEmail: "",
+    userPassword: "",
+  });
 
   const [is_seller] = useState(props.location.state.is_seller);
 
-
   const onChangeInfo = (e) => {
-      setInfo({
-          ...userInfo,
-          [e.target.name] : e.target.value,
-      })
-  }
+    setInfo({
+      ...userInfo,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const onSubmitForm = (e) => {
-      e.preventDefault()
-      Axios.post('http://localhost:4000/api/join',{
-          ...userInfo,
-          is_seller : is_seller
-      })
-      .then(res => {
-          alert(res.data.result)
-      })
-      .catch(err => {
-          console.log(err);
-      })
-  }
+    e.preventDefault();
+    Axios.post("http://localhost:4000/api/join", {
+      ...userInfo,
+      is_seller: is_seller,
+    }).catch((err) => {
+      console.log(err);
+    });
+  };
 
   return (
     <Container component="main" maxWidth="xs">
