@@ -76,14 +76,14 @@ export default function EnrollStepper() {
         }
     }
 
-    const userID = useSelector(state => state.userAction.userID);
+    const user_id = useSelector(state => state.userAction.user_id);
 
     const onClickAxios = () => {
         Axios.post('http://localhost:4000/api/enroll', {
             ...enrollData,
-            // id : localStorage.getItem('userID'),
+            // id : localStorage.getItem('user_id'),
             // token : localStorage.getItem('userToken'),
-            author: userID,
+            user_id: user_id,
         })
             .then(res => {
                 setOpen(false);

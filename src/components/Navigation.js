@@ -53,7 +53,7 @@ function Navigation() {
                         <Link className={classes.menuStyle} to='/'><Button color="inherit">HOME</Button></Link>
                         <Link className={classes.menuStyle} to='/list'><Button color="inherit">LIST</Button></Link>
                         <Link className={classes.menuStyle} to='/mypage'><Button color="inherit">MYPAGE</Button></Link>
-                        <Link className={classes.menuStyle}><Button onClick={logout} color="inherit">LOGOUT</Button></Link>
+                        <Link className={classes.menuStyle} to='#'><Button onClick={logout} color="inherit">LOGOUT</Button></Link>
                     </>
                 )
             } else {
@@ -62,7 +62,7 @@ function Navigation() {
                         <Link className={classes.menuStyle} to='/'><Button color="inherit">HOME</Button></Link>
                         <Link className={classes.menuStyle} to='/enroll'><Button color="inherit">ENROLL</Button></Link>
                         <Link className={classes.menuStyle} to='/mypage'><Button color="inherit">MYPAGE</Button></Link>
-                        <Link className={classes.menuStyle}><Button onClick={logout} color="inherit">LOGOUT</Button></Link>
+                        <Link className={classes.menuStyle} to='#'><Button onClick={logout} color="inherit">LOGOUT</Button></Link>
                     </>
                 )
             }
@@ -85,7 +85,7 @@ function Navigation() {
             <div className={classes.navStyle}>
                 {loginMenu()}
             </div>
-            <Divider style={{marginTop : '10px', width : '100%'}} variant="middle" />
+            {/* <Divider style={{marginTop : '10px'}} variant="middle" /> */}
         </div>
     )
 }

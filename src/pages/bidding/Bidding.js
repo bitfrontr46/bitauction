@@ -12,7 +12,8 @@ import { useSelector } from 'react-redux';
 function Bidding({open,setOpen,data,fetchingCtn}) {
 
     const [price, setPrice] = useState();
-    const userID = useSelector(state => state.userAction.userID);
+    const user_id = useSelector(state => state.userAction.user_id);
+    const userName = useSelector(state => state.userAction.userName);
 
     const onChangePrice = (e) => {
         setPrice(e.target.value);
@@ -21,8 +22,9 @@ function Bidding({open,setOpen,data,fetchingCtn}) {
     const onSubmitForm = (e) => {
         e.preventDefault();
         Axios.post('http://localhost:4000/api/bidding', {
-            what: data._id,
-            author : userID,
+            request_id: data._id,
+            user_id : user_id,
+            userName : userName,
             price: price,
         })
             .then(res => {

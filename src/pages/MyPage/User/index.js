@@ -1,3 +1,3 @@
-import Mypage from './Mypage';
+import MyPage from './Mypage';
 
-export default Mypage;
+export default MyPage;

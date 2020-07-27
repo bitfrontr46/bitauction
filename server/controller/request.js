@@ -7,7 +7,8 @@ const requestModel = require('../models/request');
 exports.enroll = async (req, res) => {
     const request = {
         ...req.body,
-        uploadAt: moment().format('YYYY-MM-DD HH:mm:ss'),
+        uploadAt: moment().format('YYYY-MM-DD'),
+        state : '경매 진행 중',
     }
 
     await requestModel.create(request, function (err) {
@@ -16,13 +17,12 @@ exports.enroll = async (req, res) => {
             result : "작성 성공"
         })
     });
-
 }
 
 exports.list = (req, res) => {
     console.log('카테고리 : ', req.query.category);
     if (req.query.category === undefined) {
-        requestModel.find({}).populate('author','userEmail').exec((err,data) => {
+        requestModel.find({}).populate('user_id','userName').exec((err,data) => {
             console.log(data);
             let removeList = data.filter((obj) => {
                 return new Date(obj.deadLine).getTime() > new Date().getTime();
@@ -40,6 +40,7 @@ exports.list = (req, res) => {
         })
     }
 }
+
 
 
 

@@ -38,7 +38,7 @@ function ProductShow(props) {
 
     const fetchingCtn = useCallback(() => {
         console.log(data);
-        Axios.get(`http://localhost:4000/api/ctn?id=${data._id}`)
+        Axios.get(`http://localhost:4000/api/ctn?request_id=${data._id}`)
         .then(res=>{
             setBidCtn(res.data.ctn);
             setLoading(false);
@@ -68,8 +68,8 @@ function ProductShow(props) {
                         <h3> 입찰 인원 : {bidCtn} </h3>
                     </Grid>
                     <Grid item xs={6}>
-                        {bidCtn >= 10 
-                        ? <h1>경매 마감</h1> 
+                        {(bidCtn >= 10 || data.deadLine < new Date().getTime())
+                        ? <h1>경매 마감</h1>
                         :
                         <>
                         <h3><Counter data={data}/></h3>

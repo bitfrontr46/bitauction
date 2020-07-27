@@ -1,5 +1,7 @@
 const User = require('../models/user');
+const Profile = require('../models/profile');
 const bcrypt = require('bcrypt');
+
 
 exports.login = (req,res) => {
     User.findOne({userEmail : req.body.userEmail})
@@ -40,3 +42,15 @@ exports.join = async (req,res) => {
         res.json({result : '회원가입 완료', is_join : true})
     })
 }
+
+exports.myProfile = (req,res) => {
+    Profile.findOne({user_id : req.body.user_id})
+    .populate('user_id')
+    .then( data => {
+        console.log(data);
+        res.json(data);
+    })
+    .catch(err => {
+        console.log(err);
+    })
+};
