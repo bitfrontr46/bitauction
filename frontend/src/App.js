@@ -16,6 +16,7 @@ import AdminTagsList from "./pages/Admin/AdminTagsList";
 import Test from "./Test";
 import Footer from "./components/Footer"
 import Navigation from "./components/Navigation"
+import MyPage from './pages/MyPage';
 
 //css reset 참고하기.
 function App() {
@@ -64,6 +65,7 @@ function App() {
           <Route path="/enroll" component={Enroll} exact />
           <Route path="/login" component={Login} exact />
           <Route path="/join" component={Join} />
+          <Route path="/mypage" component={MyPage}/>
 
 
           {/* 관리자 페이지 */}
