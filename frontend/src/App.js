@@ -17,6 +17,7 @@ import Test from "./Test";
 import Footer from "./components/Footer"
 import Navigation from "./components/Navigation"
 
+
 //css reset 참고하기.
 function App() {
   const dispatch = useDispatch();
