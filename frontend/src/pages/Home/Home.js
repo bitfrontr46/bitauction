@@ -22,8 +22,8 @@ export default function Album() {
   const history = useHistory();
 
   return (
-    <div>
-      <Navigation />
+    <>
+      {/* <Navigation /> */}
       <main>
         <div className={classes.heroContent}>
           <Container maxWidth="sm">
@@ -75,7 +75,7 @@ export default function Album() {
           </Container>
         </div>
       </main>
-      <Footer />
-    </div>
+      {/* <Footer /> */}
+    </>
   );
 }
