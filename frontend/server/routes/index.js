@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const app = express();
 const requestController = require('../controller/request')
 const userController = require('../controller/user')
 const biddingController = require('../controller/bidding')
@@ -16,5 +17,8 @@ router.post('/MyBiddingList', myPageController.MyBiddingList);
 router.post('/login',userController.login);
 router.post('/join',userController.join);
 router.post('/myProfile',userController.myProfile);
+
+
+
 
 module.exports = router;
