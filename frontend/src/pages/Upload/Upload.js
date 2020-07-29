@@ -41,7 +41,7 @@ function Upload(props) {
 
       Axios.post("/api/upload", body).then((response) => {
         if (response.data.success) {
-          alert("업로드 성공"); //전송(확인) 버튼을 누르지 않았는데도 메시지 뜸
+          alert("업로드 성공"); 
           props.history.push("/");
         } else {
           alert("업로드 실패 ");
@@ -72,7 +72,7 @@ function Upload(props) {
           <FileUpload refreshFunction={updateImages}></FileUpload>
           <br />
           <br />
-          <label>판매자 설명</label>
+          <label>설명</label>
           <TextArea onChange={sellerChangeHandler} value={SellerProfile} />
           <br />
           <Button onClick={submitHandler}>확인</Button>

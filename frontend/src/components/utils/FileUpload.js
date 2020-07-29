@@ -2,21 +2,23 @@ import React, {useState} from 'react';
 import Dropzone from "react-dropzone";
 import axios from 'axios'
 
-//formData와 config를 같이 넣어주지 않으면 보낼 때 에러 발생
 
 
 function SellerUpload(props) {
+
   const [Images, setImages] = useState([]); //내용 저장
 
   const dropHandler = (files) => {
 
     let formData = new FormData(); //객체
-    const config = {
+    const config = { //config 객체
       header: { "content-type": "multipart/form-data" },
     };
     formData.append("file", files[0]);
 
-    axios.post("/api/upload/image", formData, config)
+    //axios 사용해서 백엔드에게 파일 보내기. 서버로 post 요청
+
+    axios.post('http://localhost:4000/api/upload/image', formData, config)
     .then(response => {
       if (response.data.success) {
         console.log(response.data);
@@ -26,6 +28,9 @@ function SellerUpload(props) {
         alert("파일을 저장하는데 실패했습니다.");
       }
     });
+
+
+
   };
 
   const deleteHandler = (image) =>{ //이미지 삭제
@@ -83,3 +88,16 @@ function SellerUpload(props) {
 }
 
 export default SellerUpload;
+
+
+
+/*
+FormData
+-자바스크립트를 사용하여 데이터를 서버에 보낼 수 있으며
+비동기식으로 데이터나 파일 전송 가능
+
+src={`http://localhost:4000/${image}`}
+-img 태그는 src라는 attribute를 가지게 됨
+-이미지를 저장해주는 위치가 local이라 저렇게 써줄 수 있음
+
+*/
