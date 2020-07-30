@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 mongoose.connect(
-  "mongodb+srv://testDB:1234567890@cluster0-3zzdx.mongodb.net/bitProject?retryWrites=true&w=majority",
+  "mongodb+srv://young:3195@cluster0-cafds.mongodb.net/shopping?retryWrites=true&w=majority",
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -32,6 +32,7 @@ db.on("error", (err) => {
 });
 
 const roomModel = require("./models/Chat/room");
+//const router = require("./controller/upload");
 
 chat(io);
 
@@ -52,7 +53,12 @@ app.post("/roomList", (req, res) => {
 });
 
 app.use("/api", require("./routes/index"));
+app.use('/api/upload', require('./controller/upload'));
+app.use('/uploads', express.static('uploads'));
+// /api/upload/image
+
 
 http.listen(4000, () => {
   console.log("Server is Running... http://localhost:4000");
 });
+
