@@ -1,7 +1,6 @@
-const express = require('express');
+const express = require('express')
 const router = express.Router();
 const multer = require('multer');
-
 
 
 //백엔드 -> 프론트 엔드로 파일 저장, 정보 전달
@@ -17,39 +16,27 @@ var storage = multer.diskStorage({
     }
     //함수가 호출될 때 두 번째 인자로 파일 객체 전달
   })
-   
-  var upload = multer({ storage: storage }).single("file")
 
-  router.post('/image', (req, res) => {
-    //가져온 이미지를 저장해주면 된다
-    upload(req, res, (err) => {
-      if (err) {
-        //에러 발생시 에러를 json형태로 웹 브라우저에 표시
-        return req.json({ success: false, err });
+  var upload = multer({storage : storage }).single("file");
+
+  //api/product/image
+  router.post('/image', (req,res)=>{
+    upload(req,res, err =>{
+      if(err){
+        return res.json({success: false, err});
       }
-      return res.json({
+      return res.json({ //결과값을 보낼 때 res
         success: true,
         filePath: res.req.file.path,
         fileName: res.req.file.filename,
       });
     });
   });
-
-
-
-  router.post('/', (req, res) => {
-    //받아온 정보들을 DB에 넣어 준다.
-
-    const seller = new Seller(req.body)
-    seller.save((err)=>{
-      if(err) return res.status(400).json({success: false, err});
-      return res.status(200).json({success: true});
-    });
-
-  });
-
+  
 
   module.exports = router;
+
+  
   //router를 통해 index.js에서 사용 가능
   
 //받아온 이미지 정보 db에 저장하기

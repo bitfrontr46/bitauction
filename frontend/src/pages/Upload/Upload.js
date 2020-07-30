@@ -29,24 +29,6 @@ function Upload(props) {
     const submitHandler = (e) => {
       e.preventDefault();
 
-      const body = {
-        title: Title,
-        profile: SellerProfile,
-        images: Images,
-      };
-      
-      if(!Title || !SellerProfile || !Images){
-        return alert("모든 값을 넣어주세요")
-      }
-
-      Axios.post("/api/upload", body).then((response) => {
-        if (response.data.success) {
-          alert("업로드 성공"); 
-          props.history.push("/");
-        } else {
-          alert("업로드 실패 ");
-        }
-      });
     };
 
     //서버에 채운 값들을 request로 보낸다.

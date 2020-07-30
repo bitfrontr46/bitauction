@@ -62,7 +62,6 @@ function GeneralRoutes() {
           <Route path="/join" component={Join} />
           <Route path="/mypage" component={MyPage} />
           <Route path="/upload" component={Upload} />
-          
         </Switch>
         <Footer />
       </BrowserRouter>
