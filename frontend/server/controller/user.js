@@ -1,5 +1,4 @@
 const User = require("../models/user");
-const Profile = require("../models/Upload");
 const bcrypt = require("bcrypt");
 
 exports.login = (req, res) => {

@@ -6,6 +6,7 @@ const multer = require('multer');
 
 
 
+
 //백엔드 -> 프론트 엔드로 파일 저장, 정보 전달
 //Seller
 

@@ -11,7 +11,7 @@ import Join from "../pages/join/JoinHome";
 import Footer from "../components/Footer";
 import Navigation from "../components/Navigation";
 import MyPage from "../pages/MyPage";
-import Upload from "../pages/Upload/Upload";
+import UploadPage from "../pages/UploadPage/UploadPage";
 
 
 
@@ -61,7 +61,7 @@ function GeneralRoutes() {
           <Route path="/login" component={Login} />
           <Route path="/join" component={Join} />
           <Route path="/mypage" component={MyPage} />
-          <Route path="/upload" component={Upload} />
+          <Route path="/upload" component={UploadPage} />
         </Switch>
         <Footer />
       </BrowserRouter>

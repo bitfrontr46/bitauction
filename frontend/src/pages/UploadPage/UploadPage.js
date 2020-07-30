@@ -3,10 +3,11 @@ import FileUpload from '../../components/utils/FileUpload'
 import React, {useState} from 'react';
 import {Button, Form, Input} from 'antd';
 import 'antd/dist/antd.css'
+import Axios from 'axios';
 const {TextArea} = Input;
 
 
-function Upload(props) {
+function UploadPage(props) {
 
     const[Title, setTitle] = useState("")
     const[SellerProfile, setSellerProfile] = useState("")
@@ -28,11 +29,26 @@ function Upload(props) {
     const submitHandler = (e) => {
       e.preventDefault();
 
+      if(!Title || !SellerProfile || !Images){
+        return alert("모든 값을 넣어주세요")
+      }   //반드시 submitHandler 함수 안에다가 넣어야 함 
+      
+      //서버에 채운 값들을 request로 보낸다.
+
+      const body = {
+        title: Title,
+        profile: SellerProfile,
+        images: Images,
+      }
+
+      Axios.post("http://localhost:4000/api/upload", body)
+
+
+
     };
 
-    //서버에 채운 값들을 request로 보낸다.
+    
   
-
     //업로드하고 자동으로 랜딩 페이지로 오게 하게끔!
    
 
@@ -65,4 +81,4 @@ function Upload(props) {
     );
 }
 
-export default Upload;
+export default UploadPage;

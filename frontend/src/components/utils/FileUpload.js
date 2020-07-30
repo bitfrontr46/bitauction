@@ -3,7 +3,7 @@ import Dropzone from "react-dropzone";
 import axios from 'axios'
 
 
-function SellerUpload(props) {
+function FileUpload(props) {
 
   const [Images, setImages] = useState([]); //내용 저장
 
@@ -85,7 +85,7 @@ function SellerUpload(props) {
   );
 }
 
-export default SellerUpload;
+export default FileUpload;
 
 
 
