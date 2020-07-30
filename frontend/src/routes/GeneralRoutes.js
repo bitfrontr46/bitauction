@@ -50,16 +50,16 @@ function GeneralRoutes() {
       <BrowserRouter>
         <Navigation />
         <Switch>
-          <Route path="/" component={Home} exact />
-          <Route path="/list" component={ProductList} exact />
-          <Route path="/list/:id" component={ProductShow} exact />
-          <Route path="/list/:id/bidding" component={Bidding} exact />
-          <Route path="/enroll" component={Enroll} exact />
-          <Route path="/login" component={Login} exact />
+          <Route exact path="/" component={Home} />
+          <Route path="/list" component={ProductList} />
+          <Route path="/list/:id" component={ProductShow} />
+          <Route path="/list/:id/bidding" component={Bidding} />
+          <Route path="/enroll" component={Enroll} />
+          <Route path="/login" component={Login} />
           <Route path="/join" component={Join} />
           <Route path="/mypage" component={MyPage} />
-          <Footer />
         </Switch>
+        <Footer />
       </BrowserRouter>
     </>
   );
