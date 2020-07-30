@@ -11,6 +11,9 @@ import Join from "../pages/join/JoinHome";
 import Footer from "../components/Footer";
 import Navigation from "../components/Navigation";
 import MyPage from "../pages/MyPage";
+import Upload from "../pages/Upload/Upload";
+
+
 
 function GeneralRoutes() {
   const dispatch = useDispatch();
@@ -58,6 +61,8 @@ function GeneralRoutes() {
           <Route path="/login" component={Login} />
           <Route path="/join" component={Join} />
           <Route path="/mypage" component={MyPage} />
+          <Route path="/upload" component={Upload} />
+          
         </Switch>
         <Footer />
       </BrowserRouter>
@@ -66,3 +71,6 @@ function GeneralRoutes() {
 }
 
 export default GeneralRoutes;
+
+
+//일반 유저 routes
