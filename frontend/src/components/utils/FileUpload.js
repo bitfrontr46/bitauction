@@ -3,8 +3,6 @@ import Dropzone from "react-dropzone";
 import axios from 'axios'
 
 
-
-
 function SellerUpload(props) {
 
   const [Images, setImages] = useState([]); //내용 저장

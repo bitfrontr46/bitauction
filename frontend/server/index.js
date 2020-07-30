@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 mongoose.connect(
-  "mongodb+srv://young:3195@cluster0-cafds.mongodb.net/shopping?retryWrites=true&w=majority",
+  "mongodb+srv://young:3195@cluster0-cafds.mongodb.net/Action?retryWrites=true&w=majority",
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -32,7 +32,7 @@ db.on("error", (err) => {
 });
 
 const roomModel = require("./models/Chat/room");
-//const router = require("./controller/upload");
+
 
 chat(io);
 

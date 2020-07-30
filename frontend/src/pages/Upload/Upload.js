@@ -2,7 +2,6 @@
 import FileUpload from '../../components/utils/FileUpload'
 import React, {useState} from 'react';
 import {Button, Form, Input} from 'antd';
-import Axios from 'axios';
 import 'antd/dist/antd.css'
 const {TextArea} = Input;
 

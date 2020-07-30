@@ -1,6 +1,9 @@
+
+
 const express = require('express')
 const router = express.Router();
 const multer = require('multer');
+
 
 
 //백엔드 -> 프론트 엔드로 파일 저장, 정보 전달
@@ -34,9 +37,9 @@ var storage = multer.diskStorage({
   });
   
 
-  module.exports = router;
+module.exports = router;
 
-  
+
   //router를 통해 index.js에서 사용 가능
   
 //받아온 이미지 정보 db에 저장하기
