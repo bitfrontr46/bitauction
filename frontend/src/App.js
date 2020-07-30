@@ -12,7 +12,7 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route path="/admin" component={AdminRoutes} />
-          <Route exact path="/" component={GeneralRoutes} />
+          <Route path="/" component={GeneralRoutes} />
           <Route component={NotFound} />
         </Switch>
       </BrowserRouter>
