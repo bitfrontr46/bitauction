@@ -4,10 +4,12 @@ import axios from 'axios'
 
 
 
+
 function SellerUpload(props) {
 
   const [Images, setImages] = useState([]); //내용 저장
 
+  //업로드를 눌렀을 경우 호출되는 함수
   const dropHandler = (files) => {
 
     let formData = new FormData(); //객체
@@ -18,17 +20,16 @@ function SellerUpload(props) {
 
     //axios 사용해서 백엔드에게 파일 보내기. 서버로 post 요청
 
-    axios.post('http://localhost:4000/api/upload/image', formData, config)
-    .then(response => {
-      if (response.data.success) {
+    axios.post("http://localhost:4000/api/upload/image", formData, config)
+    .then((response)=>{
+      if(response.data.success){
         console.log(response.data);
         setImages([...Images, response.data.filePath]);
-        props.refreshFunction([...Images, response.data.filePath]);
-      } else {
+        props.refreshFunction([...Images, response.data.filePath])
+      }else{
         alert("파일을 저장하는데 실패했습니다.");
       }
     });
-
 
 
   };
@@ -39,7 +40,6 @@ function SellerUpload(props) {
     newImages.splice(currentIndex,1)
     setImages(newImages)
     props.refreshFunction(newImages)
-
   }
 
 
@@ -99,5 +99,10 @@ FormData
 src={`http://localhost:4000/${image}`}
 -img 태그는 src라는 attribute를 가지게 됨
 -이미지를 저장해주는 위치가 local이라 저렇게 써줄 수 있음
+
+post 방식은 url로 요청할 수 X
+사진을 업로드 시 axios로 post로 요청을 하는 것을 구현!
+
+
 
 */

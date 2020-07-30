@@ -32,7 +32,7 @@ db.on("error", (err) => {
 });
 
 const roomModel = require("./models/Chat/room");
-const router = require("./controller/upload");
+//const router = require("./controller/upload");
 
 chat(io);
 
@@ -53,11 +53,12 @@ app.post("/roomList", (req, res) => {
 });
 
 app.use("/api", require("./routes/index"));
-app.use('http://localhost:4000/api/upload', require('./controller/upload'));
+app.use('/api/upload', require('./controller/upload'));
 app.use('/uploads', express.static('uploads'));
-//  /api/upload/image
+// /api/upload/image
 
 
 http.listen(4000, () => {
   console.log("Server is Running... http://localhost:4000");
 });
+
