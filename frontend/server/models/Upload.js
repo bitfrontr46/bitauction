@@ -22,3 +22,4 @@ const uploadSchema = mongoose.Schema({
 
 const Upload = mongoose.model('Upload', uploadSchema);
 module.exports = {Upload}
+//exports 

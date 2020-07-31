@@ -42,6 +42,14 @@ function UploadPage(props) {
       }
 
       Axios.post("http://localhost:4000/api/upload", body)
+        .then(response=>{
+          if(response.data.success){
+            alert("업로드 성공!")
+            props.history.push('/landing') //상품 업로드가 성공하면 랜딩 페이지로 이동함
+          }else{
+            alert("업로드 실패")
+          }
+        })
 
 
 

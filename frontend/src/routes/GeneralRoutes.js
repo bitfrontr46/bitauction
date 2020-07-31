@@ -12,7 +12,7 @@ import Footer from "../components/Footer";
 import Navigation from "../components/Navigation";
 import MyPage from "../pages/MyPage";
 import UploadPage from "../pages/UploadPage/UploadPage";
-
+import Landing from "../pages/Landing/Landing";
 
 
 function GeneralRoutes() {
@@ -62,6 +62,8 @@ function GeneralRoutes() {
           <Route path="/join" component={Join} />
           <Route path="/mypage" component={MyPage} />
           <Route path="/upload" component={UploadPage} />
+          <Route path="/landing" component={Landing} />
+          
         </Switch>
         <Footer />
       </BrowserRouter>
