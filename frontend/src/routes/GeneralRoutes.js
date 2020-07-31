@@ -13,7 +13,7 @@ import Navigation from "../components/Navigation";
 import MyPage from "../pages/MyPage";
 import UploadPage from "../pages/UploadPage/UploadPage";
 import Landing from "../pages/Landing/Landing";
-
+import CardForm from "../pages/Landing/CardForm";
 
 function GeneralRoutes() {
   const dispatch = useDispatch();
@@ -63,7 +63,7 @@ function GeneralRoutes() {
           <Route path="/mypage" component={MyPage} />
           <Route path="/upload" component={UploadPage} />
           <Route path="/landing" component={Landing} />
-          
+          <Route path="/card" component={CardForm} />
         </Switch>
         <Footer />
       </BrowserRouter>

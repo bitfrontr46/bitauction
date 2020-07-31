@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from "axios"
 import {Icon, Col, Card, Row} from 'antd';
 import Meta from 'antd/lib/card/Meta';
-
+import { Container, Typography } from "@material-ui/core"
+import { makeStyles } from "@material-ui/core/styles"
 
 
 function Landing(props) {
@@ -31,13 +32,16 @@ function Landing(props) {
         return <Col log={6} md={8} xs={24} key={index}>
         <Card 
             cover={<img src={`http://localhost:4000/${upload.images[0]}`}/>}
-        key={index}>
+        >
             <Meta
                 title={upload.title}
             />
         </Card>
         </Col>
     })
+
+    //이미지에 하이퍼링크를 걸어서 
+    //이미지를 클릭하면 상세페이지로 넘어갈 수 있게끔하기
 
 
 
