@@ -3,8 +3,8 @@ import { Route, BrowserRouter, Switch } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import Home from "./pages/Home/Home";
 import Enroll from "./pages/enroll/Enroll";
-import ProductList from "./pages/ProductList/ProductList";
-import ProductShow from "./pages/ProductShow";
+import RequestMain from './pages/Request/RequestMain';
+import RequestDetail from './pages/Request/RequestDetail';
 import Bidding from "./pages/bidding/Bidding";
 import Login from "./pages/Login";
 import Join from "./pages/join/JoinHome";
@@ -59,8 +59,8 @@ function App() {
           <Navigation />
         <Switch>
           <Route path="/" component={Home} exact />
-          <Route path="/list" component={ProductList} exact />
-          <Route path="/list/:id" component={ProductShow} exact />
+          <Route path='/list' component={RequestMain}  exact/>
+          <Route path='/list/:id' component={RequestDetail}  exact/>
           <Route path="/list/:id/bidding" component={Bidding} exact />
           <Route path="/enroll" component={Enroll} exact />
           <Route path="/login" component={Login} exact />

@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import Axios from 'axios';
+import React, { useState,useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -8,12 +7,26 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { useSelector } from 'react-redux';
+import { useMutation } from '@apollo/client';
+import { SEND_BID } from '../../lib/queries';
 
-function Bidding({open,setOpen,data,fetchingCtn}) {
+function Bidding({ open, setOpen, data }) {
 
-    const [price, setPrice] = useState();
+    const [price, setPrice] = useState(0);
+
     const user_id = useSelector(state => state.userAction.user_id);
+
     const userName = useSelector(state => state.userAction.userName);
+
+    const [sendBid, {data : data_result}] = useMutation(SEND_BID);
+
+    useEffect(() => {
+        if(data_result){
+            alert(data_result.sendBid)
+            setOpen(false);
+        }
+    }, [data_result,setOpen])
+
 
     const onChangePrice = (e) => {
         setPrice(e.target.value);
@@ -21,22 +34,19 @@ function Bidding({open,setOpen,data,fetchingCtn}) {
 
     const onSubmitForm = (e) => {
         e.preventDefault();
-        Axios.post('http://localhost:4000/api/bidding', {
-            request_id: data._id,
-            user_id : user_id,
-            userName : userName,
-            price: price,
-        })
-            .then(res => {
-                alert(res.data.result);
-                setOpen(false);
-                fetchingCtn();
-            })
-            .catch(err => {
-                console.log(err);
-            })
-    }
+        sendBid({
+            variables: {
+                input: {
+                    request: data._id,
+                    author: user_id,
+                    name: userName,
+                    price: price,
 
+                }
+            }
+        })
+    }
+    
     const handleClose = () => {
         setOpen(false);
     };
