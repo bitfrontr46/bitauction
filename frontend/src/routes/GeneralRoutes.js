@@ -11,6 +11,8 @@ import Join from "../pages/join/JoinHome";
 import Footer from "../components/Footer";
 import Navigation from "../components/Navigation";
 import MyPage from "../pages/MyPage";
+import UserPage from "../pages/UserPage/UserPage";
+import Test from "../Test";
 
 function GeneralRoutes() {
   const dispatch = useDispatch();
@@ -58,6 +60,8 @@ function GeneralRoutes() {
           <Route path="/login" component={Login} />
           <Route path="/join" component={Join} />
           <Route path="/mypage" component={MyPage} />
+          {/* <Route path="/userpage" component={UserPage} /> */}
+          <Route path="/test" component={Test} />
         </Switch>
         <Footer />
       </BrowserRouter>
