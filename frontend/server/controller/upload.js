@@ -64,7 +64,25 @@ var storage = multer.diskStorage({
     })
 
   });
-  
+ 
+  router.get('/uploads_by_id', (req,res)=>{
+
+    let type = req.query.type
+    let uploadId = req.query.id
+    //uploadId를 이용해서 DB에서 uploadId와 같은 상품의 정보를 가져온다.
+
+    Upload.find({_id: uploadId})
+    .exec((err,upload) =>{ //db에서 정보를 찾아옴!
+      if(err) return res.status(400).send(err)
+      return res.status(200).send({success:true,upload})
+    })
+
+  });
+   
+   
+
+
+
   
 
 

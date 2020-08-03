@@ -4,7 +4,7 @@ import {Icon, Col, Card, Row} from 'antd';
 import Meta from 'antd/lib/card/Meta';
 import { Container, Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-
+import Image from 'material-ui-image';
 
 function Landing(props) {
     
@@ -31,7 +31,7 @@ function Landing(props) {
 
         return <Col log={6} md={8} xs={24} key={index}>
         <Card 
-            cover={<img src={`http://localhost:4000/${upload.images[0]}`}/>}
+            cover={<a href={`/upload/${upload._id}`}><Image src={`http://localhost:4000/${upload.images[0]}`}/></a>}
         >
             <Meta
                 title={upload.title}
@@ -50,7 +50,7 @@ function Landing(props) {
     return (
         <div style={{width:"75%", margin: "3rem auto"}}>
            <div style={{textAlign: "center"}}>
-                목록
+                <h1>프로필</h1>
            </div> 
 
            {/* Card */}
