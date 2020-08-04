@@ -10,8 +10,7 @@ import Login from "../pages/Login";
 import Join from "../pages/join/JoinHome";
 import Footer from "../components/Footer";
 import Navigation from "../components/Navigation";
-import MyPage from "../pages/MyPage";
-import UserPage from "../pages/UserPage/UserPage";
+import UserPageApp from "../pages/UserPage/UserPageApp";
 import Test from "../Test";
 
 function GeneralRoutes() {
@@ -59,8 +58,7 @@ function GeneralRoutes() {
           <Route path="/enroll" component={Enroll} />
           <Route path="/login" component={Login} />
           <Route path="/join" component={Join} />
-          <Route path="/mypage" component={MyPage} />
-          {/* <Route path="/userpage" component={UserPage} /> */}
+          <Route path="/userpage" component={UserPageApp} />
           <Route path="/test" component={Test} />
         </Switch>
         <Footer />

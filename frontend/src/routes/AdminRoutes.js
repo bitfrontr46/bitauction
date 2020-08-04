@@ -5,6 +5,7 @@ import AdminHome from "../pages/Admin/AdminHome";
 import AdminSettings from "../pages/Admin/AdminSettings";
 import AdminAccountList from "../pages/Admin/AdminAccountList";
 import AdminTagsList from "../pages/Admin/AdminTagsList";
+import UserPageApp from "../pages/UserPage/UserPageApp";
 
 function AdminRoutes() {
   return (
@@ -18,6 +19,7 @@ function AdminRoutes() {
           <Route path="/adminsettings" component={AdminSettings} />
           <Route path="/adminaccountlist" component={AdminAccountList} />
           <Route path="/admintagslist" component={AdminTagsList} />
+          <Route path="/userpage" component={UserPageApp} />
         </Switch>
       </BrowserRouter>
     </>

@@ -13,6 +13,7 @@ function App() {
         <Switch>
           <Route path="/admin" component={AdminRoutes} />
           <Route path="/" component={GeneralRoutes} />
+          {/* NotFound 작동 안됨! 해결해야 함 */}
           <Route component={NotFound} />
         </Switch>
       </BrowserRouter>
