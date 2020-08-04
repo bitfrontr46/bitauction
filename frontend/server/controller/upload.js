@@ -1,13 +1,25 @@
 
-
+const aws = require('aws-sdk')
 const express = require('express')
-const router = express.Router();
 const multer = require('multer');
+const multerS3 = require('multer-s3')
+const path = require("path");
+const AWS = require("aws-sdk");
+
+const router = express.Router();
 const {Upload} = require('../models/Upload');
 
 
 //백엔드 -> 프론트 엔드로 파일 저장, 정보 전달
-//Seller
+// 파일을 로컬이 아닌 aws에 저장하기 위해서 multer s3 사용
+
+
+let s3 = new AWS.S3(); 
+
+//옵션 설정
+
+
+
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) { //어디에 파일이 저장되는지.
@@ -21,6 +33,18 @@ var storage = multer.diskStorage({
   })
 
   var upload = multer({storage : storage }).single("file");
+  //multer s3으로 설정
+
+
+  // var upload = multer({
+  //   storage : multerS3({
+  //     s3,
+  //     acl:"",
+  //     bucket: "project-portfolio-uploads"
+  //   })
+  // })
+  
+
 
   //api/product/image
   router.post('/image', (req,res)=>{
