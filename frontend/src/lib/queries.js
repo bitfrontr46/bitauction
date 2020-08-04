@@ -88,6 +88,36 @@ query GetMyRoomListForSeller($seller:ID){
 }
 `
 
+export const GET_MY_REQUESTS = gql`
+query GetMyRequests($author:ID){
+  getMyRequests(author:$author){
+    _id
+    author{
+      name
+    }
+    detail
+    category
+    requestedAt
+    deadLine
+    hopeDate
+    state
+    tags
+  }
+}
+`
+export const GET_BIDS_IN_REQUEST = gql`
+query GetBidsInRequest($request:ID){
+  getBidsInRequest(request:$request){
+    _id
+    author{
+      _id
+      name
+    }
+    price
+  }
+}
+`
+
 //Mutation
 
 export const SEND_REQUEST = gql`

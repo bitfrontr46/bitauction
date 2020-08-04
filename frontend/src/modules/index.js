@@ -1,10 +1,10 @@
-import userAction from "./userAction";
-import myPage from "./myPage";
-import { combineReducers } from "redux";
+import userAction from './userAction';
+import myPage from './myPage';
+import { combineReducers } from 'redux';
 
 const rootReducer = combineReducers({
-  myPage,
-  userAction,
-});
+    myPage,
+    userAction,
+})
 
 export default rootReducer;

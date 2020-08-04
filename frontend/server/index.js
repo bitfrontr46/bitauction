@@ -2,9 +2,8 @@ const { GraphQLServer,PubSub } = require('graphql-yoga');
 const pubsub = new PubSub();
 const resolvers = require('./resolvers');
 const mongoose = require('mongoose');
-const dev = require('./config/dev');
 
-mongoose.connect(dev.mongoURI,
+mongoose.connect("mongodb+srv://testDB:1234567890@cluster0-3zzdx.mongodb.net/graph?retryWrites=true&w=majority",
     {
         useNewUrlParser: true,
         useUnifiedTopology: true,
