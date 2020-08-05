@@ -52,6 +52,9 @@ app.post("/roomList", (req, res) => {
     });
 });
 
+
+
+
 app.use("/api", require("./routes/index"));
 app.use('/api/upload', require('./controller/upload'));
 app.use('/uploads', express.static('uploads'));

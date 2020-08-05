@@ -17,7 +17,6 @@ function Landing(props) {
             if(response.data.success){
                 //console.log(response.data);
                 //  -> 연속해서 콘솔 로그가 찍히는 문제 발생(무한반복)
-
                 setUploads(response.data.uploadInfo)
             }else{
                 alert("이미지를 가져오는데 실패했습니다.")
