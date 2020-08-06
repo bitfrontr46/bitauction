@@ -1,6 +1,5 @@
 package com.project.backend.handlers;
 
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import static org.springframework.web.reactive.function.server.ServerResponse.ok;
@@ -12,32 +11,42 @@ import org.springframework.data.r2dbc.core.DatabaseClient;
 
 import org.springframework.stereotype.Component;
 
-import org.springframework.transaction.annotation.Transactional;
 
-import com.project.backend.Configurations.GetTimeZone;
 import com.project.backend.Model.*;
-import com.project.backend.repositories.TagRepository;
-
-import java.util.Map;
-import java.util.HashMap;
-import java.util.List;
+import com.project.backend.repositories.PublicRepository;
 
 
 
 
 @Component
 public class TagHandler {
-    private final TagRepository tagRepository;
+    private final PublicRepository publicRepository;
     private final DatabaseClient databaseClient;
     
     public TagHandler(DatabaseClient databaseClient,
-    TagRepository tagRepository) {
+    PublicRepository publicRepository) {
         this.databaseClient = databaseClient;
-        this.tagRepository = tagRepository;
+        this.publicRepository = publicRepository;
     }
-    /*
-    public Flux<Request>  getRequestsByTagContext(ServerRequest req) {
-      
 
-    }*/
+    public Mono<ServerResponse> sortByBiddingCount(ServerRequest req) {
+        return ok().body(publicRepository.sortTagByBidCount(),Tag.class);
+    }
+
+    public Mono<ServerResponse> selectByTagContext(ServerRequest req) {
+        Mono<String> mMap = req.bodyToMono(String.class);
+     
+        return ok().body(
+            mMap.flatMap(
+                m -> publicRepository.selectByTagContext(m)
+            ), Tag.class);
+    }
+
+    public Mono<ServerResponse> selectByTagId(ServerRequest req) {
+        Mono<Integer> mMap = req.bodyToMono(Integer.class);
+        return ok().body(
+            mMap.flatMap(
+                m -> publicRepository.selectByTagId(m)
+            ), Tag.class);
+    }
 }

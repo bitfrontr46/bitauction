@@ -1,13 +1,13 @@
 package com.project.backend.Model;
 
-public class seller {
+public class Seller {
     private int sellerId;
     private String portfolio;
     private String ImageLink;
     private int imageCount;
     private int sellerGrade;
     private int reviewerCount;
-    private int userIndexId;
+
     
     public int getSellerId() {
         return sellerId;
@@ -57,25 +57,17 @@ public class seller {
         this.reviewerCount = reviewerCount;
     }
     
-    public seller() {
+    public Seller() {
     }
 
-    public int getUserIndexId() {
-        return userIndexId;
-    }
 
-    public void setUserIndexId(int userIndexId) {
-        this.userIndexId = userIndexId;
-    }
-
-    public seller(int sellerId, String portfolio, String imageLink, int imageCount, int sellerGrade, int reviewerCount,
-            int userIndexId) {
+    public Seller(int sellerId, String portfolio, String imageLink, int imageCount, int sellerGrade, int reviewerCount) {
         this.sellerId = sellerId;
         this.portfolio = portfolio;
         ImageLink = imageLink;
         this.imageCount = imageCount;
         this.sellerGrade = sellerGrade;
         this.reviewerCount = reviewerCount;
-        this.userIndexId = userIndexId;
+
     }
 }

@@ -113,4 +113,77 @@ https://team-platform.tistory.com/45
 
 오늘 에러 
 https://oysu.tistory.com/50 이거 참조 
-얘네들이 
+
+
+
+
+// Flux에 대한 이해가 전반적으로 좀 더 필요할 것 같다 
+// 아직 못찾음 다른 링크 
+https://spring.io/blog/2016/11/28/going-reactive-with-spring-data
+
+일단 방법 1 
+insert -> select
+방법 2
+MySQL의 LAST_INSERT_ID() 함수 이용해서 가장 최근에 성공된 insert 구문의 첫번째 컬럼값 반환 
+얘는 다른 커넥션에서 접근했을 때 원하는 값을 도출하지 못할 가능성이 있다 마지막이므로 내가 성공했더라도 마지막인 다른것이 올라온다
+
+방법 3 애초에 이럴게 아니라 그냥 고유키를 만들어서 집어넣고 그것을 저장하고 있다가 다른쪽에 쓴다 
+얘네가 nonblocking에 확실히 잘되는지 모르겠다 
+
+2번쓰고 
+https://cirius.tistory.com/1139 
+
+
+2번 함수 불러오는 방법을 모르겠음 도저히 모르겠다 
+
+3번 으로 바꾼다 진짜 어쩔 수 없이 바꿨다 
+select UUID(); 이건 또 먹히네 아 이거씀  
+
+프로시져 쓰면되는걸... 함수 콜하면 되는걸.... 난 왜 이랬나..
+프로시져에 대한 내용 여기서 jpa를 쓸 수 있다면 데이터를 가공해서 쓰지만 없으면 뭐 어떻게 써야지
+http://blog.naver.com/PostView.nhn?blogId=jwyoon25&logNo=221490667508&categoryNo=0&parentCategoryNo=0&viewDate=&currentPage=1&postListTopCurrentPage=1&from=postView
+
+UPDATE tag 
+SET bidCount = bidCount + 1
+WHERE tagId IN (
+	SELECT tagId FROM (SELECT t.tagId FROM request r 
+	INNER JOIN request_has_tag rht 
+	ON r.requestId = rht.request_requestId
+	INNER JOIN tag t 
+	ON t.tagId = rht.tag_tagId 
+	WHERE r.requestId = 3 #해당 요청과 관련된 태그들의 아이디를 찾는다
+	) AS tagIds 
+);
+
+이 구문에서 tag랑 tag 별칭 t 랑해서 where 절에 같은 테이블로 비교를 하면 에러띄운다 
+따라서 SELECT tagId FROM 요렇게 가상의 테이블을 하나 만들고 AS tagIds별칭까지 만들어 줘야 실행이 된다
+
+https://spring.io/blog/2019/03/05/spring-hateoas-1-0-m1-released hateoas의 webflux 지원 
+
+// webclient랑 같이쓰는게 맞음 hateoas 
+예전에 무심코 dto(vo) 랑 dao를 섞어썼었는데 차이점이 
+dto는 앞단에서 뒷단으로 넘겨줄때의 데이터 형식을 말하는거고 
+
+dao는 뒷단에서 db로 넘겨줄때의 형식을 말하는것이다 
+
+MYSQL 페이징
+https://anomie7.tistory.com/33 리미트를 사용하면 생각보다 쉽게 될듯 5개씩
+
+graph ql webflux를 지원안한다
+// 이거 에러뜬다 (mvc 뭐랑 겹친다고 뜬다 import쪽에서 )
+	<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-hateoas</artifactId>
+		</dependency>
+
+//
+    .bind("category", rs.block())
+       
+        .fetch()
+        .all().collectList() // 이렇게 불러와야한다
+객체로 지정했을 때 string뺴고 안 불러와지는 현상이 있는데 
+		    @Column("hopeDate") // 지정 꼭 해주자
+//http RESTAPI
+			https://javaplant.tistory.com/18 
+
+			https://ryan-han.com/post/translated/pathvariable_queryparam/
