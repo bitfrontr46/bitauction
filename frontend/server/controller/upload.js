@@ -12,8 +12,8 @@ const {Upload} = require('../models/Upload');
 
 
 const s3 = new AWS.S3({ //S3 객체 사용
-  accessKeyId: '', //생성한 s3의 accesskey
-  secretAccessKey: '', //생성한 s3의 secret key
+  accessKeyId: 'AKIA27RRYWPWBVGPQP6A', //생성한 s3의 accesskey
+  secretAccessKey: 'pKHXC0s990ZBvdhRuMRKbQUheo0J4GQgZEnMRCOu', //생성한 s3의 secret key
   region: 'ap-northeast-2', //지역설정
 });
 
@@ -27,8 +27,9 @@ const storage = multerS3({ //storage:저장되는 파일명이나 인코딩 조�
   metadata: function(req, file,cb){
     cb(null, {fieldName: file.fieldname}) //파일 메타정보 저장
   },
-  key: function(req,file,cb){ 
-    cb(null, `${Date.now()}_${file.originalname}`) //저장될 파일 명과 똑같이 해줌!
+  key: function(req,file,cb){ //디렉토리 이름(uploads)/${Date.now}
+            //s3 uploads 폴더 안에 파일명 : 날짜+파일명으로 넣기  
+    cb(null, `uploads/${Date.now()}_${file.originalname}`) //저장될 파일 명과 똑같이 해줌!
   }
 })
 const upload = multer({storage:storage}).single("file"); //single(): 하나의 파일 업로드할 때 사용 
@@ -37,10 +38,8 @@ const upload = multer({storage:storage}).single("file"); //single(): 하나의 �
 
 //multer
 
-
 /*
-
-var storage = multer.diskStorage({
+var storage = multer.diskStorage({ //diskStorage:임시저장소 
     destination: function (req, file, cb) { //어디에 파일이 저장되는지.
       cb(null, 'uploads/') //파일이 저장될 경로
     },
@@ -54,7 +53,7 @@ var storage = multer.diskStorage({
   var upload = multer({storage : storage }).single("file");
   //single : 하나의 파일 업로드할 때 
 
-  */
+*/
  
 
   router.post('/image',(req,res,next)=>{

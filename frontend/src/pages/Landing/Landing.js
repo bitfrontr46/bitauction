@@ -15,7 +15,7 @@ function Landing(props) {
         axios.post("http://localhost:4000/api/upload/uploads", )
         .then(response=>{
             if(response.data.success){
-                //console.log(response.data);
+                // console.log(response.data);
                 //  -> 연속해서 콘솔 로그가 찍히는 문제 발생(무한반복)
                 setUploads(response.data.uploadInfo)
             }else{
@@ -30,7 +30,7 @@ function Landing(props) {
 
         return <Col log={6} md={8} xs={24} key={index}>
         <Card 
-            cover={<a href={`/upload/${upload._id}`}><Image src={`http://localhost:4000/${upload.images[0]}`}/></a>}
+             cover={<a href={`/upload/${upload._id}`}><Image src={`http://localhost:4000/${upload.images[0]}`}/></a>}
         >
             <Meta
                 title={upload.title}

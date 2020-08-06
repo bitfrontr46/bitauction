@@ -57,8 +57,9 @@ app.post("/roomList", (req, res) => {
 
 app.use("/api", require("./routes/index"));
 app.use('/api/upload', require('./controller/upload'));
-app.use('/uploads', express.static('uploads'));
-// /api/upload/image
+app.use('/uploads', express.static('uploads')) 
+//uploads 폴더에 저장되어있는 이미지를 가져올 때 사용
+
 
 
 http.listen(4000, () => {
