@@ -1,8 +1,3 @@
-// https://hocheon.tistory.com/59
-// https://marmelab.com/react-admin/
-// Redux-Saga 사용해야 함
-// https://marmelab.com/react-admin/CustomApp.html
-
 import { adminReducer, adminSaga, USER_LOGOUT } from "react-admin";
 import { applyMiddleware, combineReducers, compose, createStore } from "redux";
 import { routerMiddleware, connectRouter } from "connected-react-router";
@@ -18,7 +13,7 @@ export default ({ authProvider, dataProvider, history }) => {
   const resettableAppReducer = (state, action) =>
     reducer(action.type !== USER_LOGOUT ? state : undefined, action);
 
-  const saga = function* rootSaga() {
+  const saga = function* rootSaga() { 
     yield all(
       [
         adminSaga(dataProvider, authProvider),

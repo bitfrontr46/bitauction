@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import Stepper from "./EnrollStepper";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import Navigation from "../../components/Navigation";
+import Footer from "../../components/Footer";
 
 function Enroll() {
   const is_login = useSelector((state) => state.userAction.is_login);
@@ -16,7 +18,9 @@ function Enroll() {
 
   return (
     <div>
+      <Navigation />
       <Stepper />
+      <Footer />
     </div>
   );
 }

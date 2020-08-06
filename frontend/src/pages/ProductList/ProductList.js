@@ -7,6 +7,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import ProductListDrawer from "./ProductListDrawer";
 import ProductSearch from "./ProductSearch";
+import Navigation from "../../components/Navigation";
+import Footer from "../../components/Footer";
 
 const useStyles = makeStyles((theme) => ({
   cardGrid: {
@@ -71,6 +73,7 @@ function ProductList() {
 
   return (
     <div className={classes.backgroundStyle}>
+    <Navigation/>
       {/* inputs */}
       <ProductListDrawer />
       <ProductSearch />
@@ -100,6 +103,7 @@ function ProductList() {
           </Grid>
         </Container>
       )}
+    <Footer/>
     </div>
   );
 }

@@ -11,6 +11,8 @@ import Container from "@material-ui/core/Container";
 import { Link as RLink, useHistory } from "react-router-dom";
 import Axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
+import Navigation from "../components/Navigation";
+import Footer from "../components/Footer";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -96,6 +98,7 @@ export default function Login() {
 
   return (
     <Container component="main" maxWidth="xs">
+      <Navigation />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
@@ -150,6 +153,7 @@ export default function Login() {
         </form>
         <br />
       </div>
+      <Footer />
     </Container>
   );
 }

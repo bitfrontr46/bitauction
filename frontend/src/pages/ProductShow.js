@@ -8,6 +8,8 @@ import Chip from "@material-ui/core/Chip";
 import Axios from "axios";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Bidding from "./bidding/Bidding";
+import Footer from "../components/Footer";
+import Navigation from "../components/Navigation";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -60,6 +62,7 @@ function ProductShow(props) {
   });
   return (
     <div>
+      <Navigation />
       {isLoading ? (
         <CircularProgress className={classes.loadingStyle} />
       ) : (
@@ -103,6 +106,7 @@ function ProductShow(props) {
           />
         </Container>
       )}
+      <Footer />
     </div>
   );
 }
