@@ -12,8 +12,8 @@ const {Upload} = require('../models/Upload');
 
 
 const s3 = new AWS.S3({ //S3 객체 사용
-  accessKeyId: 'AKIA27RRYWPWBVGPQP6A', //생성한 s3의 accesskey
-  secretAccessKey: 'pKHXC0s990ZBvdhRuMRKbQUheo0J4GQgZEnMRCOu', //생성한 s3의 secret key
+  accessKeyId: '', //생성한 s3의 accesskey
+  secretAccessKey: '', //생성한 s3의 secret key
   region: 'ap-northeast-2', //지역설정
 });
 
