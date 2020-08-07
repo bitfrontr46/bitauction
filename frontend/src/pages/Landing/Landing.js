@@ -51,6 +51,7 @@ function Landing(props) {
            <div style={{textAlign: "center"}}>
                 <h1>프로필</h1>
            </div> 
+           
 
            {/* Card */}
            <Row gutter={[16,16]}>

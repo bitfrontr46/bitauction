@@ -11,6 +11,8 @@ const {Upload} = require('../models/Upload');
 // 파일을 로컬이 아닌 aws에 저장하기 위해서 multer s3 사용
 
 
+//AWS 키 외부(github)에 공개되면 안됨. commit할 때 주의!
+ 
 const s3 = new AWS.S3({ //S3 객체 사용
   accessKeyId: '', //생성한 s3의 accesskey
   secretAccessKey: '', //생성한 s3의 secret key
