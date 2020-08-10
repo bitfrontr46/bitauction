@@ -58,12 +58,12 @@ var storage = multer.diskStorage({ //diskStorage:임시저장소
 */
  
 
-  router.post('/image',(req,res,next)=>{
+  router.post('/image',(req,res)=>{
     //가져온 이미지를 저장을 해주면 됨
     upload(req,res, err =>{
       if(err){
         return res.json({success: false, err});
-      }
+      } 
       return res.json({ //결과값을 보낼 때 res
         success: true,
         filePath: res.req.file.path,
@@ -72,11 +72,15 @@ var storage = multer.diskStorage({ //diskStorage:임시저장소
     });
   });
 
-
-  router.post('/', (req,res)=>{
+    
+  
+  router.post('/', (req,res)=>{ //'/image'
     //index에서 api/upload로 맞춰줬기 때문에 /로 생략 가능!
     //받아온 정보들을 DB에 넣어줌(body)
-    
+
+    //s3 객체 url 
+    //image_url = "https://project-portfolio-upload.s3.ap-northeast-2.amazonaws.com/uploads/" + image_time+ "." + image_type //업로드된 이미지의 url이 설정갑으로 저장됨 
+
     const upload = new Upload(req.body)
     upload.save((err)=>{
       if(err) return res.status(400).json({success: false, err})
@@ -101,9 +105,11 @@ var storage = multer.diskStorage({ //diskStorage:임시저장소
   });
  
   router.get('/uploads_by_id', (req,res)=>{
+      //uploadId를 이용해서 DB에서 uploadId와 같은 상품의 정보를 가져온다.
     let type = req.query.type
     let uploadId = req.query.id
-    //uploadId를 이용해서 DB에서 uploadId와 같은 상품의 정보를 가져온다.
+    //req.query.id: 요청의 query객체의 id프로퍼티 값
+  
 
     Upload.find({_id: uploadId})
     .exec((err,upload) =>{ //db에서 정보를 찾아옴!
@@ -138,7 +144,8 @@ multer를 통해서 데이터를 읽을 수 있음.
 destination, filename
 
 
-*/
 
+
+*/
 
 
