@@ -187,3 +187,33 @@ graph ql webflux를 지원안한다
 			https://javaplant.tistory.com/18 
 
 			https://ryan-han.com/post/translated/pathvariable_queryparam/
+
+
+			메신저에 대한 
+			기본소양
+			https://blog.sendbird.com/ko/%EC%9E%90%EC%B2%B4-or-%EC%99%B8%EC%A3%BC%EA%B0%9C%EB%B0%9C-%EC%B9%B4%ED%86%A1%EA%B3%BC-%EA%B0%99%EC%9D%80-%EB%A9%94%EC%8B%A0%EC%A0%80-%EC%96%B4%ED%94%8C%EC%9D%84-%EA%B0%9C%EB%B0%9C%ED%95%98%EA%B8%B0/
+
+			// redis 사용 확인			
+			https://daddyprogrammer.org/post/4056/reactive-redis/
+
+//  한국 공식인진 모르겠지만 자료쓰는 샘플이 한글로 다있다 
+			http://redisgate.kr/redis/clients/lettuce_intro.php
+
+// 임베디드 설정부분
+			https://blog.naver.com/gngh0101/221780936975
+			리액티브 설정 참고 
+			https://daddyprogrammer.org/post/4056/reactive-redis/
+			감으로는 레디스 구조가 데이터 집합의  key가 있고 그 키안에 
+			key와 value로 이루어진 데이터가 있다  
+
+			일단 리액티브 레디스를 임베디드로 쓰려고했는데 내가 잘못했는지 안된다 
+			그런데 더 애매한건 얘네가 windows를 지원 안한다 ㅡㅡ (설치버전 3.0 현재버전 6.0)
+			따라서 도커형식으로 이미지 만들어서 설치예정 
+			도커 툴박스 사용
+			https://4coops.tistory.com/entry/VirtualBox-Won%E2%80%99t-Run-rawmode-unavailable-courtesy-of-HyperV
+docker run -p 6379:6379 --rm --name redis redis
+
+이메일 인증 완료 
+이메일인증은 랜덤으로 0 ~ 100000 - 1의 숫자를 랜덤으로 뽑아서
+그걸 레디스에 이메일과 함께 저장시켜놨다가 
+그걸 불러다가 검증시키고 나중에 삭제한다 따로 만료기간을 줄 수도 있지만 일단 급하므로 이렇게 해결함

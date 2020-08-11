@@ -1,12 +1,14 @@
 package com.project.backend.handlers;
 
 import com.nimbusds.jose.JOSEException;
+import com.project.backend.Configurations.Email;
 import com.project.backend.Model.LoginModel;
 import com.project.backend.Model.User;
 import com.project.backend.repositories.PublicRepository;
 
-
 import org.springframework.data.r2dbc.core.DatabaseClient;
+import org.springframework.data.redis.core.ReactiveHashOperations;
+import org.springframework.data.redis.core.ReactiveRedisTemplate;
 import org.springframework.http.ResponseCookie;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -30,12 +32,23 @@ public class UserHandler  {
 
     private final DatabaseClient databaseClient;
     private final PublicRepository publicRepository;
+
+
+
+    @Autowired
+    ReactiveRedisTemplate<String,String> reactiveRedisTemplate;
+
+    @Autowired
+    Email email;
+
     public UserHandler(
         DatabaseClient databaseClient,
         PublicRepository publicRepository
+
     ) {
         this.databaseClient = databaseClient;
         this.publicRepository = publicRepository;
+       
     }
 
     public Mono<ServerResponse> join(ServerRequest req) { 
@@ -59,9 +72,8 @@ public class UserHandler  {
         Mono<User> user = 
              publicRepository.findByUserPk(Integer.valueOf(req.queryParam("id").get()))
                 .flatMap(nu -> {
-
                 BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-    
+              
                 if (!passwordEncoder.matches(req.queryParam("password").get(), nu.getUserPassword())) {
                     return Mono.just(nu);
                 }
@@ -112,7 +124,7 @@ public class UserHandler  {
             return databaseClient
             .execute(
                 "update user set userPassword = : pwd" + 
-                "userName : name where userId = :id")
+                ",userName = : name where userId = :id")
                 .bind("id", mUser.get("id"))
                 .bind("pwd", mUser.get("userPassword"))
                 .bind("name", mUser.get("name"))
@@ -145,16 +157,18 @@ public class UserHandler  {
     public  Mono<ServerResponse> findByPK(ServerRequest req) { 
         return ok().body( databaseClient
         .execute("select * from user where userId = :userId")
-        .bind("id",req.bodyToMono(Map.class).block().get("userId"))
+        .bind("userId",req.queryParam("pk").get())
         .fetch()
         .first(), User.class);
 
     }
 
+
+ 
     public  Mono<ServerResponse> findByUserId(ServerRequest req) { 
         return ok().body( databaseClient
         .execute("select * from user where userEmail = :userEmail")
-        .bind("id",req.bodyToMono(Map.class).block().get("userEmail"))
+        .bind("userEmail",req.queryParam("userId").get())
         .fetch()
         .first(), User.class);
     }
@@ -167,7 +181,7 @@ public class UserHandler  {
 
     public Mono<ServerResponse> setSeller(ServerRequest req) {
         Mono<Map> mMap = req.bodyToMono(Map.class);
-        System.out.println(mMap.block().get("userId"));
+        mMap.block().get("userId");
         return ok().body(
             mMap.flatMap(map -> {
                 System.out.println("-------------------------------------------");
@@ -177,21 +191,59 @@ public class UserHandler  {
                     System.out.println(123);
                     if(user.getUserId() == -1) return Mono.just(user.getUserId() );
 
-                    
                     return publicRepository.insertSeller(
                         map.get("portfolio").toString(),
                         map.get("imageLink").toString(),
                         (int)map.get("imageCount"),
                         (int)map.get("userId")
-                    );
-                
-                     
+                    );                     
                 });
-               
-               
-
             }), Integer.class);
 
     }
 
+    public Mono<ServerResponse> emailAuth(ServerRequest req) {
+        return ok().body(databaseClient
+        .execute("select * from user where userEmail = :userEmail")
+        .bind("userEmail",req.queryParam("email").get())
+        .fetch().first().flatMap(u -> {
+            email.sendMail(req.queryParam("email").get());
+            return Mono.just("이메일 보냄");
+        }).switchIfEmpty(Mono.defer(() -> {
+            return Mono.just("이메일 없다");
+        })),String.class);
+    }
+
+    public Mono<ServerResponse> emailAuthVerify(ServerRequest req) { 
+        return ok().body(Mono.defer(() -> {
+            ReactiveHashOperations<String, String, String> hashOps = reactiveRedisTemplate.opsForHash();
+            
+            System.out.println(hashOps.size( Email.redisKey).block());
+            return hashOps.get( Email.redisKey, "woswkd98@naver.com").flatMap(m -> {
+                System.out.println(m);
+                if(m.equals(req.queryParam("authId").get())) {
+                    hashOps.remove( Email.redisKey, req.queryParam("authId").get());
+                    return Mono.just("인증 완료");
+                }
+                
+                return Mono.just("인증실패");
+                
+           });            
+        }), String.class);
+    }
+    public Mono<ServerResponse> updatePwd(ServerRequest req) {
+        
+        System.out.println(req.queryParam("userId").get());
+        System.out.println(req.queryParam("newPassword").get());
+        return ok().body(databaseClient
+        .execute(  "update user set userPassword = :pwd" + 
+        " where userId = :userId")
+        .bind("userId",req.queryParam("userId").get())
+        .bind("pwd", (new BCryptPasswordEncoder()).encode(req.queryParam("newPassword").get()))
+        .fetch()
+        .first(), User.class);
+    }
+
+
+     
 }
