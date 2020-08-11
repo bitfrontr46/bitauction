@@ -38,7 +38,7 @@ function Routes() {
           <Route path="/admin/accountlist" component={AdminAccountList} />
           <Route path="/admin/tagslist" component={AdminTagsList} />
           {/* User 관리 페이지 */}
-          <Route path="/user/page" component={UserPageApp} />
+          <Route path="/userpage" component={UserPageApp} />
           {/* Not Found */}
           <Route component={NotFound} />
         </Switch>

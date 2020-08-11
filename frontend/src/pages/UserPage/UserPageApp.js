@@ -1,10 +1,11 @@
 import * as React from "react";
 import { Provider } from "react-redux";
 import { createHashHistory } from "history";
-import { Admin } from "react-admin";
+import { Admin, Resource, ListGuesser } from "react-admin";
 import restProvider from "ra-data-simple-rest";
 
 import createAdminStore from "./createAdminStore";
+import Dashboard from "./Dashboard";
 
 const dataProvider = restProvider("https://localhost:3000");
 const authProvider = () => Promise.resolve();
@@ -26,11 +27,17 @@ const UserPageApp = () => (
     })}
   >
     <Admin
+      dashboard={Dashboard}
       authProvider={authProvider}
       dataProvider={dataProvider}
+      Resource
+      name="users"
+      list={ListGuesser}
       history={history}
       title="My Admin"
-    ></Admin>
+    >
+      <Resource name="users" list={ListGuesser} />
+    </Admin>
   </Provider>
 );
 
