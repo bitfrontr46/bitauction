@@ -70,7 +70,7 @@ const BidList = () => {
 
         const MyChosenList = ChosenList.map((obj) => {
             return (
-                <Grid style={{ margin: 'auto' }} item xs={4}>
+                <Grid key={obj._id} style={{ margin: 'auto' }} item xs={4}>
                     <RequestCard obj={obj.request} />
                 </Grid>
             )
@@ -78,7 +78,7 @@ const BidList = () => {
 
         const MyWaittingList = WaittingList.map((obj) => {
             return (
-                <Grid style={{ margin: 'auto' }} item xs={4}>
+                <Grid key={obj.request._id} style={{ margin: 'auto' }} item xs={4}>
                     <Card variant="outlined">
                         <CardContent style={{ margin: 'auto' }}>
                             {obj.request.author.name} 님의 {obj.request.category} 요청
