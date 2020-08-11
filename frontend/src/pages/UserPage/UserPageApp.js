@@ -1,13 +1,17 @@
 import * as React from "react";
 import { Provider } from "react-redux";
 import { createHashHistory } from "history";
-import { Admin, Resource, ListGuesser } from "react-admin";
-import restProvider from "ra-data-simple-rest";
+import { Admin, Resource, EditGuesser } from "react-admin";
+import jsonServerProvider from "ra-data-json-server";
 
 import createAdminStore from "./createAdminStore";
 import Dashboard from "./Dashboard";
+import { UserList } from "./users";
+import { PostList, PostCreate } from "./posts";
 
-const dataProvider = restProvider("https://localhost:3000");
+import { BrowserRouter, Switch } from "react-router-dom";
+
+const dataProvider = jsonServerProvider("https://jsonplaceholder.typicode.com");
 const authProvider = () => Promise.resolve();
 /* const i18nProvider = polyglotI18nProvider((locale) => {
   if (locale !== "en") {
@@ -19,26 +23,33 @@ const authProvider = () => Promise.resolve();
 const history = createHashHistory();
 
 const UserPageApp = () => (
-  <Provider
-    store={createAdminStore({
-      authProvider,
-      dataProvider,
-      history,
-    })}
-  >
-    <Admin
-      dashboard={Dashboard}
-      authProvider={authProvider}
-      dataProvider={dataProvider}
-      Resource
-      name="users"
-      list={ListGuesser}
-      history={history}
-      title="My Admin"
-    >
-      <Resource name="users" list={ListGuesser} />
-    </Admin>
-  </Provider>
+  <BrowserRouter>
+    <Switch>
+      <Provider
+        store={createAdminStore({
+          authProvider,
+          dataProvider,
+          history,
+        })}
+      >
+        <Admin
+          dashboard={Dashboard}
+          authProvider={authProvider}
+          dataProvider={dataProvider}
+          history={history}
+          title="My Admin"
+        >
+          <Resource
+            name="posts"
+            list={PostList}
+            edit={EditGuesser}
+            create={PostCreate}
+          />
+          <Resource name="users" list={UserList} />
+        </Admin>
+      </Provider>
+    </Switch>
+  </BrowserRouter>
 );
 
 export default UserPageApp;
