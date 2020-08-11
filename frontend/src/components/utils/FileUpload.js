@@ -14,13 +14,13 @@ function FileUpload(props) {
     const config = { //config 객체
       header: { "content-type": "multipart/form-data" },
     };
-    formData.append("file", files[0]);
+    formData.append("file", files[0]); //첫 번째로 가져오기 위해 array 설정
 
     //axios 사용해서 백엔드에게 파일 보내기. 서버로 post 요청
 
     axios.post("http://localhost:4000/api/upload/image", formData, config)
-    .then((response)=>{
-      if(response.data.success){
+    .then((response)=>{ 
+      if(response.data.success){ //res가 성공한다면
         console.log(response.data);
         setImages([...Images, response.data.filePath]);
         props.refreshFunction([...Images, response.data.filePath])

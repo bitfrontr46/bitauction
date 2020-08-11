@@ -17,6 +17,13 @@ const uploadSchema = mongoose.Schema({
         type : Array,
         default :[]
     },
+    
+     imageurl : {
+         type : String, //이미지 경로 저장
+    //     default : "https://project-portfolio-upload.s3.ap-northeast-2.amazonaws.com/uploads/"
+     }
+    //url는 string
+
 
 })
 

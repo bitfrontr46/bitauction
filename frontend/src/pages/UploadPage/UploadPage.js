@@ -27,7 +27,7 @@ function UploadPage(props) {
     }
 
     const submitHandler = (e) => {
-      e.preventDefault();
+      e.preventDefault(); //클릭해서 넘어가는 것을 방지함
 
       if(!Title || !SellerProfile || !Images){
         return alert("모든 값을 넣어주세요")

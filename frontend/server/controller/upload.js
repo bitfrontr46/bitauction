@@ -19,7 +19,7 @@ const s3 = new AWS.S3({ //S3 객체 사용
   region: 'ap-northeast-2', //지역설정
 });
 
-// //multerS3
+// //multerS3에 파일 업로드
 
 const storage = multerS3({ //storage:저장되는 파일명이나 인코딩 조작
 
@@ -59,17 +59,19 @@ var storage = multer.diskStorage({ //diskStorage:임시저장소
  
 
   router.post('/image',(req,res)=>{
-    //가져온 이미지를 저장을 해주면 됨
+    //가져온 이미지를 저장을 해주면 됨.index 쪽으로 먼저 갔다가 router
     upload(req,res, err =>{
       if(err){
         return res.json({success: false, err});
       } 
       return res.json({ //결과값을 보낼 때 res
         success: true,
-        filePath: res.req.file.path,
+        filePath: res.req.file.path,//파일 경로 
         fileName: res.req.file.filename,
+     
       });
     });
+
   });
 
     
@@ -81,8 +83,8 @@ var storage = multer.diskStorage({ //diskStorage:임시저장소
     //s3 객체 url 
     //image_url = "https://project-portfolio-upload.s3.ap-northeast-2.amazonaws.com/uploads/" + image_time+ "." + image_type //업로드된 이미지의 url이 설정갑으로 저장됨 
 
-    const upload = new Upload(req.body)
-    upload.save((err)=>{
+    const upload = new Upload(req.body) 
+    upload.save((err)=>{ //모든 정보 저장 
       if(err) return res.status(400).json({success: false, err})
       return res.status(200).json({success:true})
     })
@@ -92,7 +94,7 @@ var storage = multer.diskStorage({ //diskStorage:임시저장소
 
   router.post('/uploads', (req,res)=>{
     //upload collection에 들어있는 모든 정보를 가져오기 
-    Upload.find()
+    Upload.find() 
     .exec((err, uploadInfo)=>{
       if(err) return res.status(400).json({success:false,err});
       return res.status(200).json({
@@ -142,6 +144,12 @@ multer를 통해서 데이터를 읽을 수 있음.
 
 -스토리지 엔진
 destination, filename
+
+-S3
+key-value 형태의 객체 스토리지로 파일,폴더 모두 버킷 내 객체
+deleteObjects 메소드를 통해 객체(파일/폴더)를 삭제할 수 있으며,
+포더 인 경우 모두 비워져 있어야만 삭제 가능함
+
 
 
 

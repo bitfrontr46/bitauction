@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import { useSelector } from "react-redux";
 
+
 const Profile = () => {
   const user_id = useSelector((state) => state.userAction.user_id);
   const [myProfile, setProfile] = useState({});

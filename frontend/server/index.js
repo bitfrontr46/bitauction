@@ -60,6 +60,7 @@ app.use('/api/upload', require('./controller/upload'));
 app.use('/uploads', express.static('uploads')) 
 //uploads 폴더에 저장되어있는 이미지를 가져올 때 사용.
 //express.static을 이용해서 uploads 파일을 공유할 수 있게 한다
+//이미지,파일과 같은 정적 파일을 제공할 때 express.static을 사용하면 편리함
 
 
 
