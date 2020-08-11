@@ -89,7 +89,7 @@ query GetMyRoomListForSeller($seller:ID){
 `
 
 export const GET_MY_REQUESTS = gql`
-query GetMyRequests($author:ID){
+query GetMyRequests($author:ID!){
   getMyRequests(author:$author){
     _id
     author{
@@ -105,6 +105,7 @@ query GetMyRequests($author:ID){
   }
 }
 `
+
 export const GET_BIDS_IN_REQUEST = gql`
 query GetBidsInRequest($request:ID){
   getBidsInRequest(request:$request){
@@ -114,6 +115,33 @@ query GetBidsInRequest($request:ID){
       name
     }
     price
+    state
+  }
+}
+`
+
+export const GET_MY_ROOM = gql`
+query GetMyRoom($request:ID,$seller:ID){
+  getMyRoom(request:$request,seller:$seller){
+    _id
+    messages{
+      name
+      message
+      createdAt
+    }
+  }
+}
+`
+
+export const GET_MY_PROFILE = gql`
+query GetProfile($user:ID){
+  getProfile(user:$user){
+    user{
+      name
+      email
+    }
+    image
+    text
   }
 }
 `
@@ -135,14 +163,6 @@ mutation SendBid($input:BidInput){
   )
 }
 `
-
-export const CHOICE_ONE_BID = gql`
-mutation ChoiceOneBid($bid:ID,$request:ID){
-  choiceOneBid(bid:$bid,request:$request)
-}
-`
-
-
 
 export const LOGIN = gql`
 mutation Login($email:String!,$pwd:String!){
@@ -168,6 +188,30 @@ mutation SendNewMessage($input:MessageInput){
     message
     createdAt
   }
+}
+`
+
+export const CHOICE_ONE_BID = gql`
+mutation ChoiceOneBid($bid:ID,$request:ID){
+  choiceOneBid(bid:$bid,request:$request)
+}
+`
+
+export const TRADE_COMPLETE = gql`
+mutation TradeComplete($bid:ID,$request:ID){
+  tradeComplete(bid:$bid,request:$request)
+}
+`
+
+export const TRADE_CANCLE = gql`
+mutation TradeCancle($request:ID){
+  tradeCancle(request:$request)
+}
+`
+
+export const BID_CANCLE = gql`
+mutation bidCancle($request:ID,$author:ID){
+  bidCancle(request:$request,author:$author)
 }
 `
 

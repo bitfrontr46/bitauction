@@ -50,18 +50,18 @@ function Navigation() {
             if (is_seller) {
                 return (
                     <>
-                        <Link className={classes.menuStyle} to='/'><Button color="inherit">HOME</Button></Link>
-                        <Link className={classes.menuStyle} to='/list'><Button color="inherit">LIST</Button></Link>
-                        <Link className={classes.menuStyle} to='/mypage'><Button color="inherit">MYPAGE</Button></Link>
+                        <Link className={classes.menuStyle} to='/seller'><Button color="inherit">HOME</Button></Link>
+                        <Link className={classes.menuStyle} to='/seller/request'><Button color="inherit">LIST</Button></Link>
+                        <Link className={classes.menuStyle} to='/seller/mypage'><Button color="inherit">MYPAGE</Button></Link>
                         <Link className={classes.menuStyle} to='#'><Button onClick={logout} color="inherit">LOGOUT</Button></Link>
                     </>
                 )
             } else {
                 return (
                     <>
-                        <Link className={classes.menuStyle} to='/'><Button color="inherit">HOME</Button></Link>
-                        <Link className={classes.menuStyle} to='/enroll'><Button color="inherit">ENROLL</Button></Link>
-                        <Link className={classes.menuStyle} to='/mypage'><Button color="inherit">MYPAGE</Button></Link>
+                        <Link className={classes.menuStyle} to='/user'><Button color="inherit">HOME</Button></Link>
+                        <Link className={classes.menuStyle} to='/user/enroll'><Button color="inherit">ENROLL</Button></Link>
+                        <Link className={classes.menuStyle} to='/user/mypage'><Button color="inherit">MYPAGE</Button></Link>
                         <Link className={classes.menuStyle} to='#'><Button onClick={logout} color="inherit">LOGOUT</Button></Link>
                     </>
                 )

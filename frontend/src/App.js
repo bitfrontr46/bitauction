@@ -1,16 +1,16 @@
 import React, { useEffect } from 'react';
 import { Switch, Route,BrowserRouter } from 'react-router-dom';
 import  Home from './pages/Home';
-import  Enroll from './pages/enroll';
-import RequestMain from './pages/Request/RequestMain';
-import RequestDetail from './pages/Request/RequestDetail';
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
-import Bidding from './pages/bidding';
 import Login from './pages/Login';
 import Join from './pages/join';
-import MyPage from './pages/MyPage';
+import Seller from './pages/SellerPage';
+import User from './pages/UserPage';
 import { useDispatch } from 'react-redux';
+
+// const Seller = React.lazy(() => import('./pages/SellerPage'));
+// const User = React.lazy(() => import('./pages/UserPage'));
 
 function App() {
 
@@ -48,13 +48,10 @@ function App() {
       <Navigation></Navigation>
         <Switch>
           <Route path='/' component={Home} exact />
-          <Route path='/list' component={RequestMain}  exact/>
-          <Route path='/list/:id' component={RequestDetail}  exact/>
-          <Route path='/list/:id/bidding' component={Bidding} exact />
-          <Route path='/enroll' component={Enroll}  />
+          <Route path='/seller' component={Seller}/>
+          <Route path='/user' component={User}/>
           <Route path='/login' component={Login}  />
           <Route path='/join' component={Join}  />
-          <Route path='/mypage' component={MyPage}  />
         </Switch>
       <Footer></Footer>
     </BrowserRouter>
