@@ -10,6 +10,9 @@ import {
   EditButton,
   TextInput,
   DateInput,
+  Filter,
+  ReferenceInput,
+  SelectInput,
 } from "react-admin";
 
 export const PostList = (props) => (
@@ -53,4 +56,17 @@ export const PostCreate = (props) => (
       <TextInput source="average_note" />
     </SimpleForm>
   </Create>
+);
+
+const PostFilter = (props) => (
+  <Filter {...props}>
+    <TextInput label="Search" source="q" alwaysOn />
+    <ReferenceInput label="User" source="userId" reference="users" allowEmpty>
+      <SelectInput optionText="name" />
+    </ReferenceInput>
+  </Filter>
+);
+
+export const PostList = (props) => (
+  <List filters={<PostFilter />} {...props}></List>
 );
