@@ -77,6 +77,7 @@ function FileUpload(props) {
             <img
               style={{ minWidth: "300px", width: "300px", height: "240px" }}
               src={`http://localhost:4000/${image}`}
+
             />
           </div>
         ))}
@@ -100,6 +101,11 @@ src={`http://localhost:4000/${image}`}
 
 post 방식은 url로 요청할 수 X
 사진을 업로드 시 axios로 post로 요청을 하는 것을 구현!
+
+//이미지 경로
+"https://project-portfolio-upload.s3.ap-northeast-2.amazonaws.com/uploads/"
+
+
 
 
 

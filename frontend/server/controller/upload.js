@@ -25,7 +25,7 @@ const storage = multerS3({ //storage:저장되는 파일명이나 인코딩 조�
 
   s3 : s3, 
   bucket : 'project-portfolio-upload',//s3 생성시 버킷이름
-  acl : 'public-read' ,//업로드 된 데이터를 url로 읽을 때 설정하는 값. 업로드만 한다면 필요X
+  acl : 'public-read' ,//업로드 된 데이터를 url로 읽을 때 설정하는 값. 외부에 공개할 이미지
   metadata: function(req, file,cb){
     cb(null, {fieldName: file.fieldname}) //파일 메타정보 저장
   },
@@ -125,7 +125,7 @@ var storage = multer.diskStorage({ //diskStorage:임시저장소
 
 
 
-  
+
 
   
 
