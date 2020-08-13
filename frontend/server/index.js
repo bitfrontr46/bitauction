@@ -62,6 +62,10 @@ app.use('/uploads', express.static('uploads'))
 //express.static을 이용해서 uploads 파일을 공유할 수 있게 한다
 //이미지,파일과 같은 정적 파일을 제공할 때 express.static을 사용하면 편리함
 
+// const fileUpload = require('express-fileupload');
+// app.use(fileUpload());
+
+
 
 
 http.listen(4000, () => {

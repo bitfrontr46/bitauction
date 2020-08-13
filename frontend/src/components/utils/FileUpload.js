@@ -17,13 +17,13 @@ function FileUpload(props) {
     formData.append("file", files[0]); //첫 번째로 가져오기 위해 array 설정
 
     //axios 사용해서 백엔드에게 파일 보내기. 서버로 post 요청
-
+    //url[localhost:포트번호/image]에 post 요청 
     axios.post("http://localhost:4000/api/upload/image", formData, config)
     .then((response)=>{ 
       if(response.data.success){ //res가 성공한다면
-        console.log(response.data);
-        setImages([...Images, response.data.filePath]);
-        props.refreshFunction([...Images, response.data.filePath])
+        console.log(response.data); //새로 들어온 데이터 location을 집어넣음 
+        setImages([...Images, response.data.location]);
+        props.refreshFunction([...Images, response.data.location])
       }else{
         alert("파일을 저장하는데 실패했습니다.");
       }
@@ -72,7 +72,7 @@ function FileUpload(props) {
           overflowX: "scroll",
         }}
       >
-        {Images.map((image, index) => (
+        {Images.map((image, index) => ( //이 값을 리턴함
           <div onClick={() => deleteHandler(image)} key={index}>
             <img
               style={{ minWidth: "300px", width: "300px", height: "240px" }}
@@ -104,6 +104,8 @@ post 방식은 url로 요청할 수 X
 
 //이미지 경로
 "https://project-portfolio-upload.s3.ap-northeast-2.amazonaws.com/uploads/"
+
+//response 안에 파일 정보(loacation)이 들어있음
 
 
 

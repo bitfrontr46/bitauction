@@ -5,6 +5,7 @@ const multerS3 = require('multer-s3')
 const AWS = require("aws-sdk");
 const router = express.Router();
 const {Upload} = require('../models/Upload');
+const { response } = require('express');
 
 
 //백엔드 -> 프론트 엔드로 파일 저장, 정보 전달
@@ -25,6 +26,7 @@ const storage = multerS3({ //storage:저장되는 파일명이나 인코딩 조�
 
   s3 : s3, 
   bucket : 'project-portfolio-upload',//s3 생성시 버킷이름
+  contentType: multerS3.AUTO_CONTENT_TYPE, //자동으로 콘텐츠 타입 세팅
   acl : 'public-read' ,//업로드 된 데이터를 url로 읽을 때 설정하는 값. 외부에 공개할 이미지
   metadata: function(req, file,cb){
     cb(null, {fieldName: file.fieldname}) //파일 메타정보 저장
@@ -32,10 +34,22 @@ const storage = multerS3({ //storage:저장되는 파일명이나 인코딩 조�
   key: function(req,file,cb){ //디렉토리 이름(uploads)/${Date.now}
             //s3 uploads 폴더 안에 파일명 : 날짜+파일명으로 넣기  
     cb(null, `uploads/${Date.now()}_${file.originalname}`) //저장될 파일 명과 똑같이 해줌!
-  }
+  }, 
 })
 const upload = multer({storage:storage}).single("file"); //single(): 하나의 파일 업로드할 때 사용 
 
+
+
+// router.post('/image', (req,res)=>{
+//   try{
+//     console.log("req.file: ", req.file);
+//     let payLoad = {url: req.file.location};
+//     response(res,200,payLoad);
+//   }catch(err){
+//     console.log(err);
+//     response(res,500, "서버에러")
+//   }
+// })
 
 
 //multer
@@ -53,12 +67,14 @@ var storage = multer.diskStorage({ //diskStorage:임시저장소
   })
 
   var upload = multer({storage : storage }).single("file");
-  //single : 하나의 파일 업로드할 때 
+  // req.files는 'file'이라는 필드의 파일 정보
+  // 텍스트 필드가 있는 경우 req.body가 이를 포함함
+
 
 */
  
 
-  router.post('/image',(req,res)=>{
+  router.post('/image',(req,res)=>{ //백엔드-> 프론트 
     //가져온 이미지를 저장을 해주면 됨.index 쪽으로 먼저 갔다가 router
     upload(req,res, err =>{
       if(err){
@@ -66,8 +82,12 @@ var storage = multer.diskStorage({ //diskStorage:임시저장소
       } 
       return res.json({ //결과값을 보낼 때 res
         success: true,
-        filePath: res.req.file.path,//파일 경로 
-        fileName: res.req.file.filename,
+        // filePath: res.req.file.path,//파일 경로 
+        // fileName: res.req.file.filename,
+        location: res.req.file.location
+
+        //multer -> s3
+        //구성 내용이 바뀌면서 path가 존재하지 않음 
      
       });
     });
@@ -106,13 +126,13 @@ var storage = multer.diskStorage({ //diskStorage:임시저장소
 
   });
  
+  //여기서 자꾸 get 404뜸
   router.get('/uploads_by_id', (req,res)=>{
       //uploadId를 이용해서 DB에서 uploadId와 같은 상품의 정보를 가져온다.
     let type = req.query.type
     let uploadId = req.query.id
     //req.query.id: 요청의 query객체의 id프로퍼티 값
   
-
     Upload.find({_id: uploadId})
     .exec((err,upload) =>{ //db에서 정보를 찾아옴!
       if(err) return res.status(400).send(err)
@@ -138,6 +158,8 @@ module.exports = router;
 /*
 -FormData의 경우 req로부터 데이터를 얻을 수 X
 multer를 통해서 데이터를 읽을 수 있음.
+-> multer는 multipart/form-data가 아닌 폼에서는 동작하지 않음!
+
 
 -multer-s3 key
 : 파일명 앞에 디렉토리명을 써서 올리면 해당 디렉토리 안으로 파일이 업로드됨

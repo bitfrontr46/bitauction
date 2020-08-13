@@ -24,13 +24,15 @@ function Landing(props) {
         })
     })
 
+    //src에 s3 링크를 넣으면 끌고옴. 4000 포트에서 불러오는 게 아님!
+
     const renderCards = Uploads.map((upload,index)=>{
         // console.log('upload', upload);
         // ->연속해서 콘솔 로그 찍히는 문제 발생
 
         return <Col log={6} md={8} xs={24} key={index}>
         <Card 
-             cover={<a href={`/upload/${upload._id}`}><Image src={`http://localhost:4000/${upload.images[0]}`}/></a>}
+             cover={<a href={`/upload/${upload._id}`}><Image src={`https://project-portfolio-upload.s3.ap-northeast-2.amazonaws.com/uploads/1597308377768_%EB%82%98%EB%AC%B4.jpg`}/></a>}
         >
             <Meta
                 title={upload.title}
