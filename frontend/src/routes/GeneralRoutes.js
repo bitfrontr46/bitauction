@@ -14,7 +14,7 @@ import MyPage from "../pages/MyPage";
 import UploadPage from "../pages/UploadPage/UploadPage";
 import Landing from "../pages/Landing/Landing";
 import DetailPage from '../pages/Detail/DetailPage';
-import CardForm from "../pages/Landing/CardForm";
+
 
 function GeneralRoutes() {
   const dispatch = useDispatch();
@@ -64,8 +64,7 @@ function GeneralRoutes() {
           <Route path="/mypage" component={MyPage} />
           <Route path="/fileupload" component={UploadPage} />
           <Route path="/upload/:uploadId" component={DetailPage}/>
-          <Route path="/landing" component={Landing} />
-          <Route path="/card" component={CardForm} />
+          <Route path="/landing" component={Landing}/>
         </Switch>
         <Footer />
       </BrowserRouter>

@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import { useSelector } from "react-redux";
-
+import Landing from '../../Landing/Landing'
+import UploadPage from '../../UploadPage/UploadPage';
+import Button from '@material-ui/core/Button';
 
 const Profile = () => {
   const user_id = useSelector((state) => state.userAction.user_id);
@@ -21,6 +23,9 @@ const Profile = () => {
   return (
     <div>
       <h1>Profile</h1>
+      <Landing></Landing>
+  
+
     </div>
   );
 };

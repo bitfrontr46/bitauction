@@ -45,7 +45,7 @@ function UploadPage(props) {
         .then(response=>{
           if(response.data.success){
             alert("업로드 성공!")
-            props.history.push('/landing') //사진 업로드가 성공하면 랜딩 페이지로 이동함
+            props.history.push('/mypage/profile') //사진 업로드가 성공하면 랜딩 페이지로 이동(/landing)
           }else{
             alert("업로드 실패")
           }

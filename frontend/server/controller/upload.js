@@ -12,7 +12,7 @@ const { response } = require('express');
 // 파일을 로컬이 아닌 aws에 저장하기 위해서 multer s3 사용
 
 
-//AWS 키 외부(github)에 공개되면 안됨. commit할 때 주의!
+//AWS 키 외부(github)에 공개되면 안됨. aws 요금폭탄 위험
  
 const s3 = new AWS.S3({ //S3 객체 사용
   accessKeyId: '', //생성한 s3의 accesskey
@@ -171,9 +171,6 @@ destination, filename
 key-value 형태의 객체 스토리지로 파일,폴더 모두 버킷 내 객체
 deleteObjects 메소드를 통해 객체(파일/폴더)를 삭제할 수 있으며,
 포더 인 경우 모두 비워져 있어야만 삭제 가능함
-
-
-
 
 
 */

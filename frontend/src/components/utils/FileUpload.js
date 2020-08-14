@@ -76,7 +76,7 @@ function FileUpload(props) {
           <div onClick={() => deleteHandler(image)} key={index}>
             <img
               style={{ minWidth: "300px", width: "300px", height: "240px" }}
-              src={`http://localhost:4000/${image}`}
+              src={`${image}`}
 
             />
           </div>
@@ -106,7 +106,6 @@ post 방식은 url로 요청할 수 X
 "https://project-portfolio-upload.s3.ap-northeast-2.amazonaws.com/uploads/"
 
 //response 안에 파일 정보(loacation)이 들어있음
-
 
 
 

@@ -5,9 +5,15 @@ import Meta from 'antd/lib/card/Meta';
 import { Container, Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import Image from 'material-ui-image';
+import Button from '@material-ui/core/Button';
+import { useHistory } from "react-router-dom";
+
+
+
 
 function Landing(props) {
-    
+
+    const history = useHistory();
     const [Uploads, setUploads] = useState([])
 
     useEffect(()=>{
@@ -32,7 +38,7 @@ function Landing(props) {
 
         return <Col log={6} md={8} xs={24} key={index}>
         <Card 
-             cover={<a href={`/upload/${upload._id}`}><Image src={`https://project-portfolio-upload.s3.ap-northeast-2.amazonaws.com/uploads/1597308377768_%EB%82%98%EB%AC%B4.jpg`}/></a>}
+             cover={<a href={`/upload/${upload._id}`}><Image src={`${upload.images[0]}`}/></a>}
         >
             <Meta
                 title={upload.title}
@@ -41,28 +47,33 @@ function Landing(props) {
         </Col>
     })
 
-    //이미지에 하이퍼링크를 걸어서 
-    //이미지를 클릭하면 상세페이지로 넘어갈 수 있게끔하기
+    //이미지에 하이퍼링크를 걸어서 이미지를 클릭하면
+    // 상세페이지로 넘어갈 수 있게끔하기
 
 
 
   
 
     return (
-        <div style={{width:"75%", margin: "3rem auto"}}>
-           <div style={{textAlign: "center"}}>
-                <h1>프로필</h1>
-           </div> 
-           
-
-           {/* Card */}
-           <Row gutter={[16,16]}>
-            {renderCards}
-           </Row>
-          
-
-
+      <div style={{ width: "75%", margin: "3rem auto" }}>
+        <div style={{ textAlign: "center" }}>
+          <h1>프로필</h1>
         </div>
+
+        {/* Card */}
+        <Row gutter={[16, 16]}>{renderCards}</Row>
+
+        <Button
+          onClick={() => {
+            history.push("/fileupload");
+          }}
+          variant="contained"
+          color="primary"
+          disableElevation
+        >
+          업로드
+        </Button>
+      </div>
     );
 }
 
