@@ -7,9 +7,22 @@ import { Grid, Container, Divider } from '@material-ui/core';
 import Image from 'material-ui-image';
 import Button from '@material-ui/core/Button';
 import RequestDetail from './MyRequest/RequestDetail';
+import { useSelector } from 'react-redux';
+import ProfileModal from '../../../components/Profile/ProfileModal';
 
 const MyPage = () => {
     const userName = localStorage.getItem('userName');
+    const user_id = localStorage.getItem('user_id')
+    const is_seller = useSelector(state=>state.userAction.is_seller);
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
 
     const imageStyle = { borderRadius: '10px' }
     return (
@@ -17,14 +30,17 @@ const MyPage = () => {
             <Grid style={{ textAlign: 'center', marginRight: '10px' }} item xs={2}>
                 <Image imageStyle={imageStyle} src="https://placeimg.com/280/250/animals" alt="avatar" />
                 <h3>{userName}</h3>
+                {is_seller
+                &&
+                <Button style={{ width: '100%', margin: '1px' }} variant="outlined" component={Link} to='/seller/mypage'>
+                    판매 정보
+                </Button>
+                }
                 <Button style={{ width: '100%', margin: '1px' }} variant="outlined" component={Link} to='/user/mypage'>
-                    마이 페이지
+                    구매 정보
                 </Button>
-                <Button style={{ width: '100%', margin: '1px' }} variant="outlined" component={Link} to='/user/mypage/profile'>
-                    프로필
-                </Button>
-                <Button style={{ width: '100%', margin: '1px' }} variant="outlined" component={Link} to='/user/mypage/chat'>
-                    채팅 상담
+                <Button style={{ width: '100%', margin: '1px' }} variant="outlined" onClick={handleClickOpen}>
+                    나의 프로필
                 </Button>
                 <br />
             </Grid>
@@ -35,6 +51,7 @@ const MyPage = () => {
                 <Route path='/user/mypage/chat' component={Chat} />
                 <Route path='/user/mypage/profile' component={Profile} />
             </Grid>
+            <ProfileModal name={userName} open={open} onClose={handleClose} user_id={user_id} />
         </Grid>
     )
 }

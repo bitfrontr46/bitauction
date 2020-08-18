@@ -79,9 +79,9 @@ const BidList = () => {
         const MyWaittingList = WaittingList.map((obj) => {
             return (
                 <Grid key={obj.request._id} style={{ margin: 'auto' }} item xs={4}>
-                    <Card variant="outlined">
-                        <CardContent style={{ margin: 'auto' }}>
-                            {obj.request.author.name} 님의 {obj.request.category} 요청
+                    <Card style={{ textAlign: 'center' }} variant="outlined">
+                        <CardContent>
+                            {obj.request.author.name} 님의 {obj.request.category}<br/>
                             <Counter data={obj.request} />
                         </CardContent>
                     </Card>

@@ -71,7 +71,7 @@ export default function Login() {
         alert(data.login.result);
       }
     }
-  }, [history, is_login, data, dispatch])
+  }, [history, is_login,is_seller, data, dispatch])
 
   const onChangeInput = (e) => {
     setUser({

@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client';
 
-//Query
+//######################### Query #########################
 
 export const GET_ALL_USERS = gql`
 query GetAllUsers{
@@ -113,6 +113,9 @@ query GetBidsInRequest($request:ID){
     author{
       _id
       name
+      profile{
+        phone
+      }
     }
     price
     state
@@ -134,19 +137,26 @@ query GetMyRoom($request:ID,$seller:ID){
 `
 
 export const GET_MY_PROFILE = gql`
-query GetProfile($user:ID){
-  getProfile(user:$user){
+query GetMyProfile($user:ID){
+  getMyProfile(user:$user){
     user{
       name
       email
     }
-    image
+    phone
+    profileImage
+    exampleImages
     text
+    reviews{
+      name
+      text
+      rating
+    }
   }
 }
 `
 
-//Mutation
+ // ######################### Mutation #########################
 
 export const SEND_REQUEST = gql`
 mutation SendRequest($input:RequestInput){
@@ -210,12 +220,24 @@ mutation TradeCancle($request:ID){
 `
 
 export const BID_CANCLE = gql`
-mutation bidCancle($request:ID,$author:ID){
+mutation BidCancle($request:ID,$author:ID){
   bidCancle(request:$request,author:$author)
 }
 `
 
-//Subscription
+export const REQUEST_TIME_OVER = gql`
+mutation RequestTimeOver($request:ID){
+  requestTimeOver(request:$request)
+}
+`
+
+export const EDIT_MY_PROFILE = gql`
+mutation EditMyProfile($input:ProfileInput){
+  editMyProfile(input:$input)
+}
+`
+
+//######################### Subscription #########################
 
 export const START_CHAT = gql`
 subscription NewMessage($room:ID){

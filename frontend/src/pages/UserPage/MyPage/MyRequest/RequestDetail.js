@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_BIDS_IN_REQUEST, CHOICE_ONE_BID } from '../../../../lib/queries';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid } from '@material-ui/core';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import Bids from './Bids';
 import NowTrading from './NowTrading';
+import ReceiveList from './ReceiveList';
 
 const useStyles = makeStyles((theme) => ({
     card: {
@@ -64,7 +63,7 @@ const RequestDetail = (props) => {
     useEffect(() => {
         if (data2) {
             alert(data2.choiceOneBid);
-            history.replace('/mypage');
+            history.replace('/user/mypage');
         }
     }, [data2])
 
@@ -96,42 +95,56 @@ const RequestDetail = (props) => {
     }
 
 
-    if (requestData.state === '요청 진행중') {
-        return (
-            <div>
-                <h2>받은 견적서</h2>
-                <Grid container>
-                    <Grid item xs={6}>
-                        {requestData.category}
-                        <br />
-                        {requestData.tags.map((obj) => {
-                            return obj;
-                        })}
-                        <br />
-                        {requestData.detail}
-                        <br />
-                        {requestData.hopeDate}
-                        <br />
-                        {requestData.requestdAt}
-                    </Grid>
-                    <Grid item xs={6}>
-                        <Bids onClickChoice={onClickChoice} data={data.getBidsInRequest} requestData={requestData}/>
-                    </Grid>
-                </Grid>
-            </div>
-        )
-    } else if(requestData.state === '거래 진행중') {
-        return(
-            <NowTrading data={data.getBidsInRequest} requestData={requestData}/>
-        )
-    } else if(requestData.state === '거래 완료'){
-        return(
-            <h1>거래 종료</h1>
-        )
-    } else if(requestData.state === '취소된 거래'){
-        return(
-            <h1>취소된 거래</h1>
-        )
+    // if (requestData.state === '요청 진행중') {
+    //     return (
+    //         <div>
+    //             <h2>받은 견적서</h2>
+    //             <Grid container>
+    //                 <Grid item xs={6}>
+    //                     {requestData.category}
+    //                     <br />
+    //                     {requestData.tags.map((obj) => {
+    //                         return obj;
+    //                     })}
+    //                     <br />
+    //                     {requestData.detail}
+    //                     <br />
+    //                     {requestData.hopeDate}
+    //                     <br />
+    //                     {requestData.requestdAt}
+    //                 </Grid>
+    //                 <Grid item xs={6}>
+    //                     <Bids onClickChoice={onClickChoice} data={data.getBidsInRequest} requestData={requestData} />
+    //                 </Grid>
+    //             </Grid>
+    //         </div>
+    //     )
+    // } else if (requestData.state === '거래 진행중') {
+    //     return (
+    //         <NowTrading data={data.getBidsInRequest} requestData={requestData} />
+    //     )
+    // } else if (requestData.state === '거래 완료') {
+    //     return (
+    //         <h1>거래 완료</h1>
+    //     )
+    // } else if (requestData.state === '취소된 거래') {
+    //     return (
+    //         <h1>취소된 거래</h1>
+    //     )
+    // }
+
+    switch (requestData.state) {
+        case '거래 진행중':
+            return <NowTrading data={data.getBidsInRequest} requestData={requestData} />
+        case '거래 완료':
+            return <h1>거래 완료</h1>
+        case '취소된 거래':
+            return <h1>취소된 거래</h1>
+        case '취소된 요청':
+            return <h1>취소된 요청(요청시간이 마감되었는데 견적서가 1개도 없음)</h1>
+
+        default:
+            return <ReceiveList onClickChoice={onClickChoice} bidData={data.getBidsInRequest} requestData={requestData} />
     }
 
 

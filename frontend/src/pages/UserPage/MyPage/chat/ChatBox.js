@@ -1,15 +1,19 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
-import { Input, Container, Button } from '@material-ui/core';
+import { Input, Container, Divider, InputAdornment, OutlinedInput } from '@material-ui/core';
 import ChatList from './ChatList';
 import { START_CHAT, SEND_NEW_MESSAGE } from '../../../../lib/queries';
 import { useSubscription, useMutation } from '@apollo/client';
 import { useSelector } from 'react-redux';
+import SendIcon from '@material-ui/icons/Send';
+import IconButton from '@material-ui/core/IconButton';
 
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
+        background: 'lightGray',
+        marginBottom: '15px',
     },
     inline: {
         display: 'inline',
@@ -18,21 +22,21 @@ const useStyles = makeStyles((theme) => ({
         float: 'right',
     },
     container: {
-        webkitScrollbar: {
-            background: 'transparent',
-        },
-        backgroundColor: "skyblue",
         width: '100%',
-        height: '700px',
-        overflowY: 'scroll',
+        height: '600px',
+        overflowY: 'auto',
         overflowX: 'hidden',
-        margin: 'auto',
+        margin: '0px auto',
+    },
+    inputStyle: {
+        width: '100%',
+        padding: '15px 0px 15px 15px',
     }
 }));
 
 
 
-function ChatBox({userInfo}) {
+function ChatBox({ userInfo }) {
 
     const classes = useStyles();
 
@@ -40,9 +44,9 @@ function ChatBox({userInfo}) {
 
     const [newMessages, setNewMessage] = useState([]);
 
-    const { data,error } = useSubscription(START_CHAT,{
-        variables : {
-            room : userInfo.room
+    const { data, error } = useSubscription(START_CHAT, {
+        variables: {
+            room: userInfo.room
         }
     });
 
@@ -52,22 +56,22 @@ function ChatBox({userInfo}) {
 
     const userName = useSelector(state => state.userAction.userName);
 
-    useEffect(()=>{
+    useEffect(() => {
         objDiv.current.scrollTop = objDiv.current.scrollHeight;
-        if(data){
+        if (data) {
             setNewMessage((newMessages) => [
                 ...newMessages,
                 data.newMessage,
             ]);
         }
-        if(error){
+        if (error) {
             console.log(error);
         }
-    },[data,error])
+    }, [data, error])
 
-    useEffect(()=>{
+    useEffect(() => {
         objDiv.current.scrollTop = objDiv.current.scrollHeight;
-    },[newMessages])
+    }, [newMessages])
 
 
 
@@ -89,11 +93,11 @@ function ChatBox({userInfo}) {
                 if (message) {
                     e.preventDefault();
                     sendNewMessage({
-                        variables : {
-                            input : {
-                                room : userInfo.room,
-                                name : userName,
-                                message : message
+                        variables: {
+                            input: {
+                                room: userInfo.room,
+                                name: userName,
+                                message: message
                             }
                         }
                     })
@@ -108,11 +112,11 @@ function ChatBox({userInfo}) {
     const onClickForm = () => {
         if (message) {
             sendNewMessage({
-                variables : {
-                    input : {
-                        room : userInfo.room,
-                        name : userName,
-                        message : message
+                variables: {
+                    input: {
+                        room: userInfo.room,
+                        name: userName,
+                        message: message
                     }
                 }
             })
@@ -123,7 +127,7 @@ function ChatBox({userInfo}) {
     }
 
     return (
-        <Container style={{ textAlign: 'center' }}>
+        <div className={classes.root}>
             <Container ref={objDiv} className={classes.container}>
                 <List className={classes.root}>
                     {lastMessageList}
@@ -131,10 +135,22 @@ function ChatBox({userInfo}) {
                 </List>
             </Container>
             <form onKeyDown={onSubmitForm}>
-                <Input style={{ width: '90%' }} rowsMax={4} multiline value={message} onChange={onChangeMessage} />
-                <Button style={{ backgroundColor: 'yellow',width: '10%' }} onClick={onClickForm}>보내기</Button>
+                <OutlinedInput
+                    className={classes.inputStyle}
+                    va
+                    rowsMax={4}
+                    multiline
+                    value={message}
+                    endAdornment={
+                        <InputAdornment position="end">
+                            <IconButton onClick={onClickForm}>
+                                <SendIcon />
+                            </IconButton>
+                        </InputAdornment>
+                    }
+                    onChange={onChangeMessage} />
             </form>
-        </Container>
+        </div>
     );
 }
 

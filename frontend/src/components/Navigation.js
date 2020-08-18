@@ -51,6 +51,7 @@ function Navigation() {
                 return (
                     <>
                         <Link className={classes.menuStyle} to='/seller'><Button color="inherit">HOME</Button></Link>
+                        <Link className={classes.menuStyle} to='/user/enroll'><Button color="inherit">ENROLL</Button></Link>
                         <Link className={classes.menuStyle} to='/seller/request'><Button color="inherit">LIST</Button></Link>
                         <Link className={classes.menuStyle} to='/seller/mypage'><Button color="inherit">MYPAGE</Button></Link>
                         <Link className={classes.menuStyle} to='#'><Button onClick={logout} color="inherit">LOGOUT</Button></Link>

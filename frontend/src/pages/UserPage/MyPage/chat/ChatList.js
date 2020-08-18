@@ -54,8 +54,7 @@ function ChatList({ data, userName }) {
                     <>
                         <ListItem alignItems="flex-start" style={{ textAlign: 'right', paddingRight: '0px' }}>
                             <ListItemText
-                                primary={<small>{data.name}</small>}
-                                secondary={
+                                primary={
                                     <React.Fragment>
                                         <small>{data.createdAt}</small>
                                 &nbsp;&nbsp;
@@ -65,9 +64,6 @@ function ChatList({ data, userName }) {
                                     </React.Fragment>
                                 }
                             />
-                            <ListItemAvatar>
-                                <Avatar style={{ marginLeft: '14px' }} alt="Remy Sharp" src="https://placeimg.com/200/100/any" />
-                            </ListItemAvatar>
                         </ListItem>
                     </> :
                     <>

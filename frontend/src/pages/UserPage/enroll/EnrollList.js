@@ -7,7 +7,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import Divider from '@material-ui/core/Divider';
 import BuildIcon from '@material-ui/icons/Build';
 import QueryBuilderIcon from '@material-ui/icons/QueryBuilder';
-import { TextField } from '@material-ui/core';
+import { TextField, InputAdornment, OutlinedInput } from '@material-ui/core';
 import Chip from '@material-ui/core/Chip';
 import LabelIcon from '@material-ui/icons/Label';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
@@ -276,7 +276,14 @@ function EnrollList({ stepIndex, handleEnrollData }) {
                     <br />
                     <br />
                     <form onSubmit={onSubmitForm}>
-                        <TextField fullWidth size="small" variant="outlined" label="태그" placeholder="한 단어씩 입력해주세요!" value={tag} onChange={onChangeTag} />
+                        <OutlinedInput 
+                        fullWidth 
+                        size="small" 
+                        placeholder="한 단어씩 입력해주세요!" 
+                        value={tag}
+                        autoFocus
+                        endAdornment={<InputAdornment position="end">ENTER</InputAdornment>}
+                        onChange={onChangeTag} />
                         <br /><br />
                     </form>
                     {showTagList}<br /><br />

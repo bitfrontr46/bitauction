@@ -7,6 +7,8 @@ const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Types.ObjectId.isValid;
 
+
+
 const resolvers = {
     Query: {
         getAllUsers: () => {
@@ -19,9 +21,17 @@ const resolvers = {
             return result;
         },
 
-        getProfile: (root, args) => {
-            if(ObjectId(args.user)){
-                const result = Profile.findOne({ user: args.user }).populate('user', 'name email');
+        getMyProfile: (root, args) => {
+            console.log('getProfile');
+            if (ObjectId(args.user)) {
+                const result = Profile.findOne({ user: args.user }).populate('user', 'name email')
+                    .then(profile => {
+                        console.log(profile);
+                        return profile
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    })
                 return result;
             }
         },
@@ -44,20 +54,20 @@ const resolvers = {
         },
 
         getMyRequests: (root, args) => {
-            if(ObjectId(args.author)){
+            if (ObjectId(args.author)) {
                 const result = Request.find({ author: args.author }).populate('author', 'name')
                     .then((res) => {
                         return res
                     })
                     .catch(err => {
-                        console.log('User에러1',err);
+                        console.log('User에러1', err);
                     })
                 return result;
             }
         },
 
         getMyBids: (root, args) => {
-            if(ObjectId(args.author)){
+            if (ObjectId(args.author)) {
                 const result = Bid.find({ author: args.author }).populate({
                     path: 'request',
                     populate: { path: 'author', select: 'name email' }
@@ -66,26 +76,32 @@ const resolvers = {
                         return res
                     })
                     .catch(err => {
-                        console.log('Seller에러2',err);
+                        console.log('Seller에러2', err);
                     })
                 return result;
             }
         },
 
         getBidsInRequest: (root, args) => {
-            if(ObjectId(args.request)){
-                const result = Bid.find({ request: args.request }).populate('author', '_id name');
+            if (ObjectId(args.request)) {
+                console.log('asdasdasdasd');
+                const result = Bid.find({ request: args.request }).populate({
+                    path: 'author',
+                    select: '_id name profile',
+                    populate: { path: 'profile', select: 'phone' }
+                });
                 return result;
             }
         },
 
         getMyRoom: (root, args) => {
+            console.log('args', args);
             const result = Room.findOne({ request: args.request, seller: args.seller })
             return result;
         },
 
         getMyRoomListForSeller: (root, args) => {
-            if(ObjectId(args.seller)){
+            if (ObjectId(args.seller)) {
                 const result = Room.find({ seller: args.seller })
                     .populate({
                         path: 'request',
@@ -99,6 +115,7 @@ const resolvers = {
     },
 
     Mutation: {
+
         login: (root, args) => {
             const result = User.findOne({ email: args.email })
                 .then(async user => {
@@ -137,7 +154,28 @@ const resolvers = {
                     console.log(err);
                 })
             const result = await User.create({ ...args.input, pwd })
-                .then(() => {
+                .then((user) => {
+                    Profile.create({
+                        user: user._id,
+                        phone: '',
+                        profileImage: '',
+                        exampleImages: [],
+                        text: '',
+                        reviews: [],
+                    })
+                        .then((profile) => {
+                            console.log('profile create');
+                            User.updateOne({ _id: user._id }, { $set: { profile: profile._id } })
+                                .then(() => {
+                                    console.log('Create profile field in User!');
+                                })
+                                .catch((err) => {
+                                    console.log(err);
+                                })
+                        })
+                        .catch((err) => {
+                            console.log(err);
+                        })
                     return true;
                 })
                 .catch((err) => {
@@ -147,9 +185,10 @@ const resolvers = {
             return result;
         },
 
-        saveProfile: (root, args) => {
-            const result = Profile.create(args.input)
+        editMyProfile: (root, args) => {
+            const result = Profile.updateOne({ user: args.input.user }, { $set: args.input })
                 .then(() => {
+                    console.log('Profile Update!');
                     return true;
                 })
                 .catch((err) => {
@@ -291,7 +330,7 @@ const resolvers = {
                 })
             const result3 = Request.updateOne({ _id: args.request }, { $set: { state: '취소된 거래' } })
                 .then(() => {
-                    console.log('Request update');
+                    console.log('Request cancle');
                     return true
                 })
                 .catch((err) => {
@@ -323,6 +362,41 @@ const resolvers = {
             return (result1 && result2);
         },
 
+        requestTimeOver: async (root, args) => {
+            let result = false;
+            const bidCount = await Bid.countDocuments({ request: args.request })
+                .then((res) => {
+                    console.log('bid Count');
+                    return res
+                })
+                .catch(err => {
+                    console.log(err);
+                    return 0;
+                })
+            if (bidCount === 0) {
+                result = await Request.updateOne({ _id: args.request }, { $set: { state: '취소된 요청' } })
+                    .then(() => {
+                        console.log('time over and cancle');
+                        return true
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                        return false
+                    })
+            } else {
+                result = await Request.updateOne({ _id: args.request }, { $set: { state: '요청 마감' } })
+                    .then(() => {
+                        console.log('time over');
+                        return true
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                        return false
+                    })
+                return result;
+            }
+        },
+
         sendNewMessage: async (root, args, { pubsub }) => {
             const now = new Date().toTimeString().substr(0, 8);
             const chat = await {
@@ -348,6 +422,7 @@ const resolvers = {
                 return pubsub.asyncIterator(`${args.room}`)
             },
             resolve: (payload) => {
+                console.log(payload);
                 return payload;
             }
         }
