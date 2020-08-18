@@ -21,7 +21,6 @@ const s3 = new AWS.S3({ //S3 객체 사용
 });
 
 // //multerS3에 파일 업로드
-
 const storage = multerS3({ //storage:저장되는 파일명이나 인코딩 조작
 
   s3 : s3, 
@@ -39,21 +38,7 @@ const storage = multerS3({ //storage:저장되는 파일명이나 인코딩 조�
 const upload = multer({storage:storage}).single("file"); //single(): 하나의 파일 업로드할 때 사용 
 
 
-
-// router.post('/image', (req,res)=>{
-//   try{
-//     console.log("req.file: ", req.file);
-//     let payLoad = {url: req.file.location};
-//     response(res,200,payLoad);
-//   }catch(err){
-//     console.log(err);
-//     response(res,500, "서버에러")
-//   }
-// })
-
-
 //multer
-
 /*
 var storage = multer.diskStorage({ //diskStorage:임시저장소 
     destination: function (req, file, cb) { //어디에 파일이 저장되는지.
@@ -141,13 +126,11 @@ var storage = multer.diskStorage({ //diskStorage:임시저장소
 
   });
    
-   
+
+  //이미지 데이터 삭제
 
 
 
-
-
-  
 
 module.exports = router;
 
@@ -171,6 +154,15 @@ destination, filename
 key-value 형태의 객체 스토리지로 파일,폴더 모두 버킷 내 객체
 deleteObjects 메소드를 통해 객체(파일/폴더)를 삭제할 수 있으며,
 포더 인 경우 모두 비워져 있어야만 삭제 가능함
+
+-save() 메서드 
+몽고db는 save() 메서드를 사용하여 _id속성이 일치하는 데이터를
+저장하면 자동으로 원래 데이터 수정
+
+-remove() 메서드
+데이터를 삭제할 때는 remove() 메서드 사용함.
+Upload.remove(매개변수)
+매개변수를 입력하지 않고 메서드를 사용하면 모든 데이터를 제거하므로 주의
 
 
 */
