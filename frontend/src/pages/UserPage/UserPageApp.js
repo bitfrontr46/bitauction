@@ -35,7 +35,7 @@ const UserPageApp = () => (
       authProvider={authProvider}
       dataProvider={dataProvider}
       history={history}
-      title="My Admin"
+      title="Admin Page"
     >
       <Resource
         name="posts"

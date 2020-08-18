@@ -1,7 +1,9 @@
 import * as React from "react";
 import { Card, CardContent, CardHeader } from "@material-ui/core/";
+import AdminHomeChart1 from "../Admin/AdminHomeChart1"
 
 export default () => (
+  <>
   <Card>
     <CardHeader title="Admin Page" />
     <CardContent>
@@ -11,4 +13,11 @@ export default () => (
       aperiam! Delectus!
     </CardContent>
   </Card>
+  <Card>
+    <CardHeader title="Admin Chart1"/>
+    <CardContent>
+      <AdminHomeChart1/>
+    </CardContent>
+  </Card>
+  </>
 );

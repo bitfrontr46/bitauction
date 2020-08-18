@@ -30,15 +30,15 @@ function AdminNavigation() {
 
   const menuList = [
     {
-      url: "/adminhome",
+      url: "/admin/home",
       name: "HOME",
     },
     {
-      url: "/adminstatistics",
+      url: "/admin/statistics",
       name: "STATISTICS",
     },
     {
-      url: "/adminsettings",
+      url: "/admin/settings",
       name: "SETTINGS",
     },
   ];

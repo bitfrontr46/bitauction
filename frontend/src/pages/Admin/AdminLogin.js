@@ -6,7 +6,6 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Axios from "axios";
-import Navigation from "../../components/Navigation";
 import useStyles from "../../styles/Style"
 
 
@@ -40,7 +39,6 @@ export default function Login() {
 
   return (
     <Container component="main" maxWidth="xs">
-    <Navigation/>
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />

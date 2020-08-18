@@ -58,11 +58,11 @@ function ResponsiveDrawer(props) {
   //구분선 위 메뉴 목록
   const upperMenuList = [
     {
-      url: "/adminaccountlist",
+      url: "/admin/accountlist",
       name: "회원목록",
     },
     {
-      url: "/admintagslist",
+      url: "/admin/tagslist",
       name: "Tags",
     },
     {
