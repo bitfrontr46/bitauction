@@ -47,7 +47,14 @@ function payment(props) {
           type="text/javascript"
           src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"
         ></script>
-        <button onClick={onClickPayment}>결제하기</button>
+        <Button
+          onClick={onClickPayment}
+          variant="contained"
+          color="primary"
+          disableElevation
+        >
+          결제하기
+        </Button>
       </div>
     );
 }
