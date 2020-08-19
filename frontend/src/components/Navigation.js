@@ -4,11 +4,11 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import { useSelector, useDispatch } from 'react-redux';
-import { Divider } from '@material-ui/core';
+import { Divider, Container } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        padding: '10px'
+        padding: '10px',
     },
     title: {
         flexGrow: 1,
@@ -79,15 +79,14 @@ function Navigation() {
     }
 
     return (
-        <div className={classes.root}>
+        <Container className={classes.root}>
             <Typography className={classes.title}>
                 HELL
             </Typography>
             <div className={classes.navStyle}>
                 {loginMenu()}
             </div>
-            <Divider style={{marginTop : '15px'}} />
-        </div>
+        </Container>
     )
 }
 

@@ -156,6 +156,14 @@ query GetMyProfile($user:ID){
 }
 `
 
+export const GET_MY_PROFILE_IMAGE = gql`
+query GetMyProfile($user:ID){
+  getMyProfile(user:$user){
+    profileImage
+  }
+}
+`
+
  // ######################### Mutation #########################
 
 export const SEND_REQUEST = gql`

@@ -9,7 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Chip from '@material-ui/core/Chip'
 import CardMedia from '@material-ui/core/CardMedia';
-import { Grid } from '@material-ui/core';
+import { Grid,Paper } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     card: {
@@ -52,24 +52,26 @@ function Request({ data }) {
 
 
     return (
-        <Card component={Link} to={{ pathname: `/seller/request/${data._id}`, state: { data: data } }} size="large" color="primary" variant="outlined" className={classes.card}>
-            <CardContent className={classes.cardContent}>
-                <Grid container>
-                    <Grid className={classes.gridStyle} item xs={6}>
-                        <small>{data.requestedAt}</small>
-                        <Typography className={classes.cardHead}>
-                            {data.author.name} 님의 {data.category} 요청
-                        </Typography>
-                        {showTagList}
+        <Paper elevation={3}>
+            <Card component={Link} to={{ pathname: `/seller/request/${data._id}`, state: { data: data } }} className={classes.card}>
+                <CardContent className={classes.cardContent}>
+                    <Grid container>
+                        <Grid className={classes.gridStyle} item xs={6}>
+                            <small>{data.requestedAt}</small>
+                            <Typography className={classes.cardHead}>
+                                {data.author.name} 님의 {data.category} 요청
+                            </Typography>
+                            {showTagList}
+                        </Grid>
+                        <Grid className={classes.gridStyle} item xs={6}>
+                            <h2 style={{textAlign:'center'}}>
+                                <Counter data={data}></Counter>
+                            </h2>
+                        </Grid>
                     </Grid>
-                    <Grid className={classes.gridStyle} item xs={6}>
-                        <h2 style={{textAlign:'center'}}>
-                            <Counter data={data}></Counter>
-                        </h2>
-                    </Grid>
-                </Grid>
-            </CardContent>
-        </Card>
+                </CardContent>
+            </Card>
+        </Paper>
     )
 }
 

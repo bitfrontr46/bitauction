@@ -26,7 +26,6 @@ const resolvers = {
             if (ObjectId(args.user)) {
                 const result = Profile.findOne({ user: args.user }).populate('user', 'name email')
                     .then(profile => {
-                        console.log(profile);
                         return profile
                     })
                     .catch(err => {

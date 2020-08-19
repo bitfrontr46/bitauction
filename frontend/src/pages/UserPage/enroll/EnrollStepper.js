@@ -17,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
         textAlign: "center",
+        backgroundColor : 'transparent',
     },
     backButton: {
         marginRight: theme.spacing(1),
@@ -135,7 +136,7 @@ export default function EnrollStepper() {
                                 전문가들의 입찰을 기다려주세요!
                             </p>
                         </span>
-                        <Button variant="outlined" onClick={handleReset}>돌아가기</Button>
+                        <Button variant="contained" onClick={handleReset}>돌아가기</Button>
                     </div>
                 ) : (
                         <div>
@@ -147,17 +148,18 @@ export default function EnrollStepper() {
                                     disabled={activeStep === 0}
                                     onClick={handleBack}
                                     className={classes.backButton}
+                                    variant="contained"
                                 >
-                                    Back
+                                    뒤로
                                 </Button>
                                 {activeStep === steps.length - 1
                                     ?
-                                    <Button variant="outlined" onClick={onClickCheck}>
-                                        Finish
+                                    <Button variant="contained" color="primary" onClick={onClickCheck}>
+                                        완료
                                 </Button>
                                     :
-                                    <Button variant="outlined" onClick={handleNext}>
-                                        Next
+                                    <Button variant="contained" color="primary" onClick={handleNext}>
+                                        다음
                                 </Button>}
                             </div>
                         </div>

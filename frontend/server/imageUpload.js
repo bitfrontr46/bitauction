@@ -23,6 +23,6 @@ const storage = multerS3({
 
 
 exports.upload = multer({ storage: storage });
-exports.upload2 = multer({ dest: 'uploads/' });
+exports.upload2 = multer({dest : './public/img'});
 
 

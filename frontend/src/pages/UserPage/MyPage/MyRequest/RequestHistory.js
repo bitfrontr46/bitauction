@@ -24,21 +24,23 @@ const RequestHistory = ({data}) => {
     })
 
     return (
-        <TableContainer variant="outlined" component={Paper}>
-            <Table>
-                <TableHead>
-                    <TableRow>
-                        <TableCell>카테고리</TableCell>
-                        <TableCell align="center">요청일</TableCell>
-                        <TableCell align="center">상태</TableCell>
-                        <TableCell align="center"></TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {requestHistory}
-                </TableBody>
-            </Table>
-        </TableContainer>
+        <Paper elevation={3}>
+            <TableContainer>
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>카테고리</TableCell>
+                            <TableCell align="center">요청일</TableCell>
+                            <TableCell align="center">상태</TableCell>
+                            <TableCell align="center"></TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {requestHistory}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+        </Paper>
     )
 }
 

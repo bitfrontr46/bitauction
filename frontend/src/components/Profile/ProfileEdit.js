@@ -60,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const ProfileEdit = ({ onClose, open, user_id, profileClose }) => {
+const ProfileEdit = ({ profile, onClose, open, user_id, profileClose }) => {
 
     const classes = useStyles();
 
@@ -79,9 +79,13 @@ const ProfileEdit = ({ onClose, open, user_id, profileClose }) => {
 
     const [profileImage, setProfileImage] = useState('');
 
-    const [profilePreview, setProfilePreview] = useState('');
+    const [profilePreview, setProfilePreview] = useState(profile.profileImage);
 
     const [exampleImages, setExampleImages] = useState([]);
+
+    const [examplePreview, setExamplePreview] = useState([]);
+
+    const [exPreview, setExPreview] = useState(profile.exampleImages);
 
     const [text, setText] = useState('');
 
@@ -115,8 +119,23 @@ const ProfileEdit = ({ onClose, open, user_id, profileClose }) => {
         const config = { //config 객체
             header: { "content-type": "multipart/form-data" },
         };
-        formData.append("img", profileImage);
+        formData.append('user', user_id);
+        if (profileImage) {
+            formData.append("profileImage", profileImage);
+        } else {
+            formData.append("profilePreview", profilePreview);
+        }
 
+        if (exPreview) {
+            exPreview.map((obj) => {
+                formData.append("exPreview", obj);
+            })
+        }
+        if (exampleImages) {
+            exampleImages.map((obj) => {
+                formData.append("exampleImages", obj);
+            })
+        }
         Axios.post('http://localhost:4000/image', formData, config)
             .then(res => {
                 console.log(res);
@@ -139,14 +158,31 @@ const ProfileEdit = ({ onClose, open, user_id, profileClose }) => {
         }
     }
 
+    const imageRead = (obj) => {
+        let reader = new FileReader();
+        reader.onload = (e) => {
+            setExamplePreview((examplePreview) => {
+                return [
+                    ...examplePreview,
+                    {
+                        src: e.target.result,
+                        obj: obj,
+                    }
+                ]
+            })
+        }
+        reader.readAsDataURL(obj);
+    }
+
     const onChangeImage = (e) => {
         const files = e.target.files
         const filesLength = files.length;
+        // setExampleImages(files);
         for (let i = 0; i < filesLength; i++) {
             setExampleImages((exampleImages) => {
                 return [...exampleImages, files[i]]
             });
-            console.log(files[i]);
+            imageRead(files[i]);
         }
         console.log(exampleImages);
     }
@@ -155,16 +191,26 @@ const ProfileEdit = ({ onClose, open, user_id, profileClose }) => {
         setExampleImages(exampleImages.filter((x) => {
             return obj !== x;
         }))
+        setExamplePreview(examplePreview.filter((x) => {
+            return obj !== x.obj;
+        }))
     }
 
-    const previewComponent = (imageSrc, obj, index) => {
+    const onClicDeleteExPreview = (ex) => {
+        setExPreview(exPreview.filter((x) => {
+            return ex !== x;
+        }))
+        console.log(exPreview);
+    }
+
+    const showExamplePreview = examplePreview.map((obj, index) => {
         return (
             <GridListTile key={index} >
-                <img src={imageSrc} onClick={() => { onClickImageOpen(imageSrc) }} />
+                <img src={obj.src} onClick={() => { onClickImageOpen(obj.src) }} />
                 <GridListTileBar
                     titlePosition="bottom"
                     actionIcon={
-                        <IconButton className={classes.icon} onClick={() => { onClickDeleteImage(obj) }}>
+                        <IconButton className={classes.icon} onClick={() => { onClickDeleteImage(obj.obj) }}>
                             <DeleteIcon />
                         </IconButton>
                     }
@@ -173,25 +219,26 @@ const ProfileEdit = ({ onClose, open, user_id, profileClose }) => {
                 />
             </GridListTile>
         )
-    }
-
-    const imageRead = async (obj) => {
-        let reader = new FileReader();
-        let result = null;
-        reader.onload = (e) => {
-            result = e.target.result;
-        }
-        await reader.readAsDataURL(obj);
-        await console.log(result);
-        // console.log(reader.result);
-        // console.log(imageSrc);
-        // return imageSrc;
-    }
-
-    const examplePreview = exampleImages.map((obj, index) => {
-        const imageSrc = imageRead(obj);
-        return previewComponent(imageSrc, obj, index);
     })
+
+    const showExPreview = exPreview.map((obj, index) => {
+        return (
+            <GridListTile key={index} >
+                <img src={obj} onClick={() => { onClickImageOpen(obj) }} />
+                <GridListTileBar
+                    titlePosition="bottom"
+                    actionIcon={
+                        <IconButton className={classes.icon} onClick={() => { onClicDeleteExPreview(obj) }}>
+                            <DeleteIcon />
+                        </IconButton>
+                    }
+                    actionPosition="right"
+                    className={classes.titleBar}
+                />
+            </GridListTile>
+        )
+    })
+
 
     useEffect(() => {
         if (data) {
@@ -254,7 +301,8 @@ const ProfileEdit = ({ onClose, open, user_id, profileClose }) => {
                         <input type="file" onChange={onChangeImage} multiple accept="image/*" />
                         <div className={classes.root}>
                             <GridList className={classes.gridList} cols={2.5}>
-                                {examplePreview}
+                                {showExPreview}
+                                {showExamplePreview}
                             </GridList>
                         </div>
                         <br />

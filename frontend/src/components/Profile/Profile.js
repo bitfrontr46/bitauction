@@ -155,7 +155,7 @@ const Profile = ({ profile, onClose, open, user_id }) => {
                     <h4 style={{ textAlign: 'center' }}>등록된 리뷰가 없습니다.</h4>
                 }
                 <ProfileCarousel open={imageOpen} setOpen={setImageOpen} src={image} />
-                <ProfileEdit onClose={onEditClose} open={editOpen} user_id={user_id} profileClose={handleClose} />
+                <ProfileEdit profile={profile} onClose={onEditClose} open={editOpen} user_id={user_id} profileClose={handleClose} />
             </DialogContent>
             {userName === profile.user.name
                 ?

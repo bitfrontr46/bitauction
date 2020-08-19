@@ -7,7 +7,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import Divider from '@material-ui/core/Divider';
 import BuildIcon from '@material-ui/icons/Build';
 import QueryBuilderIcon from '@material-ui/icons/QueryBuilder';
-import { TextField, InputAdornment, OutlinedInput } from '@material-ui/core';
+import { TextField, InputAdornment, OutlinedInput, Paper } from '@material-ui/core';
 import Chip from '@material-ui/core/Chip';
 import LabelIcon from '@material-ui/icons/Label';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
         margin: 'auto',
     },
     backgroundStyle: {
-        backgroundColor: '#fafafa',
+        backgroundColor: 'white',
     }
 }));
 
@@ -172,23 +172,24 @@ function EnrollList({ stepIndex, handleEnrollData }) {
 
     const printList = (arr, index, fnc) => {
         return (
-            <List className={classes.backgroundStyle} component="nav" aria-label="main mailbox folders">
-                {arr.map((obj) => {
-                    return (
-                        <div key={obj.id}>
-                            <ListItem button selected={index === obj.id} onClick={() => fnc(obj.id, obj.value)}>
-                                <ListItemIcon>
-                                    <Checkbox
-                                        checked={index === obj.id}
-                                    />
-                                </ListItemIcon>
-                                <ListItemText primary={obj.value} />
-                            </ListItem>
-                            <Divider />
-                        </div>
-                    )
-                })}
-            </List>
+            <Paper elevation={3}>
+                <List className={classes.backgroundStyle} component="nav" aria-label="main mailbox folders">
+                    {arr.map((obj) => {
+                        return (
+                            <div key={obj.id}>
+                                <ListItem button selected={index === obj.id} onClick={() => fnc(obj.id, obj.value)}>
+                                    <ListItemIcon>
+                                        <Checkbox
+                                            checked={index === obj.id}
+                                        />
+                                    </ListItemIcon>
+                                    <ListItemText primary={obj.value} />
+                                </ListItem>
+                            </div>
+                        )
+                    })}
+                </List>
+            </Paper>
         )
     }
 
@@ -221,44 +222,46 @@ function EnrollList({ stepIndex, handleEnrollData }) {
                     <p>
                         전문가와 협의도 가능합니다!
                     </p>
-                    <List className={classes.backgroundStyle} component="nav" aria-label="main mailbox folders">
-                        <ListItem button selected={hopeDateIndex === 0} onClick={() => onChangeHopeDate(0, '전문가와 협의')}>
-                            <ListItemIcon>
-                                <Checkbox
-                                    checked={hopeDateIndex === 0}
-                                />
-                            </ListItemIcon>
-                            <ListItemText primary='전문가와 협의' />
-                        </ListItem>
-                        <ListItem button selected={hopeDateIndex === 1} onClick={() => onChangeHopeDate(1)}>
-                            <ListItemIcon>
-                                <Checkbox
-                                    checked={hopeDateIndex === 1}
-                                />
-                            </ListItemIcon>
-                            <ListItemText primary='날짜 선택' />
-                            {hopeDateIndex === 1
-                                ? <TextField
-                                    id="date"
-                                    label="date"
-                                    type="date"
-                                    defaultValue={new Date().toDateString()}
-                                    className={classes.textField}
-                                    InputLabelProps={{
-                                        shrink: true,
-                                    }}
-                                    onChange={(e) => {
-                                        if (new Date(e.target.value) < new Date()) {
-                                            alert('이미 지난 날짜입니다. 다시 선택해 주세요')
-                                        } else {
-                                            onChangeHopeDate(1, e.target.value)
-                                        }
-                                    }}
-                                />
-                                : <></>
-                            }
-                        </ListItem>
-                    </List>
+                    <Paper elevation={3}>
+                        <List className={classes.backgroundStyle} component="nav" aria-label="main mailbox folders">
+                            <ListItem button selected={hopeDateIndex === 0} onClick={() => onChangeHopeDate(0, '전문가와 협의')}>
+                                <ListItemIcon>
+                                    <Checkbox
+                                        checked={hopeDateIndex === 0}
+                                    />
+                                </ListItemIcon>
+                                <ListItemText primary='전문가와 협의' />
+                            </ListItem>
+                            <ListItem button selected={hopeDateIndex === 1} onClick={() => onChangeHopeDate(1)}>
+                                <ListItemIcon>
+                                    <Checkbox
+                                        checked={hopeDateIndex === 1}
+                                    />
+                                </ListItemIcon>
+                                <ListItemText primary='날짜 선택' />
+                                {hopeDateIndex === 1
+                                    ? <TextField
+                                        id="date"
+                                        label="date"
+                                        type="date"
+                                        defaultValue={new Date().toDateString()}
+                                        className={classes.textField}
+                                        InputLabelProps={{
+                                            shrink: true,
+                                        }}
+                                        onChange={(e) => {
+                                            if (new Date(e.target.value) < new Date()) {
+                                                alert('이미 지난 날짜입니다. 다시 선택해 주세요')
+                                            } else {
+                                                onChangeHopeDate(1, e.target.value)
+                                            }
+                                        }}
+                                    />
+                                    : <></>
+                                }
+                            </ListItem>
+                        </List>
+                    </Paper>
                 </div>
             )
         case 3:
@@ -276,14 +279,15 @@ function EnrollList({ stepIndex, handleEnrollData }) {
                     <br />
                     <br />
                     <form onSubmit={onSubmitForm}>
-                        <OutlinedInput 
-                        fullWidth 
-                        size="small" 
-                        placeholder="한 단어씩 입력해주세요!" 
-                        value={tag}
-                        autoFocus
-                        endAdornment={<InputAdornment position="end">ENTER</InputAdornment>}
-                        onChange={onChangeTag} />
+                        <OutlinedInput
+                            fullWidth
+                            style={{ backgroundColor: 'white' }}
+                            size="small"
+                            placeholder="한 단어씩 입력해주세요!"
+                            value={tag}
+                            autoFocus
+                            endAdornment={<InputAdornment position="end">ENTER</InputAdornment>}
+                            onChange={onChangeTag} />
                         <br /><br />
                     </form>
                     {showTagList}<br /><br />
@@ -300,6 +304,7 @@ function EnrollList({ stepIndex, handleEnrollData }) {
                     </p>
                     <TextField id="outlined-multiline-static"
                         label="구상하신 아이디어의 상세한 설명이 필요해요!"
+                        style={{ backgroundColor: 'white' }}
                         multiline
                         rows={5}
                         variant="outlined"
@@ -313,55 +318,45 @@ function EnrollList({ stepIndex, handleEnrollData }) {
             return (
                 <div className={classes.rootList}>
                     <h1>작성하신 견적서를 확인해주세요!</h1>
-                    <List>
-                        {[
-                            {
-                                icon: () => <BuildIcon />,
-                                text: category
-                            },
-                            {
-                                icon: () => <QueryBuilderIcon />,
-                                text: new Date(deadLine).toLocaleString()
-                            },
-                            {
-                                icon: () => <AddCircleOutlineIcon />,
-                                text: detail
-                            },
-                            {
-                                icon: () => <LabelIcon />,
-                                text: tagList.map((obj) => {
-                                    return <span key={obj}><Chip variant="outlined" size="small" label={obj} />&nbsp;</span>
-                                })
-                            },
-                            {
-                                icon: () => <CalendarTodayIcon />,
-                                text: hopeDate
-                            },
-                        ].map((obj, index) => {
-                            return (
-                                <ListItem key={index}>
-                                    <ListItemIcon>
-                                        {obj.icon()}
-                                    </ListItemIcon>
-                                    <ListItemText
-                                        primary={obj.text}
-                                    />
-                                </ListItem>
-                            )
-                        })}
-                    </List>
-                    {/* <RequestCard obj={
-                        {
-                            author : {
-                                name : null
-                            },
-                            category: category,
-                            deadLine: deadLine,
-                            detail: detail,
-                            tags: tagList,
-                            hopeDate: hopeDate,
-                        }
-                    } /> */}
+                    <Paper elevation={3}>
+                        <List>
+                            {[
+                                {
+                                    icon: () => <BuildIcon />,
+                                    text: category
+                                },
+                                {
+                                    icon: () => <QueryBuilderIcon />,
+                                    text: new Date(deadLine).toLocaleString()
+                                },
+                                {
+                                    icon: () => <AddCircleOutlineIcon />,
+                                    text: detail
+                                },
+                                {
+                                    icon: () => <LabelIcon />,
+                                    text: tagList.map((obj) => {
+                                        return <span key={obj}><Chip variant="outlined" size="small" label={obj} />&nbsp;</span>
+                                    })
+                                },
+                                {
+                                    icon: () => <CalendarTodayIcon />,
+                                    text: hopeDate
+                                },
+                            ].map((obj, index) => {
+                                return (
+                                    <ListItem key={index}>
+                                        <ListItemIcon>
+                                            {obj.icon()}
+                                        </ListItemIcon>
+                                        <ListItemText
+                                            primary={obj.text}
+                                        />
+                                    </ListItem>
+                                )
+                            })}
+                        </List>
+                    </Paper>
                 </div>
 
             )
