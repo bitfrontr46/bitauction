@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Provider } from "react-redux";
 import { createHashHistory } from "history";
-import { Admin, Resource, EditGuesser } from "react-admin";
+import { Admin, Resource } from "react-admin";
 import jsonServerProvider from "ra-data-json-server";
 
 import createAdminStore from "./createAdminStore";
@@ -10,6 +10,9 @@ import { UserList } from "./users";
 import { PostList, PostCreate, PostEdit } from "./posts";
 import PostIcon from "@material-ui/icons/Book";
 import UserIcon from "@material-ui/icons/Group";
+import CSIcon from "@material-ui/icons/HelpOutline";
+import Menu from "./Menu";
+import { CSList, CSCreate, CSEdit } from "./CS/CS";
 
 const dataProvider = jsonServerProvider("https://jsonplaceholder.typicode.com");
 const authProvider = () => Promise.resolve();
@@ -31,6 +34,7 @@ const UserPageApp = () => (
     })}
   >
     <Admin
+      menu={Menu}
       dashboard={Dashboard}
       authProvider={authProvider}
       dataProvider={dataProvider}
@@ -38,19 +42,20 @@ const UserPageApp = () => (
       title="Admin Page"
     >
       <Resource
-        name="posts"
-        list={PostList}
-        edit={EditGuesser}
-        create={PostCreate}
-      />
-      <Resource
-        name="posts"
+        name="Posts"
         list={PostList}
         edit={PostEdit}
         create={PostCreate}
         icon={PostIcon}
       />
-      <Resource name="users" list={UserList} icon={UserIcon} />
+      <Resource name="Support" list={UserList} icon={UserIcon} />
+      <Resource
+        name="Support" 
+        list={CSList}
+        edit={CSEdit}
+        create={CSCreate}
+        icon={CSIcon}
+        />
     </Admin>
   </Provider>
 );

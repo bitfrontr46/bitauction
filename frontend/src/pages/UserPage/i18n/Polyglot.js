@@ -1,3 +1,5 @@
+//언어 설정(아직 적용 안 됨)
+
 import polyglotI18nProvider from "ra-i18n-polyglot";
 
 const englishMessages = {

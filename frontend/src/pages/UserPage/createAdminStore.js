@@ -1,3 +1,5 @@
+//기본 페이지에서 React Admin 돌리기 위한 Redux, Redux Saga Store
+
 import { adminReducer, adminSaga, USER_LOGOUT } from "react-admin";
 import { applyMiddleware, combineReducers, compose, createStore } from "redux";
 import { routerMiddleware, connectRouter } from "connected-react-router";

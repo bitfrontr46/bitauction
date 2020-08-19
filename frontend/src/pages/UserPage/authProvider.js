@@ -1,3 +1,5 @@
+//기본 페이지에서 React Admin 돌리기 위한 Redux Provider
+
 export default {
   login: ({ username }) => {
     localStorage.setItem("username", username);

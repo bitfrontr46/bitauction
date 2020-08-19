@@ -1,39 +1,34 @@
-//Post 페이지
-import * as React from "react";
-import { cloneElement} from "react";
+//Q&A Post 페이지, 여기서 답변 하면 실제로 답글 달리게끔 해보자
+
+import React from "react";
+import { cloneElement } from "react";
 import {
   List,
   Datagrid,
   TextField,
   ReferenceField,
   EditButton,
-  SimpleForm,
-  Edit,
+  SimpleList,
   TextInput,
   ReferenceInput,
   SelectInput,
-  Create,
-  SimpleList,
   useListContext,
   TopToolbar,
   CreateButton,
   ExportButton,
-  Button,
   sanitizeListRestProps,
   BulkDeleteButton,
   Filter,
 } from "react-admin";
 
 import { useMediaQuery } from "@material-ui/core";
-import IconEvent from "@material-ui/icons/Event";
-import ResetViewsButton from "./ResetViewsButton";
-import PostPagination from "./MyPagination";
+import ResetViewsButton from "../ResetViewsButton";
+import PostPagination from "../MyPagination";
 
 //Post Page에서 다중 선택 시 나오는 Popup
-const PostBulkActionButtons = (props) => (
+const CSBulkActionButtons = (props) => (
   <>
     <ResetViewsButton label="Reset Views" {...props} />
-    {/* default bulk delete action */}
     <BulkDeleteButton {...props} />
   </>
 );
@@ -67,20 +62,11 @@ const ListActions = (props) => {
         filterValues={filterValues}
         maxResults={maxResults}
       />
-      {/* Add your custom actions */}
-      <Button
-        onClick={() => {
-          alert("Your custom action");
-        }}
-        label="Show calendar"
-      >
-        <IconEvent />
-      </Button>
     </TopToolbar>
   );
 };
 
-const PostFilter = (props) => (
+const CSFilter = (props) => (
   <Filter {...props}>
     <TextInput label="Search" source="q" alwaysOn />
     <TextInput label="Title" source="title" defaultValue="Hello World" />
@@ -90,15 +76,15 @@ const PostFilter = (props) => (
   </Filter>
 );
 
-export const PostList = (props) => {
+export const CSList = (props) => {
   const isSmall = useMediaQuery((theme) => theme.breakpoints.down("sm"));
   return (
     <List
       {...props}
       actions={<ListActions />}
-      filters={<PostFilter />}
-      bulkActionButtons={<PostBulkActionButtons />}
-      pagination={<PostPagination/>}
+      filters={<CSFilter />}
+      bulkActionButtons={<CSBulkActionButtons />}
+      pagination={<PostPagination />}
     >
       {isSmall ? (
         <SimpleList
@@ -121,28 +107,3 @@ export const PostList = (props) => {
     </List>
   );
 };
-
-export const PostEdit = (props) => (
-  <Edit {...props}>
-    <SimpleForm>
-      <TextInput disabled source="id" />
-      <ReferenceInput source="userId" reference="users">
-        <SelectInput optionText="name" />
-      </ReferenceInput>
-      <TextInput source="title" />
-      <TextInput multiline source="body" />
-    </SimpleForm>
-  </Edit>
-);
-
-export const PostCreate = (props) => (
-  <Create {...props}>
-    <SimpleForm>
-      <ReferenceInput source="userId" reference="users">
-        <SelectInput optionText="name" />
-      </ReferenceInput>
-      <TextInput source="title" />
-      <TextInput multiline source="body" />
-    </SimpleForm>
-  </Create>
-);
