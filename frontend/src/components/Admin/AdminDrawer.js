@@ -15,6 +15,8 @@ const drawerWidth = 150;
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
+    flexWrap: "wrap",
+    flexGrow: 1,
   },
   drawer: {
     [theme.breakpoints.up("sm")]: {
@@ -141,6 +143,8 @@ function ResponsiveDrawer(props) {
             ModalProps={{
               keepMounted: true, // Better open performance on mobile.
             }}
+            //안 겹치게 하는 설정
+            wrap="nowrap"
           >
             <DrawerList />
           </Drawer>
