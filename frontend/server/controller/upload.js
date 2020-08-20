@@ -20,7 +20,7 @@ const s3 = new AWS.S3({ //S3 객체 사용
   region: 'ap-northeast-2', //지역설정
 });
 
-// //multerS3에 파일 업로드
+//multerS3에 파일 업로드
 const storage = multerS3({ //storage:저장되는 파일명이나 인코딩 조작
 
   s3 : s3, 

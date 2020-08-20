@@ -57,6 +57,7 @@ app.post("/roomList", (req, res) => {
 
 app.use("/api", require("./routes/index"));
 app.use('/api/upload', require('./controller/upload'));
+app.use('/api/review', require('./controller/review'));
 app.use('/uploads', express.static('uploads')) 
 //uploads 폴더에 저장되어있는 이미지를 가져올 때 사용.
 //express.static을 이용해서 uploads 파일을 공유할 수 있게 한다
