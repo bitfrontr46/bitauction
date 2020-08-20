@@ -2,7 +2,7 @@
 import React from "react"
 import { Pagination } from "react-admin";
 
-const PostPagination = (props) => (
+const PostPagination = (...props) => (
   <Pagination rowsPerPageOptions={[10, 25, 50, 100]} {...props} />
 );
 

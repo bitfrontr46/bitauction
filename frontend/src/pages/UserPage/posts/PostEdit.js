@@ -1,22 +1,23 @@
 import React from "react";
 import {
+  Edit,
   SimpleForm,
   TextInput,
   ReferenceInput,
   SelectInput,
-  Create,
 } from "react-admin";
 
-const CSCreate = (props) => (
-  <Create {...props}>
+const PostEdit = (...props) => (
+  <Edit {...props}>
     <SimpleForm>
+      <TextInput disabled source="id" />
       <ReferenceInput source="userId" reference="users">
         <SelectInput optionText="name" />
       </ReferenceInput>
       <TextInput source="title" />
       <TextInput multiline source="body" />
     </SimpleForm>
-  </Create>
+  </Edit>
 );
 
-export default CSCreate
+export default PostEdit;

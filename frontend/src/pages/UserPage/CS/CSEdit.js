@@ -7,7 +7,7 @@ import {
   SelectInput,
 } from "react-admin";
 
-export const CSEdit = (props) => (
+const CSEdit = (props) => (
   <Edit {...props}>
     <SimpleForm>
       <TextInput disabled source="id" />
@@ -19,3 +19,5 @@ export const CSEdit = (props) => (
     </SimpleForm>
   </Edit>
 );
+
+export default CSEdit

@@ -1,13 +1,13 @@
 import React from "react";
 import {
+  Create,
   SimpleForm,
-  TextInput,
   ReferenceInput,
   SelectInput,
-  Create,
+  TextInput,
 } from "react-admin";
 
-const CSCreate = (props) => (
+const PostCreate = (...props) => (
   <Create {...props}>
     <SimpleForm>
       <ReferenceInput source="userId" reference="users">
@@ -19,4 +19,4 @@ const CSCreate = (props) => (
   </Create>
 );
 
-export default CSCreate
+export default PostCreate;

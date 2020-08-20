@@ -22,8 +22,8 @@ import {
 } from "react-admin";
 
 import { useMediaQuery } from "@material-ui/core";
-import ResetViewsButton from "../ResetViewsButton";
-import PostPagination from "../MyPagination";
+import ResetViewsButton from "../posts/ResetViewsButton";
+import PostPagination from "../posts/PostPagination";
 
 //Post Page에서 다중 선택 시 나오는 Popup
 const CSBulkActionButtons = (props) => (
@@ -76,7 +76,7 @@ const CSFilter = (props) => (
   </Filter>
 );
 
-export const CSList = (props) => {
+const CSList = (props) => {
   const isSmall = useMediaQuery((theme) => theme.breakpoints.down("sm"));
   return (
     <List
@@ -107,3 +107,5 @@ export const CSList = (props) => {
     </List>
   );
 };
+
+export default CSList;

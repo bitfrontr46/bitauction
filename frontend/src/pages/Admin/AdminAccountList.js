@@ -413,7 +413,7 @@ export default function EnhancedTable() {
         </Paper>
         <FormControlLabel
           control={<Switch checked={dense} onChange={handleChangeDense} />}
-          label="좁은 행 너비"
+          label="행 너비를 좁게"
         />
       </div>
     </>

@@ -6,13 +6,9 @@ import jsonServerProvider from "ra-data-json-server";
 
 import createAdminStore from "./createAdminStore";
 import Dashboard from "./Dashboard";
-import { UserList } from "./users";
-import { PostList, PostCreate, PostEdit } from "./posts";
-import PostIcon from "@material-ui/icons/Book";
-import UserIcon from "@material-ui/icons/Group";
-import CSIcon from "@material-ui/icons/HelpOutline";
 import Menu from "./Menu";
-import { CSList, CSCreate, CSEdit } from "./CS/CS";
+import CS from "./CS/index";
+import posts from "./posts/index";
 
 const dataProvider = jsonServerProvider("https://jsonplaceholder.typicode.com");
 const authProvider = () => Promise.resolve();
@@ -41,21 +37,8 @@ const UserPageApp = () => (
       history={history}
       title="Admin Page"
     >
-      <Resource
-        name="Posts"
-        list={PostList}
-        edit={PostEdit}
-        create={PostCreate}
-        icon={PostIcon}
-      />
-      <Resource name="Support" list={UserList} icon={UserIcon} />
-      <Resource
-        name="Support" 
-        list={CSList}
-        edit={CSEdit}
-        create={CSCreate}
-        icon={CSIcon}
-        />
+      <Resource name="Posts" {...posts} />
+      <Resource name="Support" {...CS} />
     </Admin>
   </Provider>
 );

@@ -1,18 +1,15 @@
 //Post 페이지
 import * as React from "react";
-import { cloneElement} from "react";
+import { cloneElement } from "react";
 import {
   List,
   Datagrid,
   TextField,
   ReferenceField,
   EditButton,
-  SimpleForm,
-  Edit,
   TextInput,
   ReferenceInput,
   SelectInput,
-  Create,
   SimpleList,
   useListContext,
   TopToolbar,
@@ -26,8 +23,8 @@ import {
 
 import { useMediaQuery } from "@material-ui/core";
 import IconEvent from "@material-ui/icons/Event";
-import ResetViewsButton from "./posts/ResetViewsButton";
-import PostPagination from "./MyPagination";
+import ResetViewsButton from "./ResetViewsButton";
+import PostPagination from "./PostPagination";
 
 //Post Page에서 다중 선택 시 나오는 Popup
 const PostBulkActionButtons = (props) => (
@@ -90,7 +87,7 @@ const PostFilter = (props) => (
   </Filter>
 );
 
-export const PostList = (props) => {
+const PostList = (...props) => {
   const isSmall = useMediaQuery((theme) => theme.breakpoints.down("sm"));
   return (
     <List
@@ -98,7 +95,7 @@ export const PostList = (props) => {
       actions={<ListActions />}
       filters={<PostFilter />}
       bulkActionButtons={<PostBulkActionButtons />}
-      pagination={<PostPagination/>}
+      pagination={<PostPagination />}
     >
       {isSmall ? (
         <SimpleList
@@ -122,27 +119,4 @@ export const PostList = (props) => {
   );
 };
 
-export const PostEdit = (props) => (
-  <Edit {...props}>
-    <SimpleForm>
-      <TextInput disabled source="id" />
-      <ReferenceInput source="userId" reference="users">
-        <SelectInput optionText="name" />
-      </ReferenceInput>
-      <TextInput source="title" />
-      <TextInput multiline source="body" />
-    </SimpleForm>
-  </Edit>
-);
-
-export const PostCreate = (props) => (
-  <Create {...props}>
-    <SimpleForm>
-      <ReferenceInput source="userId" reference="users">
-        <SelectInput optionText="name" />
-      </ReferenceInput>
-      <TextInput source="title" />
-      <TextInput multiline source="body" />
-    </SimpleForm>
-  </Create>
-);
+export default PostList;

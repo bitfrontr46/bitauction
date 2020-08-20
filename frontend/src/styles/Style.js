@@ -1,12 +1,12 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 // Theming을 통한 중복 Styles 제거 https://material-ui.com/customization/theming/
-//Material UI Style 변수 수정 없이 바로 import 하기 위해, useStyles 그대로 사용함
-//1. 다음과 같이 import한다. import {useStyles} from "../../styles/Style"
-//2. 기존 styles component는 없앤다.
+// Material UI Style 변수 수정 없이 바로 import 하기 위해, useStyles 그대로 사용함
+// 1. 다음과 같이 import한다. import {useStyles} from "../../styles/Style"
+// 2. 기존 styles component는 없앤다.
 
 export const useStyles = makeStyles((theme) => ({
-  root: {},
+  root: { flexGrow: 1 },
   //왼쪽 바
   header: {
     position: "absolute",
