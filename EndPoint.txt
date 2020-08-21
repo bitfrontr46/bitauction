@@ -1,0 +1,363 @@
+REST API를 사용 하였을때의 엔드포인트 문서
+몽고DB 기준 필요한 데이터들.
+각 스키마 마다 _id를 가지고 있음. (식별자?)
+식별자로 다른 컬렉션을 참조할 수 있음.
+_id는 email과는 다름. 참조 인덱스??
+엔드포인트는 편한대로 수정하시길
+요것들이 거의 확정이고
+추가로 만들것이 있으면 요청하겠음.
+
+
+
+1. 모든 유저 정보 찾기.
+endpoint : axios.get(/all-user)
+보내는 데이터 : 없음
+필요한 데이터 : User의 _id,name, email
+
+export const GET_ALL_USERS = gql`
+query GetAllUsers{
+  getAllUsers{
+    _id
+    name
+    email
+  }
+}
+`
+
+2. email이 일치하는 유저 정보 1개 찾기. 
+endpoint : axios.get(/user)
+보내는 데이터 : email
+필요한 데이터 : User의 _id,name,email
+
+export const GET_USER = gql`
+query GetOneUser($email:String!) {
+  getUser(email:$email){
+    _id
+    name
+    email
+  }
+}
+`
+
+3. 모든 request(의뢰,요청)찾기.
+endpoint : axios.get(/all-request)
+보내는 데이터 : 없음
+필요한 데이터 : Request의 모든 필드  **** author(User)의 _id,name 필요
+
+export const GET_ALL_REQUESTS = gql`
+query GetAllRequests{
+  getAllRequests{
+    _id
+    author {
+      _id
+      name
+    }
+    detail
+    category
+    requestedAt
+    deadLine
+    hopeDate
+    state
+    tags
+  }
+}
+`
+
+4. author(user id)가 작성한 bid(입찰)찾기
+Bid의 author는 판매자(User)의 id가 들어감.
+Bid의 request는 Request의 id가 들어감.
+endpoint : axios.get(/my-bid)
+보내는 데이터 : author(user_id)
+필요한 데이터 : Bid.request의 모든 필드. **** author(User)의 _id,name 필요,
+            Bid.state
+
+export const GET_MY_BIDS = gql`
+query GetMyBids($author:ID!){
+  getMyBids(author:$author){
+    request{
+      _id
+      author{
+        _id
+        name
+        email
+      }
+      detail
+      category
+      deadLine
+      hopeDate
+      tags
+      requestedAt
+      state
+    }
+    state
+  }
+}
+`
+
+5. Room의 seller(user_id)가 일치하는 Room(채팅방)찾기.
+endpoint : axios.get(/my-room)
+********** 삭제예정인데 아직 정확하지 않음 제일 나중에 만들어주삼 *****************
+
+export const GET_MY_ROOM_LIST_FOR_SELLER = gql`
+query GetMyRoomListForSeller($seller:ID){
+  getMyRoomListForSeller(seller:$seller){
+    _id
+    request{
+      author{
+        _id
+        name
+      }
+      category
+    }
+    seller{
+      _id
+      name
+    }
+    messages{
+      name
+      message
+      createdAt
+    }
+  }
+}
+`
+
+6. 나의 request(의뢰,요청) 찾기.
+endpoint : axios.get(/my-request)
+보내는 데이터 : author(user_id)
+필요한 데이터 : Request의 모든 필드  **** author(User)의 name 필요
+
+export const GET_MY_REQUESTS = gql`
+query GetMyRequests($author:ID!){
+  getMyRequests(author:$author){
+    _id
+    author{
+      name
+    }
+    detail
+    category
+    requestedAt
+    deadLine
+    hopeDate
+    state
+    tags
+  }
+}
+`
+
+7. request(request_id)가 일치하는 Bid 찾기. (어느 하나의 리퀘스트에 입찰한 리스트!)
+endpoint : axios.get(/bid-in-request)
+보내는 데이터 : request(request_id)
+필요한 데이터 : Bid의 _id, author( _id,name,profile(phone)), price,state
+
+export const GET_BIDS_IN_REQUEST = gql`
+query GetBidsInRequest($request:ID){
+  getBidsInRequest(request:$request){
+    _id
+    author{
+      _id
+      name
+      profile{
+        phone
+      }
+    }
+    price
+    state
+  }
+}
+`
+
+8. request(request_id)와 seller(user_id)가 일치하는 채팅방 찾기
+endpoint : axios.get(/my-room)
+보내는 데이터 : request(request_id), seller(user_id)
+필요한 데이터 : Room의 _id, messages(name,message,createdAt)
+
+export const GET_MY_ROOM = gql`
+query GetMyRoom($request:ID,$seller:ID){
+  getMyRoom(request:$request,seller:$seller){
+    _id
+    messages{
+      name
+      message
+      createdAt
+    }
+  }
+}
+`
+
+9. user_id 가 일치하는 프로필 찾기
+endpoint : axios.get(/my-profile)
+보내는 데이터 : user(user_id)
+필요한 데이터 : Profile의 user(name,email), phone, profileImage, exampleImages, text, reviews(name,text,rating)
+
+export const GET_MY_PROFILE = gql`
+query GetMyProfile($user:ID){
+  getMyProfile(user:$user){
+    user{
+      name
+      email
+    }
+    phone
+    profileImage
+    exampleImages
+    text
+    reviews{
+      name
+      text
+      rating
+    }
+  }
+}
+`
+
+10.user_id가 일치하는 프로필의 프로필이미지만 가져오기
+endpoint : axios.get(/my-profile-image)
+보내는 데이터 : user(user_id)
+필요한 데이터 : Profile의 profileImage
+
+export const GET_MY_PROFILE_IMAGE = gql`
+query GetMyProfile($user:ID){
+  getMyProfile(user:$user){
+    profileImage
+  }
+}
+`
+
+
+### 요기는 주로 POST(CRUD) 방식으로 통신하는 부분, 로그인과 채팅 sendMessage를 제외하고는 데이터를 받는 부분은 없다. 
+### 자세한 로직은 ./server/resolvers.js 의 mutation 부분 참고
+
+1. request 작성 (Create)
+보내는 데이터 : state,requestedAt 을 제외한 Request의 모든 필드.
+endpoint : axios.post(/request)
+
+export const SEND_REQUEST = gql`
+mutation SendRequest($input:RequestInput){
+  sendRequest(input:$input)
+}
+`
+
+2. bid 작성 (Create)
+
+endpoint : axios.post(/bid)
+보내는 데이터 : state를 제외한 Bid의 모든 필드
+
+export const SEND_BID = gql`
+mutation SendBid($input:BidInput){
+  sendBid(input:$input)
+}
+`
+
+3. 로그인 (Read)
+endpoint : axios.post(/login)
+보내는 데이터 : email,pwd
+
+export const LOGIN = gql`
+mutation Login($email:String!,$pwd:String!){
+  login(email:$email,pwd:$pwd){
+    _id
+    name
+    is_seller
+    result
+  }
+}
+`
+
+4. 회원가입 (Create)
+endpoint : axios.post(/join)
+보내는 데이터 : profile 을 제외한 User의 모든 필드.
+
+export const SIGNUP = gql`
+mutation SignUp($input:UserInput!){
+  signUp(input:$input)
+}
+`
+
+5. 채팅 메세지 보내기 (몽고 DB에서는 Update를 사용하였지만 CREATE를 사용하여도 무관?) 
+endpoint : axios.post(/new-message)
+보내는 데이터 : room(room_id),name,message
+
+export const SEND_NEW_MESSAGE = gql`
+mutation SendNewMessage($input:MessageInput){
+  sendNewMessage(input:$input){
+    name
+    message
+    createdAt
+  }
+}
+`
+
+6. 압찰들중에 하나를 고르기(낙찰) (Update, request와 bid의 state를 바꾼다. 선택안된 나머지 입찰들의 state도 바꾼다.)
+endpoint : axios.post(/one-bid)
+보내는 데이터 : bid(bid_id),request(request_id)
+
+export const CHOICE_ONE_BID = gql`
+mutation ChoiceOneBid($bid:ID,$request:ID){
+  choiceOneBid(bid:$bid,request:$request)
+}
+`
+
+7. 거래 완료 (Update, request와 bid의 state를 바꾼다.)
+endpoint : axios.post(/complete)
+보내는 데이터 : bid(bid_id),request(request_id)
+
+export const TRADE_COMPLETE = gql`
+mutation TradeComplete($bid:ID,$request:ID){
+  tradeComplete(bid:$bid,request:$request)
+}
+`
+
+
+8. 거래 취소 (Update,delete request와 bid의 state를 바꾼다. 해당 request의 _id를 가진 채팅방(Room)을 지운다.)
+endpoint : axios.post(/cancle)
+보내는 데이터 : request(request_id)
+
+export const TRADE_CANCLE = gql`
+mutation TradeCancle($request:ID){
+  tradeCancle(request:$request)
+}
+`
+
+9. 입찰 취소 (update,delete request_id와 seller가 일치하는 채팅방(Room)을 지워버리고 bid의 state를 업데이트)
+endpoint : axios.post(/cancle)
+보내는 데이터 : request(request_id), author(user_id)
+
+export const BID_CANCLE = gql`
+mutation BidCancle($request:ID,$author:ID){
+  bidCancle(request:$request,author:$author)
+}
+`
+
+10. 요청 시간 마감 (구매자가 선택하기 전에 만약 request에 입찰이 1개도 없다면 취소가 되고, 1개라도 있다면 요청만 마감이 된다.)
+endpoint : axios.post(/request-over)
+보내는 데이터 : request(request_id)
+
+export const REQUEST_TIME_OVER = gql`
+mutation RequestTimeOver($request:ID){
+  requestTimeOver(request:$request)
+}
+`
+
+11. 프로필 수정 (update)
+endpoint : axios.post(/profile)
+보내는 데이터 : reviews 필드를 제외한 Profile의 모든 필드.
+
+export const EDIT_MY_PROFILE = gql`
+mutation EditMyProfile($input:ProfileInput){
+  editMyProfile(input:$input)
+}
+`
+
+//######################### Subscription #########################
+
+---------- 이거는 graphql 채팅임 ------------
+
+export const START_CHAT = gql`
+subscription NewMessage($room:ID){
+  newMessage(room:$room){
+    name
+    message
+    createdAt
+  }
+}
+`

@@ -4,7 +4,7 @@ import Home from './pages/Home';
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
 import Login from './pages/Login';
-import Join from './pages/join';
+import Join from './pages/Join';
 import Seller from './pages/SellerPage';
 import User from './pages/UserPage';
 import { useDispatch } from 'react-redux';
@@ -50,7 +50,6 @@ function App() {
     <div style={{ backgroundColor: '#f9f9f9' }}>
     <Navigation></Navigation>
     </div>
-    <Container>
         <Switch>
           <Route path='/' component={Home} exact />
           <Route path='/seller' component={Seller} />
@@ -58,7 +57,6 @@ function App() {
           <Route path='/login' component={Login} />
           <Route path='/join' component={Join} />
         </Switch>
-      </Container>
       <div style={{ backgroundColor: '#f9f9f9' }}>
         <Footer></Footer>
       </div>
