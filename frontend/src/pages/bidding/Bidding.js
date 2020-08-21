@@ -75,3 +75,4 @@ function Bidding({open,setOpen,data,fetchingCtn}) {
 }
 
 export default Bidding;
+

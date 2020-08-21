@@ -18,7 +18,10 @@ const useStyles = makeStyles((theme)=>({ //css
 
 
 const Review = ({sellerInfo,userInfo}) => { //판매자,구매자(리뷰 작성자) props
-//sellerInfo, userInfo를 부모 컴포넌트에서 props로 받아옴 
+
+
+//sellerInfo, userInfo를 부모 컴포넌트에서 props로 받아옴.
+ 
     const[text, setText] = useState("{}");
     const[rating, setRating] = useState("{}");
    
@@ -30,8 +33,23 @@ const Review = ({sellerInfo,userInfo}) => { //판매자,구매자(리뷰 작성�
     const ratingChangeHandler = (e) =>{
         setRating(e.currentTarget.value)
     }
+
+
     const submitHandler = (e) =>{
         e.preventDefault(); //클릭해서 넘어가는 것을 방지함
+        Axios.post('', {
+            user_id : userInfo.id,
+            seller_id : sellerInfo.id,
+            name : userInfo.id,
+            text: 'text',
+            rating: 'rating'
+        })
+        .then(function(response){
+            console.log(response);
+        })
+        .catch(err=>{
+            console.log(err);
+        })
     }
 
     
@@ -68,7 +86,7 @@ const Review = ({sellerInfo,userInfo}) => { //판매자,구매자(리뷰 작성�
         <label>구매자 만족도</label>
         <Rating name="half-rating" defaultValue={2.5} precision={0.5} size="large" value={rating}/>
         <textarea placeholder="후기를 남겨주세요~"></textarea>
-        <button type="submit" style={{maxWidth:"100px"}} value={text}>확인</button>
+        <button type="submit" style={{maxWidth:"100px"}} value={text}>등록</button>
         
         {/* {seller.name} 판매자에게 보냄 
             text,
@@ -81,15 +99,6 @@ const Review = ({sellerInfo,userInfo}) => { //판매자,구매자(리뷰 작성�
     );
 }
 
-
-
-function Review2(props) {
-    return (
-        <div>
-            
-        </div>
-    );
-}
 
 
 export default Review;
@@ -129,4 +138,7 @@ axios.post('url', {
 
 
 
+
+
 */
+
