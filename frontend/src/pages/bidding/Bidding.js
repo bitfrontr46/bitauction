@@ -9,6 +9,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { useSelector } from 'react-redux';
 
+
 function Bidding({open,setOpen,data,fetchingCtn}) {
 
     const [price, setPrice] = useState();
