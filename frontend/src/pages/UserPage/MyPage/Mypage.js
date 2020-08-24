@@ -88,9 +88,7 @@ const MyPage = () => {
                     <br />
                 </Grid>
                 <Grid item xs={9}>
-                    <Route exact path='/user/mypage' component={MyRequest} />
-                    <Route path='/user/mypage/detail' component={RequestDetail} />
-                    <Route path='/user/mypage/chat' component={Chat} />
+                    <MyRequest/>
                 </Grid>
                 <ProfileModal name={userName} open={open} onClose={handleClose} user_id={user_id} />
             </Grid>

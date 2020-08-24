@@ -115,6 +115,7 @@ query GetBidsInRequest($request:ID){
       name
       profile{
         phone
+        profileImage
       }
     }
     price

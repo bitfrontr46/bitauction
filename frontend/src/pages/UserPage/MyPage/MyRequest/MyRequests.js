@@ -11,7 +11,7 @@ const MyRequests = ({ data }) => {
 
 
     const requestList = data.filter((obj) => {
-        return (obj.state === '요청 진행중') || (obj.state === '거래 진행중') || (obj.state === '요청 마감');
+        return (obj.state === '요청 진행중') || (obj.state === '거래 진행중') || (obj.state === '요청 시간 마감');
     })
 
     const MyRequestList = requestList.map((obj) => {
@@ -22,7 +22,7 @@ const MyRequests = ({ data }) => {
 
         return (
             <Grid key={obj._id} style={{ margin: 'auto' }} item xs={4}>
-                <Link style={{ textDecoration: 'none' }} to={{ pathname: `/user/mypage/detail`, state: obj }}>
+                <Link style={{ textDecoration: 'none' }} to={{ pathname: `/user/detail`, state: obj }}>
                     <Card style={{ textAlign: 'center' }} size="large" color="primary">
                         <CardHeader title={obj.category} subheader={obj.requestedAt} />
                         <CardContent>

@@ -25,7 +25,11 @@ const useStyles = makeStyles((theme) => ({
     menuStyle: {
         textDecoration: 'none',
         color : 'rgb(104,104,106)',
-        margin : '10px',
+        padding : '10px',
+        transition : 'all 0.1s',
+        '&:hover':{
+            backgroundColor : '#F2F3F4',
+        }
     },
 }));
 

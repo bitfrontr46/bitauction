@@ -83,11 +83,10 @@ const resolvers = {
 
         getBidsInRequest: (root, args) => {
             if (ObjectId(args.request)) {
-                console.log('asdasdasdasd');
                 const result = Bid.find({ request: args.request }).populate({
                     path: 'author',
                     select: '_id name profile',
-                    populate: { path: 'profile', select: 'phone' }
+                    populate: { path: 'profile', select: 'phone profileImage' }
                 });
                 return result;
             }
@@ -373,7 +372,7 @@ const resolvers = {
                     return 0;
                 })
             if (bidCount === 0) {
-                result = await Request.updateOne({ _id: args.request }, { $set: { state: '취소된 요청' } })
+                result = await Request.updateOne({ _id: args.request }, { $set: { state: '취소된 거래' } })
                     .then(() => {
                         console.log('time over and cancle');
                         return true
@@ -383,7 +382,7 @@ const resolvers = {
                         return false
                     })
             } else {
-                result = await Request.updateOne({ _id: args.request }, { $set: { state: '요청 마감' } })
+                result = await Request.updateOne({ _id: args.request }, { $set: { state: '요청 시간 마감' } })
                     .then(() => {
                         console.log('time over');
                         return true

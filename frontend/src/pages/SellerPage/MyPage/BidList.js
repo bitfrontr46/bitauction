@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
-import { CircularProgress, Container, Grid, CardHeader, Divider, Card, CardContent,Typography } from '@material-ui/core';
+import { CircularProgress, Container, Grid, CardHeader, Divider, Card, CardContent, Typography } from '@material-ui/core';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -13,6 +13,9 @@ import { GET_MY_BIDS } from '../../../lib/queries';
 import { useQuery } from '@apollo/client';
 import RequestCard from '../../../components/RequestCard';
 import Counter from '../../../components/Counter';
+import Collapse from '@material-ui/core/Collapse';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 
 
 
@@ -23,6 +26,16 @@ const BidList = () => {
     const loadingStyle = {
         display: 'block',
         margin: '18% auto',
+    }
+
+    const [checked, setChecked] = useState(false);
+
+    const onClickChecked = () => {
+        if (checked) {
+            setChecked(false);
+        } else {
+            setChecked(true);
+        }
     }
 
     const history = useHistory();
@@ -64,27 +77,22 @@ const BidList = () => {
             return obj.state === '거래 진행중';
         })
 
-        const WaittingList = data.getMyBids.filter((obj) => {
-            return obj.state === '거래 대기중';
-        })
-
         const MyChosenList = ChosenList.map((obj) => {
             return (
-                <Grid key={obj._id} style={{ margin: 'auto' }} item xs={4}>
-                    <RequestCard obj={obj.request} />
-                </Grid>
-            )
-        })
 
-        const MyWaittingList = WaittingList.map((obj) => {
-            return (
-                <Grid key={obj.request._id} style={{ margin: 'auto' }} item xs={4}>
-                    <Card style={{ textAlign: 'center' }} variant="outlined">
-                        <CardContent>
-                            {obj.request.author.name} 님의 {obj.request.category}<br/>
-                            <Counter data={obj.request} />
-                        </CardContent>
-                    </Card>
+                <Grid key={obj._id} style={{ margin: 'auto' }} item xs={4}>
+                    <Collapse in={checked} collapsedHeight={98}>
+                        <Card onClick={onClickChecked} elevation={3}>
+                            <CardHeader action={checked ? <ExpandLessIcon/> : <ExpandMoreIcon/>} style={{ textAlign: 'center' }} title={`${obj.request.author.name}님의 요청서`} subheader={obj.request.requestedAt} />
+                            <Divider />
+                            <CardContent>
+                                <ul>
+                                    <li>{obj.request.category}</li>
+                                    <li>{obj.request.detail}</li>
+                                </ul>
+                            </CardContent>
+                        </Card>
+                    </Collapse>
                 </Grid>
             )
         })
@@ -97,20 +105,8 @@ const BidList = () => {
                         ?
                         <Typography variant="h5" gutterBottom style={{ textAlign: 'center' }}>현재 진행중인 거래가 없습니다.</Typography>
                         :
-                        <Grid container spacing={4}>
+                        <Grid container>
                             {MyChosenList}
-                        </Grid>
-                    }
-                </Container>
-                <Divider style={{ marginTop: '30px' }} />
-                <Typography variant="h5" gutterBottom>대기중인 거래</Typography>
-                <Container>
-                    {WaittingList.length === 0
-                        ?
-                        <Typography variant="h5" gutterBottom style={{ textAlign: 'center' }}>현재 대기중인 견적이 없습니다.</Typography>
-                        :
-                        <Grid container spacing={4}>
-                            {MyWaittingList}
                         </Grid>
                     }
                 </Container>
