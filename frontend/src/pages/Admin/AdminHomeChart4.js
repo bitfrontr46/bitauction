@@ -3,7 +3,7 @@
 import React from "react";
 import { render } from "react-dom";
 import Highcharts from "highcharts";
-import BubbleChart from "../../components/AdminComponents/BubbleChart";
+import BubbleChart from "../../components/admin/BubbleChart";
 
 // Load Highcharts modules
 require("highcharts/modules/exporting")(Highcharts);

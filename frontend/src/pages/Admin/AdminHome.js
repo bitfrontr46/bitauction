@@ -1,10 +1,10 @@
 import React from "react";
 import useStyles from "../../styles/Style";
-import AdminNavigation from "../../components/AdminComponents/AdminNavigation";
+import AdminNavigation from "../../components/admin/AdminNavigation";
 import AdminHomeChart1 from "./AdminHomeChart1";
 import AdminHomeChart2 from "./AdminHomeChart2";
 import AdminHomeChart3 from "./AdminHomeChart3";
-import AdminDrawer from "../../components/AdminComponents/AdminDrawer";
+import AdminDrawer from "../../components/admin/AdminDrawer";
 
 // style는 styles 폴더의 style.js로 옮김.
 

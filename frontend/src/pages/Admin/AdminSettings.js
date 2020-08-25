@@ -1,6 +1,6 @@
 import React from "react";
-import AdminNavigation from "../../components/AdminComponents/AdminNavigation";
-import AdminDrawer from "../../components/AdminComponents/AdminDrawer";
+import AdminNavigation from "../../components/admin/AdminNavigation";
+import AdminDrawer from "../../components/admin/AdminDrawer";
 
 const AdminSettings = () => {
   return (

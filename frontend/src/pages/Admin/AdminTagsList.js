@@ -1,8 +1,8 @@
 import React from "react";
 import useStyles from "../../styles/Style";
 import AdminHomeChart4 from "./AdminHomeChart4";
-import AdminDrawer from "../../components/AdminComponents/AdminDrawer";
-import AdminNavigation from "../../components/AdminComponents/AdminNavigation";
+import AdminDrawer from "../../components/admin/AdminDrawer";
+import AdminNavigation from "../../components/admin/AdminNavigation";
 
 const AdminTagsList = () => {
   const classes = useStyles();

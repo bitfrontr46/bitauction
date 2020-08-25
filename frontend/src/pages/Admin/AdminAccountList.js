@@ -22,8 +22,8 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 import DeleteIcon from "@material-ui/icons/Delete";
 import FilterListIcon from "@material-ui/icons/FilterList";
-import AdminNavigation from "../../components/AdminComponents/AdminNavigation";
-import AdminDrawer from "../../components/AdminComponents/AdminDrawer";
+import AdminNavigation from "../../components/admin/AdminNavigation";
+import AdminDrawer from "../../components/admin/AdminDrawer";
 
 function createData(name, joindate, postcount, amount, rank) {
   return { name, joindate, postcount, amount, rank };
