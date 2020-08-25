@@ -6,11 +6,13 @@ import { makeStyles } from "@material-ui/core/styles";
 // 2. 기존 styles component는 없앤다.
 
 export const useStyles = makeStyles((theme) => ({
-  root: { flexGrow: 1 },
+  root: {
+    display: "flex",
+    flexWrap:"wrap"
+  },
   //왼쪽 바
   header: {
-    position: "absolute",
-    display: "flex ",
+    display: "flex",
     flexDirection: "column",
     float: "left",
   },
