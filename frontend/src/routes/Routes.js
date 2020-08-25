@@ -14,7 +14,6 @@ import Login from "../pages/Login";
 import Join from "../pages/join/JoinHome";
 import Test from "../Test";
 import NotFound from "../components/NotFound";
-import UserPageApp from "../pages/UserPage/UserPageApp"
 
 function Routes() {
   return (
@@ -37,8 +36,6 @@ function Routes() {
           <Route path="/admin/settings" component={AdminSettings} />
           <Route path="/admin/accountlist" component={AdminAccountList} />
           <Route path="/admin/tagslist" component={AdminTagsList} />
-          {/* User 관리 페이지 */}
-          <Route path="/userpage" component={UserPageApp} />
           {/* Not Found */}
           <Route component={NotFound} />
         </Switch>
