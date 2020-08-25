@@ -12,11 +12,16 @@ import { Link as RLink, useHistory } from 'react-router-dom';
 import { SIGNUP } from '../../lib/queries';
 import { useMutation } from '@apollo/client';
 import Axios from 'axios';
+import { Toolbar } from '@material-ui/core';
 
 
 const useStyles = makeStyles((theme) => ({
+  title: {
+    textDecoration: 'none',
+    color: 'black',
+  },
   paper: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(10),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -84,6 +89,14 @@ const JoinForm = () => {
   }
 
   return (
+    <>
+    <Toolbar>
+        <RLink className={classes.title} to='/'>
+          <Typography variant="h4">
+            HELL
+          </Typography>
+        </RLink>
+      </Toolbar>
     <Container component="main" maxWidth="xs">
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
@@ -153,6 +166,7 @@ const JoinForm = () => {
         </form>
       </div>
     </Container>
+    </>
   );
 }
 

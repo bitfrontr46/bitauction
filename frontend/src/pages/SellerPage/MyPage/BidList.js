@@ -11,8 +11,6 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { GET_MY_BIDS } from '../../../lib/queries';
 import { useQuery } from '@apollo/client';
-import RequestCard from '../../../components/RequestCard';
-import Counter from '../../../components/Counter';
 import Collapse from '@material-ui/core/Collapse';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
@@ -87,7 +85,7 @@ const BidList = () => {
         const MyChosenList = ChosenList.map((obj) => {
             return (
 
-                <Grid key={obj._id} style={{ margin: 'auto' }} item xs={4}>
+                <Grid key={obj.request._id} style={{ margin: 'auto' }} item xs={4}>
                     <Collapse in={checked} collapsedHeight={88}>
                         <Card elevation={3}>
                             <CardHeader onClick={onClickChecked} action={checked ? <ExpandLessIcon /> : <ExpandMoreIcon />} style={{ textAlign: 'center' }} title={`${obj.request.author.name}님의 요청서`} subheader={obj.request.requestedAt} />
@@ -126,7 +124,7 @@ const BidList = () => {
                         </Grid>
                     }
                 </Container>
-                <Divider style={{ marginTop: '30px' }} />
+                <br/><br/><br/>
                 <Typography variant="h5" gutterBottom>거래내역</Typography>
                 <TableContainer variant="outlined" component={Paper}>
                     <Table>

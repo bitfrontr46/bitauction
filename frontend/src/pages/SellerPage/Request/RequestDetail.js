@@ -11,11 +11,11 @@ import Fade from '@material-ui/core/Fade';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        flexGrow: 1,
+        padding: theme.spacing(8, 0, 6),
     },
     gridStyle: {
-        margin: '4% auto',
-        width: "80%",
+        margin:'auto',
+        width: "90%",
         color: 'rgb(104,104,106)'
     },
     loadingStyle: {
@@ -40,12 +40,12 @@ function RequestDetail(props) {
 
     return (
         <Fade in={checked}>
-            <Container>
+            <Container className={classes.root}>
                 <Grid className={classes.gridStyle} container spacing={9}>
-                    <Grid item xs={7}>
+                    <Grid item xs={6}>
                         <RequestCard obj={data} />
                     </Grid>
-                    <Grid item xs={5}>
+                    <Grid item xs={6}>
                         {(data.deadLine < new Date().getTime())
                             ?
                             <>

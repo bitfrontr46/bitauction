@@ -13,11 +13,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useMutation } from '@apollo/client';
 import { LOGIN } from '../lib/queries';
 import Axios from 'axios';
+import { Toolbar } from '@material-ui/core';
 
 
 const useStyles = makeStyles((theme) => ({
+  title: {
+    textDecoration: 'none',
+    color: 'black',
+  },
   paper: {
-    marginTop: theme.spacing(8),
+    padding: theme.spacing(10, 0, 6),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -50,7 +55,7 @@ const Login = () => {
 
   useEffect(() => {
     if (is_login) {
-      if(is_seller){
+      if (is_seller) {
         history.push('/seller');
       } else {
         history.push('/user');
@@ -64,7 +69,7 @@ const Login = () => {
         localStorage.setItem('user_id', data.login._id);
         localStorage.setItem('userName', data.login.name);
         console.log(data.login.result);
-        if(data.login.is_seller){
+        if (data.login.is_seller) {
           history.push('/seller');
         } else {
           history.push('/user');
@@ -73,7 +78,7 @@ const Login = () => {
         alert(data.login.result);
       }
     }
-  }, [history, is_login,is_seller, data, dispatch])
+  }, [history, is_login, is_seller, data, dispatch])
 
   const onChangeInput = (e) => {
     setUser({
@@ -93,8 +98,15 @@ const Login = () => {
   }
 
   return (
-    <Container component="main" maxWidth="xs">
-      <div className={classes.paper}>
+    <>
+      <Toolbar>
+        <RLink className={classes.title} to='/'>
+          <Typography variant="h4">
+            HELL
+          </Typography>
+        </RLink>
+      </Toolbar>
+      <Container className={classes.paper} component="main" maxWidth="xs">
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
@@ -149,9 +161,8 @@ const Login = () => {
             </Grid>
           </Grid>
         </form>
-        <br />
-      </div>
-    </Container>
+      </Container>
+    </>
   );
 }
 

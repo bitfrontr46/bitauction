@@ -54,6 +54,7 @@ const MyPage = () => {
     })
 
     return (
+        
         <Container className={classes.heroContent}>
             <Grid container>
                 <Grid className={classes.gridStyle} item xs={2}>
