@@ -16,3 +16,7 @@ function UploadInfo(props) {
 }
 
 export default UploadInfo;
+
+
+//prosp.detail.profile
+//

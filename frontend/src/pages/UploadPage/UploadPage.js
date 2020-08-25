@@ -51,8 +51,6 @@ function UploadPage(props) {
           }
         })
 
-
-
     };
 
     
