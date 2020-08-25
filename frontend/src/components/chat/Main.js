@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { CircularProgress, Backdrop, Divider, IconButton, Grid } from '@material-ui/core';
-import { GET_MY_ROOM } from '../../../../lib/queries';
+import { GET_MY_ROOM } from '../../lib/queries';
 import { useQuery, useLazyQuery } from '@apollo/client';
 import { makeStyles } from '@material-ui/core/styles';
 import ChatBox from './ChatBox';

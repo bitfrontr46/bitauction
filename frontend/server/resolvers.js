@@ -98,15 +98,9 @@ const resolvers = {
             return result;
         },
 
-        getMyRoomListForSeller: (root, args) => {
+        getMyRoomForSeller: (root, args) => {
             if (ObjectId(args.seller)) {
-                const result = Room.find({ seller: args.seller })
-                    .populate({
-                        path: 'request',
-                        select: '_id author category',
-                        populate: { path: 'author', select: '_id name' }
-                    })
-                    .populate('seller', '_id name');
+                const result = Room.findOne({ request: args.request,seller: args.seller })
                 return result;
             }
         },
@@ -411,6 +405,31 @@ const resolvers = {
                     console.log(err);
                 })
             return chat;
+        },
+
+        expertRegister: (root, args) => {
+            console.log(args.profile);
+            console.log(args.user);
+            const result = Profile.updateOne({ user: args.user._id }, { $set: { phone: args.profile.phone, text: args.profile.text } })
+                .then(() => {
+                    console.log('Profile Register!');
+                    return true;
+                })
+                .catch((err) => {
+                    console.log(err);
+                    return false;
+                })
+            const result2 = User.updateOne({ _id: args.user._id }, { $set: { is_seller: args.user.is_seller } })
+                .then(() => {
+                    console.log('expert Register!');
+                    return true;
+                })
+                .catch((err) => {
+                    console.log(err);
+                    return false;
+                })
+
+            return (result && result2);
         }
     },
 

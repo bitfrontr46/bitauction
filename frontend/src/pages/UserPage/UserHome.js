@@ -10,6 +10,7 @@ import Background from '../../img/background3.jpg'
 import { Link } from 'react-router-dom';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import Zoom from '@material-ui/core/Zoom';
+import ExpertRegister from '../ExpertRegister/ExpertRegister';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -41,6 +42,13 @@ const UserHome = () => {
     const classes = useStyles();
     const history = useHistory();
     const [checked, setChecked] = useState(false);
+    const [open, setOpen] = useState(false);
+
+    const onClose = () => {
+        setOpen(false);
+    }
+
+    const user_id = localStorage.getItem('user_id');
 
     useEffect(() => {
         setChecked(true);
@@ -93,7 +101,7 @@ const UserHome = () => {
                                 <Typography variant="h6" color="textSecondary" paragraph>
                                     when you want to have own website,<br/>
                                     here is best solution.
-                                    <Button component={Link} className={classes.linkStyle} to="/user/enroll">
+                                    <Button onClick={()=>{setOpen(true)}} className={classes.linkStyle}>
                                         EXPERT Register<ArrowForwardIcon fontSize="small" />
                                     </Button>
                                 </Typography>
@@ -102,6 +110,7 @@ const UserHome = () => {
                     </Grid>
                 </Grid>
             </Container>
+            <ExpertRegister onClose={onClose} open={open} user_id={user_id}/>
         </>
     );
 }

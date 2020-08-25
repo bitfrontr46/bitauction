@@ -35,6 +35,7 @@ const NowTrading = ({ data, requestData }) => {
     const classes = useStyles();
 
     const history = useHistory();
+    
 
     const [tradeCancle, { data: cancle }] = useMutation(TRADE_CANCLE, {
         variables: {

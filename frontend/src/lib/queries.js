@@ -64,21 +64,10 @@ query GetMyBids($author:ID!){
 }
 `
 
-export const GET_MY_ROOM_LIST_FOR_SELLER = gql`
-query GetMyRoomListForSeller($seller:ID){
-  getMyRoomListForSeller(seller:$seller){
+export const GET_MY_ROOM_FOR_SELLER = gql`
+query getMyRoomForSeller($seller:ID){
+  getMyRoomForSeller(seller:$seller){
     _id
-    request{
-      author{
-        _id
-        name
-      }
-      category
-    }
-    seller{
-      _id
-      name
-    }
     messages{
       name
       message
@@ -243,6 +232,12 @@ mutation RequestTimeOver($request:ID){
 export const EDIT_MY_PROFILE = gql`
 mutation EditMyProfile($input:ProfileInput){
   editMyProfile(input:$input)
+}
+`
+
+export const EXPERT_REGISTER = gql`
+mutation ExpertRegister($user:UserInput,$profile:ProfileInput){
+  expertRegister(user:$user,profile:$profile)
 }
 `
 

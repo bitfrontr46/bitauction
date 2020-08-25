@@ -93,8 +93,8 @@ const SellerHome = () => {
                                 <Typography variant="h6" color="textSecondary" paragraph>
                                     when you want to have own website,<br/>
                                     here is best solution.
-                                    <Button component={Link} className={classes.linkStyle} to="/user/enroll">
-                                        EXPERT Register<ArrowForwardIcon fontSize="small" />
+                                    <Button component={Link} className={classes.linkStyle} to="/seller/request">
+                                        REQUEST LIST<ArrowForwardIcon fontSize="small" />
                                     </Button>
                                 </Typography>
                             </Paper>

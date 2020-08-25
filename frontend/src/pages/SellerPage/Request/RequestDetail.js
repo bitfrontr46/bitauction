@@ -42,10 +42,10 @@ function RequestDetail(props) {
         <Fade in={checked}>
             <Container>
                 <Grid className={classes.gridStyle} container spacing={9}>
-                    <Grid item xs={6}>
+                    <Grid item xs={7}>
                         <RequestCard obj={data} />
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={5}>
                         {(data.deadLine < new Date().getTime())
                             ?
                             <>
@@ -64,7 +64,7 @@ function RequestDetail(props) {
                                         <List dense={true} key={index}>
                                             <ListItem>
                                                 <CheckIcon />&nbsp;&nbsp;
-                                                <ListItemText primary={obj} primaryTypographyProps={{variant:"h6"}} />
+                                                <ListItemText primary={obj} primaryTypographyProps={{variant:"subtitle1"}} />
                                             </ListItem>
                                         </List>
                                     )

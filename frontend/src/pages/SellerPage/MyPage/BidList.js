@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
-import { CircularProgress, Container, Grid, CardHeader, Divider, Card, CardContent, Typography } from '@material-ui/core';
+import { CircularProgress, Container, Grid, CardHeader, Divider, Card, CardContent, Typography, Button } from '@material-ui/core';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -16,6 +16,7 @@ import Counter from '../../../components/Counter';
 import Collapse from '@material-ui/core/Collapse';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+import Chat from '../../../components/chat';
 
 
 
@@ -29,6 +30,12 @@ const BidList = () => {
     }
 
     const [checked, setChecked] = useState(false);
+
+    const [chatOpen,setChatOpen] = useState(false);
+
+    const handleChatClose = () => {
+        setChatOpen(false);
+    }
 
     const onClickChecked = () => {
         if (checked) {
@@ -81,16 +88,25 @@ const BidList = () => {
             return (
 
                 <Grid key={obj._id} style={{ margin: 'auto' }} item xs={4}>
-                    <Collapse in={checked} collapsedHeight={98}>
-                        <Card onClick={onClickChecked} elevation={3}>
-                            <CardHeader action={checked ? <ExpandLessIcon/> : <ExpandMoreIcon/>} style={{ textAlign: 'center' }} title={`${obj.request.author.name}님의 요청서`} subheader={obj.request.requestedAt} />
+                    <Collapse in={checked} collapsedHeight={88}>
+                        <Card elevation={3}>
+                            <CardHeader onClick={onClickChecked} action={checked ? <ExpandLessIcon /> : <ExpandMoreIcon />} style={{ textAlign: 'center' }} title={`${obj.request.author.name}님의 요청서`} subheader={obj.request.requestedAt} />
                             <Divider />
                             <CardContent>
-                                <ul>
-                                    <li>{obj.request.category}</li>
-                                    <li>{obj.request.detail}</li>
-                                </ul>
+                                <Grid container spacing={3}>
+                                    <Grid item xs={6}>
+                                        <Button style={{ width: '100%' }} variant="outlined">
+                                            자세히
+                                        </Button>
+                                    </Grid>
+                                    <Grid item xs={6}>
+                                        <Button onClick={()=>{setChatOpen(true)}} style={{ width: '100%' }} variant="outlined">
+                                            1:1 채팅
+                                        </Button>
+                                    </Grid>
+                                </Grid>
                             </CardContent>
+                            <Chat open={chatOpen} onClose={handleChatClose} request={obj.request._id} seller={user_id} />
                         </Card>
                     </Collapse>
                 </Grid>

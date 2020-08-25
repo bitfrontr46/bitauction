@@ -82,13 +82,6 @@ const RequestDetail = (props) => {
         console.log(data);
     }
 
-    if (error) {
-        alert(error);
-        history.push('/');
-        return (
-            <CircularProgress className={classes.loadingStyle} />
-        )
-    }
 
     const onClickChoice = (bid_id) => {
         choiceOneBid({
@@ -113,10 +106,7 @@ const RequestDetail = (props) => {
             })[0]
             return <TradeCompelete data={data2} requestData={requestData}/>
         case '취소된 거래':
-            const data3 = data.getBidsInRequest.filter((obj) => {
-                return obj.state === '취소된 거래';
-            })[0]
-            return <CanceledTrade data={data3} requestData={requestData}/>
+            return <CanceledTrade requestData={requestData}/>
 
         default:
             return <ReceiveList onClickChoice={onClickChoice} bidData={data.getBidsInRequest} requestData={requestData} />

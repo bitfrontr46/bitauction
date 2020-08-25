@@ -35,6 +35,7 @@ server.express.post('/image', upload.fields([{ name: 'profileImage' }, { name: '
     let profileImage = '';
     let exampleImages = new Array;
     let exPreview = new Array;
+    
     if(req.files.profileImage){
         profileImage = req.files.profileImage[0].location;
     } else {

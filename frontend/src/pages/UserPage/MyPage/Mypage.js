@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Link } from 'react-router-dom';
-import Chat from './chat';
 import MyRequest from './MyRequest';
 import { Grid, Container, Divider, Avatar, Typography } from '@material-ui/core';
 import Image from 'material-ui-image';

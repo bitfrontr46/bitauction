@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Button } from '@material-ui/core';
 import PopOver from './PopOver';
-import UserChat from '../../pages/UserPage/MyPage/chat';
-import SellerChat from '../../pages/SellerPage/MyPage/chat';
+import UserChat from '../chat';
 import PhoneNumber from './PhoneNumber';
 
 const CommunicateButton = ({request_id,seller_id,phone}) => {

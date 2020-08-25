@@ -1,8 +1,10 @@
 import React from 'react'
 import RequestCard from '../../../../components/RequestCard'
-import { Container,Grid,Typography,Divider,makeStyles,Avatar } from '@material-ui/core'
+import { Container, Grid, Typography, Divider, makeStyles, Avatar, Button } from '@material-ui/core'
 import Rating from '@material-ui/lab/Rating';
 import PersonIcon from '@material-ui/icons/Person';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import EditIcon from '@material-ui/icons/Edit';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -22,9 +24,16 @@ const useStyles = makeStyles((theme) => ({
         width: '100px',
         height: '100px',
     },
+    icon: {
+        display: 'block',
+        fontSize: 50,
+        marginTop: '80px',
+        margin: 'auto',
+        color: "#4caf50",
+    }
 }));
 
-const TradeCompelete = ({data,requestData}) => {
+const TradeCompelete = ({ data, requestData }) => {
 
     const classes = useStyles();
     return (
@@ -34,16 +43,25 @@ const TradeCompelete = ({data,requestData}) => {
                     <RequestCard obj={requestData} />
                 </Grid>
                 <Grid item xs={6}>
+                    <CheckCircleIcon className={classes.icon} />
+                    <br />
+                    <Typography align="center" variant="h4" paragraph>
+                        거래 완료!
+                    </Typography>
+                    <br />
+                    <Typography variant="h5" paragraph>
+                        전문가
+                    </Typography>
                     <Grid container spacing={6}>
                         <Grid item xs={3}>
-                        {data.author.profile.profileImage 
-                            ?
-                            <Avatar src={data.author.profile.profileImage} className={classes.large} />
-                            :
-                            <Avatar className={classes.large}>
-                                <PersonIcon style={{ fontSize: 100 }} />
-                            </Avatar>
-                        }
+                            {data.author.profile.profileImage
+                                ?
+                                <Avatar src={data.author.profile.profileImage} className={classes.large} />
+                                :
+                                <Avatar className={classes.large}>
+                                    <PersonIcon style={{ fontSize: 100 }} />
+                                </Avatar>
+                            }
                         </Grid>
                         <Grid item xs={6} style={{ marginTop: '8px' }}>
                             <Typography variant="h6">
@@ -53,45 +71,19 @@ const TradeCompelete = ({data,requestData}) => {
                             <Typography>3.5/5.0</Typography>
                         </Grid>
                     </Grid>
-                    <h1>거래완료</h1>
-                </Grid>
-            </Grid>
-            <Divider/>
-            <Grid container className={classes.gridStyle} spacing={9}>
-                <Grid item xs={4}>
-                    <Typography align="center" variant="h5" gutterBottom>안내</Typography>
-                    <ul>
-                        <li>
-                            본 웹사이트는 고객과 전문가를 연결시켜드리는 중개 플랫폼 입니다.
-                        </li>
-                        <br/>
-                        <li>
-                            사이트 운영자는 거래에 관여하지 않습니다.
-                        </li>
-                        <br/>
-                        <li>
-
-                        </li>
-                    </ul>
-                </Grid>
-                <Grid item xs={4}>
-                    <Typography align="center" variant="h5" gutterBottom>교환/환불</Typography>
-                </Grid>
-                <Grid item xs={4}>
-                    <Typography align="center" variant="h5" gutterBottom>평점과 리뷰</Typography>
-                    <ul>
-                        <li>
-                            평점과 리뷰는 거래 완료 고객에 한해서만 작성이 가능합니다.
-                        </li>
-                        <br/>
-                        <li>
-                            사이트 운영자는 거래에 관여하지 않습니다.
-                        </li>
-                        <br/>
-                        <li>
-
-                        </li>
-                    </ul>
+                    <br />
+                    <Typography style={{ display: 'flex', alignItems: 'center' }}>
+                        거래는 만족스러우셨나요? &nbsp;&nbsp;&nbsp;
+                            <Button
+                            variant="contained"
+                            color="primary"
+                            size="small"
+                            className={classes.button}
+                            endIcon={<EditIcon />}
+                        >
+                            후기 작성하기
+                        </Button>
+                    </Typography>
                 </Grid>
             </Grid>
         </Container>
