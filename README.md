@@ -1,14 +1,20 @@
-## `git l` 설정 방법
+## 업무 담당
 
-1. `nano ~/.gitconfig`을 열어주세요.
-2. 아래 내용을 입력하면, `git l` 단축명령어를 사용할 수 있습니다.
+1. 김동제
 
-<br/>
+- MainPage, UserPage
 
-`[alias]`
+2. 김영은
 
-<br/>
+- Upload Photo 기능
 
-`l = log --all --graph --oneline`
+3. 정충휘
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- Admin Page
+
+4. 최진흥
+
+- BackEnd
+
+### History Version은 무조건 4.10.1로 맞춰놓아야 합니다!
+## npm install history@4.10.1

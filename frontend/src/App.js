@@ -1,66 +1,70 @@
-import React, { useEffect } from 'react';
-import { Switch, Route, BrowserRouter } from 'react-router-dom';
-import Home from './pages/Home';
-import Navigation from './components/Navigation';
-import Footer from './components/Footer';
-import Login from './pages/Login';
-import Join from './pages/Join';
-import Seller from './pages/SellerPage';
-import User from './pages/UserPage';
-import { useDispatch } from 'react-redux';
-import { Container } from '@material-ui/core';
+import React, { useEffect } from "react";
+import { Switch, Route, BrowserRouter } from "react-router-dom";
+import Home from "./pages/Home";
+import Seller from "./pages/SellerPage";
+import User from "./pages/UserPage";
+import { useDispatch } from "react-redux";
 
-// const Seller = React.lazy(() => import('./pages/SellerPage'));
-// const User = React.lazy(() => import('./pages/UserPage'));
+import PrivateRoute from "./components/PrivateRoute"
+import AdminRoute from "./components/AdminRoute"
+import AdminLogin from "./pages/Admin/AdminLogin"
+import AdminHome from "./pages/Admin/AdminHome"
+import AdminAccountList from "./pages/Admin/AdminAccountList"
+import AdminTagsList from "./pages/Admin/AdminTagsList"
+
+import NotFound from "./components/NotFound";
 
 function App() {
-
+  //Login Session 유지
   const dispatch = useDispatch();
 
   useEffect(() => {
     const is_login = () => {
-      if (localStorage.getItem('is_login') === 'true') {
-        return true
+      if (localStorage.getItem("is_login") === "true") {
+        return true;
       } else {
-        return false
+        return false;
       }
-    }
+    };
     const is_seller = () => {
-      if (localStorage.getItem('is_seller') === 'true') {
-        return true
+      if (localStorage.getItem("is_seller") === "true") {
+        return true;
       } else {
-        return false
+        return false;
       }
-    }
-    const user_id = localStorage.getItem('user_id');
-    const userName = localStorage.getItem('userName');
+    };
+    const user_id = localStorage.getItem("user_id");
+    const userName = localStorage.getItem("userName");
     if (is_login()) {
-      console.log('자동로그인!');
+      console.log("자동로그인!");
       dispatch({
-        type: 'LOGIN', payload: {
+        type: "LOGIN",
+        payload: {
           user_id: user_id,
           is_seller: is_seller(),
           userName: userName,
-        }
+        },
       });
     }
-  }, [dispatch])
+  }, [dispatch]);
+
   return (
-    <BrowserRouter>
-    <div style={{ backgroundColor: '#f9f9f9' }}>
-    <Navigation></Navigation>
-    </div>
+    <>
+      <BrowserRouter>
         <Switch>
-          <Route path='/' component={Home} exact />
-          <Route path='/seller' component={Seller} />
-          <Route path='/user' component={User} />
-          <Route path='/login' component={Login} />
-          <Route path='/join' component={Join} />
+          <Route path="/" component={Home} exact />
+          <PrivateRoute path="/seller" component={Seller} />
+          <PrivateRoute path="/user" component={User} />
+          {/* 관리자 페이지 */}
+          <Route path="/admin/login" component={AdminLogin} />
+          <AdminRoute path="/admin/home" component={AdminHome} />
+          <AdminRoute path="/admin/accountlist" component={AdminAccountList} />
+          <AdminRoute path="/admin/tagslist" component={AdminTagsList} />
+          {/* 404 */}
+          <Route component={NotFound} />
         </Switch>
-      <div style={{ backgroundColor: '#f9f9f9' }}>
-        <Footer></Footer>
-      </div>
-    </BrowserRouter>
+      </BrowserRouter>
+    </>
   );
 }
 
