@@ -75,7 +75,6 @@ function Navigation() {
         } else {
             return (
                 <Typography>
-                    <Link className={classes.menuStyle} to='/'>HOME</Link>
                     <Link className={classes.menuStyle} to='/login'>LOGIN</Link>
                     <Link className={classes.menuStyle} to='/join'>JOIN</Link>
                 </Typography>
@@ -84,16 +83,18 @@ function Navigation() {
     }
 
     return (
-        <Container className={classes.root}>
-            <Toolbar>
-                <Typography className={classes.title}>
-                    HELL
-                </Typography>
-                <div className={classes.navStyle}>
-                    {loginMenu()}
-                </div>
-            </Toolbar>
-        </Container>
+        <div style={{ backgroundColor: '#f9f9f9' }}>
+            <Container className={classes.root}>
+                <Toolbar>
+                    <Typography className={classes.title}>
+                        HELL
+                    </Typography>
+                    <div className={classes.navStyle}>
+                        {loginMenu()}
+                    </div>
+                </Toolbar>
+            </Container>
+        </div>
     )
 }
 

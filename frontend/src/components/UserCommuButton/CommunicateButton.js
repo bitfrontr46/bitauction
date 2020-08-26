@@ -4,7 +4,7 @@ import PopOver from './PopOver';
 import UserChat from '../chat';
 import PhoneNumber from './PhoneNumber';
 
-const CommunicateButton = ({request_id,seller_id,phone}) => {
+const CommunicateButton = ({request_id,seller_id,phone,avatarSrc}) => {
 
     const [anchorEl, setAnchorEl] = useState(null);
 
@@ -36,7 +36,7 @@ const CommunicateButton = ({request_id,seller_id,phone}) => {
             상담하기
         </Button>
         <PopOver setNumberOpen={setNumberOpen} setChatOpen={setChatOpen} open={open} anchorEl={anchorEl} handleClose={handleClose}/>
-        {chatOpen && <UserChat open={chatOpen} onClose={handleChatClose} request={request_id} seller={seller_id}/>}
+        {chatOpen && <UserChat open={chatOpen} onClose={handleChatClose} request={request_id} seller={seller_id} avatarSrc={avatarSrc} /> }
         <PhoneNumber open={numberOpen} onClose={handleNumberClose} phone={phone}/>
         </>
     )

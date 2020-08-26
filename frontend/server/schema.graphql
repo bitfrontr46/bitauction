@@ -7,7 +7,6 @@ type Query {
     getMyBids(author: ID!) : [Bid]
     getBidsInRequest(request: ID) : [Bid]
     getMyRoom(request: ID,seller: ID) : Room
-    getMyRoomForSeller(request: ID,seller: ID) : Room
 }
 
 type Mutation {

@@ -22,7 +22,7 @@ const PraviteRoute = ({ component: Component, ...rest }) => {
             </MainLayout>
           );
         } else {
-          return <Redirect to="/login" />;
+          return <Redirect to="/" />;
         }
       }}
     />

@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import BidList from "./BidList";
 import {
   Grid,
@@ -12,7 +12,6 @@ import Button from "@material-ui/core/Button";
 import ProfileModal from "../../../components/Profile/ProfileModal";
 import { GET_MY_PROFILE_IMAGE } from "../../../lib/queries"
 import { useQuery } from "@apollo/client";
-import PersonIcon from "@material-ui/icons/Person";
 
 const useStyle = makeStyles((theme) => ({
   heroContent: {
@@ -37,73 +36,49 @@ const useStyle = makeStyles((theme) => ({
 }));
 
 const MyPage = () => {
-  const classes = useStyle();
-  const userName = localStorage.getItem("userName");
-  const user_id = localStorage.getItem("user_id");
-  const [open, setOpen] = React.useState(false);
+    const classes = useStyle();
+    const userName = localStorage.getItem('userName');
+    const user_id = localStorage.getItem('user_id')
+    const [open, setOpen] = React.useState(false);
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+    const handleClose = () => {
+        setOpen(false);
+    };
 
-  const { data } = useQuery(GET_MY_PROFILE_IMAGE, {
-    variables: {
-      user: user_id,
-    },
-    fetchPolicy: "cache-and-network",
-  });
+    const { loding,data } = useQuery(GET_MY_PROFILE_IMAGE, {
+        variables: {
+            user: user_id,
+        },
+        fetchPolicy: 'cache-and-network',
+    })
 
+    return (
 
-      return (
         <Container className={classes.heroContent}>
-          <Grid container>
-            <Grid className={classes.gridStyle} item xs={2}>
-              {data && 
-                data.getMyProfile.profileImage ? 
-                <Avatar
-                  className={classes.avatarStyle}
-                  src={data.getMyProfile.profileImage}
-                />
-              : 
-                <Avatar className={classes.avatarStyle}>
-                  <PersonIcon style={{ fontSize: 100 }} />
-                </Avatar>
-              }
-              <br />
-              <Typography variant="h5" gutterBottom>
-                {userName}
-              </Typography>
-              <Button
-                className={classes.buttonStyle}
-                variant="outlined"
-                component={Link}
-                to="/seller/mypage"
-              >
-                판매 정보
-              </Button>
-              <Button
-                className={classes.buttonStyle}
-                variant="outlined"
-                component={Link}
-                to="/user/mypage"
-              >
-                구매 정보
-              </Button>
-              <Button
-                className={classes.buttonStyle}
-                variant="outlined"
-                onClick={handleClickOpen}
-              >
-                나의 프로필
-              </Button>
-              <br />
-            </Grid>
-            <Grid item xs={9}>
-              <Route exact path="/seller/mypage" component={BidList} />
+            <Grid container>
+                <Grid className={classes.gridStyle} item xs={2}>
+                    <Avatar className={classes.avatarStyle} src={(!loding && data) && data.getMyProfile.profileImage} />
+                    <br />
+                    <Typography variant="h5" gutterBottom>{userName}</Typography>
+                    <Button className={classes.buttonStyle} variant="outlined" component={Link} to='/seller/mypage'>
+                        판매 정보
+                    </Button>
+                    <Button className={classes.buttonStyle} variant="outlined" component={Link} to='/user/mypage'>
+                        구매 정보
+                    </Button>
+                    <Button className={classes.buttonStyle} variant="outlined" onClick={handleClickOpen}>
+                        나의 프로필
+                    </Button>
+                    <br />
+                </Grid>
+                <Grid item xs={9}>
+                    <BidList/>
+                </Grid>
+                <ProfileModal name={userName} open={open} onClose={handleClose} user_id={user_id} />
             </Grid>
             <ProfileModal
               name={userName}
@@ -111,7 +86,6 @@ const MyPage = () => {
               onClose={handleClose}
               user_id={user_id}
             />
-          </Grid>
         </Container>
       );
 
@@ -205,4 +179,4 @@ const MyPage = () => {
 
 // }
 
-export default MyPage;
+export default MyPage

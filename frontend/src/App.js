@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
-import { Switch, Route, BrowserRouter } from "react-router-dom";
-import Home from "./pages/Home";
-import Seller from "./pages/SellerPage";
-import User from "./pages/UserPage";
-import { useDispatch } from "react-redux";
+import React, { useEffect } from 'react';
+import { Switch, Route, BrowserRouter } from 'react-router-dom';
+import Home from './pages/Home';
+import Seller from './pages/SellerPage';
+import User from './pages/UserPage';
+import { useDispatch } from 'react-redux';
+import PrivateRoute from './components/PrivateRoute';
 
-import PrivateRoute from "./components/PrivateRoute"
 import AdminRoute from "./components/AdminRoute"
 import AdminLogin from "./pages/Admin/AdminLogin"
 import AdminHome from "./pages/Admin/AdminHome"
@@ -18,25 +18,26 @@ function App() {
   //Login Session 유지
   const dispatch = useDispatch();
 
+  const is_login = () => {
+    if (localStorage.getItem('is_login') === 'true') {
+      return true
+    } else {
+      return false
+    }
+  }
+  const is_seller = () => {
+    if (localStorage.getItem('is_seller') === 'true') {
+      return true
+    } else {
+      return false
+    }
+  }
+  const user_id = localStorage.getItem('user_id');
+
+  const userName = localStorage.getItem('userName');
+
   useEffect(() => {
-    const is_login = () => {
-      if (localStorage.getItem("is_login") === "true") {
-        return true;
-      } else {
-        return false;
-      }
-    };
-    const is_seller = () => {
-      if (localStorage.getItem("is_seller") === "true") {
-        return true;
-      } else {
-        return false;
-      }
-    };
-    const user_id = localStorage.getItem("user_id");
-    const userName = localStorage.getItem("userName");
     if (is_login()) {
-      console.log("자동로그인!");
       dispatch({
         type: "LOGIN",
         payload: {
