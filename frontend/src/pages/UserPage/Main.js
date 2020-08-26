@@ -1,10 +1,9 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom';
-import Enroll from './Enroll';
+import Enroll from './enroll';
 import UserHome from './UserHome';
 import MyPage from './MyPage';
 import RequestDetail from './MyPage/MyRequest/RequestDetail';
-import { Container } from '@material-ui/core';
 
 const Main = () => {
     return (

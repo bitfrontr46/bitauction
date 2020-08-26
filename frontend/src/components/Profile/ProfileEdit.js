@@ -11,9 +11,7 @@ import { EDIT_MY_PROFILE } from '../../lib/queries';
 import { useMutation } from '@apollo/client';
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import Dropzone from "react-dropzone";
 import ProfileCarousel from './ProfileCarousel';
-import AddIcon from '@material-ui/icons/Add';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Axios from 'axios';
 
