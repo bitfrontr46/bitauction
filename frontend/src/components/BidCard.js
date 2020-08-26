@@ -93,7 +93,7 @@ const BidCard = ({ data, requestData, onClickChoice }) => {
                         {data.price}원
                     </Grid>
                     <Grid item xs={4} style={{ margin: 'auto' }}>
-                        <UserCommuButton request_id={requestData._id} seller_id={data.author._id} phone={data.author.profile.phone} />
+                        <UserCommuButton request_id={requestData._id} seller_id={data.author._id} phone={data.author.profile.phone} avatarSrc={data.author.profile.profileImage} />
                         <Button onClick={() => { onClickChoice(data._id) }} style={{ width: '100%' }} variant="outlined">
                             의뢰하기
                         </Button>

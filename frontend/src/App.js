@@ -47,8 +47,6 @@ function App() {
   return (
     <BrowserRouter>
       <Route path='/' component={Home} exact />
-      <Route path='/login' component={Login} />
-      <Route path='/join' component={Join} />
       <PrivateRoute path='/seller' component={Seller}/>
       <PrivateRoute path='/user' component={User}/>
     </BrowserRouter>

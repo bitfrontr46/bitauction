@@ -100,7 +100,7 @@ const NowTrading = ({ data, requestData }) => {
                             <ListItemText primary='가격은 상호 협의를 통해 변동이 있을 수 있습니다.' />
                         </ListItem>
                     </List>
-                    <UserCommuButton request_id={requestData._id} seller_id={data.author._id} phone={data.author.profile.phone} />
+                    <UserCommuButton avatarSrc={data.author.profile.profileImage} request_id={requestData._id} seller_id={data.author._id} phone={data.author.profile.phone} />
                     <Button onClick={tradeComplete} style={{ width: '100%' }} variant="outlined">
                         거래 완료
                     </Button>

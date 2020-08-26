@@ -17,15 +17,13 @@ import { Toolbar } from '@material-ui/core';
 
 
 const useStyles = makeStyles((theme) => ({
-  title: {
-    textDecoration: 'none',
-    color: 'black',
-  },
   paper: {
-    padding: theme.spacing(10, 0, 6),
+    padding: theme.spacing(7),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    backgroundColor : '#F2F3F4',
+    borderRadius : '10px',
   },
   avatar: {
     margin: theme.spacing(1),
@@ -40,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Login = () => {
+const Login = ({handleJoin}) => {
 
   const classes = useStyles();
   const history = useHistory();
@@ -94,18 +92,9 @@ const Login = () => {
         ...user
       }
     })
-    console.log('???????');
   }
 
   return (
-    <>
-      <Toolbar>
-        <RLink className={classes.title} to='/'>
-          <Typography variant="h4">
-            HELL
-          </Typography>
-        </RLink>
-      </Toolbar>
       <Container className={classes.paper} component="main" maxWidth="xs">
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
@@ -150,19 +139,18 @@ const Login = () => {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link href="#" variant="body2">
+              <Button href="#">
                 비밀번호 찾기
-              </Link>
+              </Button>
             </Grid>
             <Grid item>
-              <Link component={RLink} to="/join" variant="body2">
+              <Button onClick={handleJoin}>
                 회원가입
-              </Link>
+              </Button>
             </Grid>
           </Grid>
         </form>
       </Container>
-    </>
   );
 }
 

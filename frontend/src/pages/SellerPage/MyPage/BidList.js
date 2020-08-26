@@ -31,8 +31,15 @@ const BidList = () => {
 
     const [chatOpen,setChatOpen] = useState(false);
 
+    const [request_id, setRequest_id] = useState('');
+
     const handleChatClose = () => {
         setChatOpen(false);
+    }
+
+    const handleChatOpen = (request_id) => {
+        setRequest_id(request_id)
+        setChatOpen(true);
     }
 
     const onClickChecked = () => {
@@ -43,8 +50,6 @@ const BidList = () => {
         }
     }
 
-    const history = useHistory();
-
     const { loading, data, error } = useQuery(GET_MY_BIDS, {
         variables: { author: user_id },
         fetchPolicy: 'cache-and-network',
@@ -52,11 +57,7 @@ const BidList = () => {
     )
 
     if (error) {
-        alert(error);
-        history.push('/');
-        return (
-            <CircularProgress style={loadingStyle} />
-        )
+        console.log(error);
     }
 
     if (loading) {
@@ -98,13 +99,12 @@ const BidList = () => {
                                         </Button>
                                     </Grid>
                                     <Grid item xs={6}>
-                                        <Button onClick={()=>{setChatOpen(true)}} style={{ width: '100%' }} variant="outlined">
+                                        <Button onClick={()=>{handleChatOpen(obj.request._id)}} style={{ width: '100%' }} variant="outlined">
                                             1:1 채팅
                                         </Button>
                                     </Grid>
                                 </Grid>
                             </CardContent>
-                            <Chat open={chatOpen} onClose={handleChatClose} request={obj.request._id} seller={user_id} />
                         </Card>
                     </Collapse>
                 </Grid>
@@ -141,6 +141,7 @@ const BidList = () => {
                         </TableBody>
                     </Table>
                 </TableContainer>
+                <Chat open={chatOpen} onClose={handleChatClose} request={request_id} seller={user_id} />
             </div>
 
         )

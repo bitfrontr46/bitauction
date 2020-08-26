@@ -69,7 +69,7 @@ const resolvers = {
             if (ObjectId(args.author)) {
                 const result = Bid.find({ author: args.author }).populate({
                     path: 'request',
-                    populate: { path: 'author', select: 'name email' }
+                    populate: { path: 'author', select: 'name' }
                 })
                     .then((res) => {
                         return res
@@ -96,13 +96,6 @@ const resolvers = {
             console.log('args', args);
             const result = Room.findOne({ request: args.request, seller: args.seller })
             return result;
-        },
-
-        getMyRoomForSeller: (root, args) => {
-            if (ObjectId(args.seller)) {
-                const result = Room.findOne({ request: args.request,seller: args.seller })
-                return result;
-            }
         },
     },
 

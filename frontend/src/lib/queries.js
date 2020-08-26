@@ -49,7 +49,6 @@ query GetMyBids($author:ID!){
       author{
         _id
         name
-        email
       }
       detail
       category
@@ -60,19 +59,6 @@ query GetMyBids($author:ID!){
       state
     }
     state
-  }
-}
-`
-
-export const GET_MY_ROOM_FOR_SELLER = gql`
-query getMyRoomForSeller($seller:ID){
-  getMyRoomForSeller(seller:$seller){
-    _id
-    messages{
-      name
-      message
-      createdAt
-    }
   }
 }
 `
