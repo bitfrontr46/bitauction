@@ -75,14 +75,7 @@ const BidCard = ({ data, requestData, onClickChoice }) => {
             <CardContent className={classes.cardContent}>
                 <Grid container>
                     <Grid item xs={4}>
-                        {data.author.profile.profileImage 
-                            ?
-                            <Avatar onClick={() => { handleClickOpen(data.author._id, data.author.name) }} src={data.author.profile.profileImage} className={classes.large} />
-                            :
-                            <Avatar onClick={() => { handleClickOpen(data.author._id, data.author.name) }} className={classes.large}>
-                                <PersonIcon style={{ fontSize: 100 }} />
-                            </Avatar>
-                        }
+                        <Avatar onClick={() => { handleClickOpen(data.author._id, data.author.name) }} src={data.author.profile.profileImage} className={classes.large} />
                     </Grid>
                     <Grid item xs={4} style={{ margin: 'auto' }} >
                         <Typography component="legend" >

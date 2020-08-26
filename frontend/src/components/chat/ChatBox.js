@@ -121,8 +121,6 @@ function ChatBox({ userInfo,avatarSrc }) {
                 }
             })
             setMessage('');
-        } else {
-            return;
         }
     }
 
@@ -137,7 +135,6 @@ function ChatBox({ userInfo,avatarSrc }) {
             <form onKeyDown={onSubmitForm}>
                 <OutlinedInput
                     className={classes.inputStyle}
-                    va
                     rowsMax={4}
                     multiline
                     value={message}

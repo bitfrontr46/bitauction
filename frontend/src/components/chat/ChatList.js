@@ -53,7 +53,7 @@ function ChatList({ data, userName,avatarSrc }) {
                 </> :
                 (data.name === userName) ?
                     <>
-                        <ListItem alignItems="flex-start" style={{ textAlign: 'right', paddingRight: '0px' }}>
+                        <ListItem alignItems="center" style={{ textAlign: 'right', paddingRight: '0px' }}>
                             <ListItemText
                                 primary={
                                     <React.Fragment>
@@ -68,7 +68,7 @@ function ChatList({ data, userName,avatarSrc }) {
                         </ListItem>
                     </> :
                     <>
-                        <ListItem alignItems="flex-start" style={{ paddingLeft: '0px' }}>
+                        <ListItem alignItems="center" style={{ margin:'0px' }}>
                             <ListItemAvatar >
                                 <Avatar alt="Remy Sharp" src={avatarSrc} />
                             </ListItemAvatar>

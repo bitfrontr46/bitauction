@@ -46,7 +46,7 @@ const MyPage = () => {
         setOpen(false);
     };
 
-    const { data } = useQuery(GET_MY_PROFILE_IMAGE, {
+    const { loding,data } = useQuery(GET_MY_PROFILE_IMAGE, {
         variables: {
             user: user_id,
         },
@@ -54,19 +54,11 @@ const MyPage = () => {
     })
 
     return (
-        
+
         <Container className={classes.heroContent}>
             <Grid container>
                 <Grid className={classes.gridStyle} item xs={2}>
-                    {data &&
-                        data.getMyProfile.profileImage
-                        ?
-                        <Avatar className={classes.avatarStyle} src={data.getMyProfile.profileImage} />
-                        :
-                        <Avatar className={classes.avatarStyle}>
-                            <PersonIcon style={{ fontSize: 100 }} />
-                        </Avatar>
-                    }
+                    <Avatar className={classes.avatarStyle} src={(!loding && data) && data.getMyProfile.profileImage} />
                     <br />
                     <Typography variant="h5" gutterBottom>{userName}</Typography>
                     <Button className={classes.buttonStyle} variant="outlined" component={Link} to='/seller/mypage'>
@@ -81,7 +73,7 @@ const MyPage = () => {
                     <br />
                 </Grid>
                 <Grid item xs={9}>
-                    <Route exact path='/seller/mypage' component={BidList} />
+                    <BidList/>
                 </Grid>
                 <ProfileModal name={userName} open={open} onClose={handleClose} user_id={user_id} />
             </Grid>
