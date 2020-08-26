@@ -4,6 +4,7 @@ const requestController = require('../controller/request')
 const userController = require('../controller/user')
 const biddingController = require('../controller/bidding')
 const myPageController = require('../controller/myPage')
+const reviewController = require('../controller/review')
 
 router.post('/enroll',requestController.enroll);
 router.get('/list', requestController.list);
@@ -16,6 +17,8 @@ router.post('/MyBiddingList', myPageController.MyBiddingList);
 router.post('/login',userController.login);
 router.post('/join',userController.join);
 router.post('/myProfile',userController.myProfile);
+router.post('/review', reviewController.Review) //Review(모듈 이름)
+
 
 
 module.exports = router;
