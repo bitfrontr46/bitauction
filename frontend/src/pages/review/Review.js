@@ -27,16 +27,23 @@ const useStyles = makeStyles((theme)=>({ //css
 //pros로 받아온 데이터(판매자,유저 정보)를 axios로 이용해서 서버로 보내기
 const Review = ({user_id,seller_id,userName}) => { //판매자,구매자(리뷰 작성자) props
 
-    const[text, setText] = useState({});
-    const[rating, setRating] = useState({});
+    const[text, setText] = useState('');
+    const[rating, setRating] = useState('');
+
+    //테스트(props 안 받았을 때)
+    // const user_id = '123123123';
+    // const seller_id = '12314345';
+    // const userName = '김동제'
    
     const classes = useStyles();
 
+    //텍스트, 별점 값 
     const textChangeHandelr = (e) =>{
         setText(e.currentTarget.value)
     }
     const ratingChangeHandler = (e) =>{
         setRating(e.currentTarget.value)
+    
     }
 
   
@@ -48,8 +55,10 @@ const Review = ({user_id,seller_id,userName}) => { //판매자,구매자(리뷰 
             // name : userInfo.id,
             text: text,
             rating: rating,
-    
-
+            user_id: user_id,//props
+            seller_id: seller_id,//props
+            userName: userName,//props
+            
         })
         .then(function(response){
             console.log(response);
@@ -58,6 +67,7 @@ const Review = ({user_id,seller_id,userName}) => { //판매자,구매자(리뷰 
             console.log(err);
         })
     }
+
 
     
 
@@ -90,16 +100,23 @@ const Review = ({user_id,seller_id,userName}) => { //판매자,구매자(리뷰 
           precision={0.5}
           size="large"
           align="center"
+          onChange={ratingChangeHandler}
         />
        </div>
         선택하세요
+        <br/>
+        <br/>
+
+        <hr width="700px" color="whitesmoke"/>
 
         <br/>
         <br/>
-        <h2><b>사용 후기는 어떠신가요?</b></h2>
+        <h2><b>이용 후기는 어떠신가요?</b></h2>
         <TextareaAutosize 
+        rowsMin={2} //3줄 간격
         placeholder="만족도에 대한 후기를 남겨주세요"
-        style={{backgroundColor:"whitesmoke"}}
+        style={{backgroundColor:"whitesmoke", borderColor:"lightgray"}}
+        onChange={textChangeHandelr}
         />
         <br/>
         <br/>
@@ -115,17 +132,7 @@ const Review = ({user_id,seller_id,userName}) => { //판매자,구매자(리뷰 
           등록
         </Button>
         </div>
-
-        {/* <Button
-              type="submit"
-              style={{ maxWidth: "100px" }}
-              variant="contained"
-            //   color="red" //디폴트 색상(회색)
-        >
-            취소
-        </Button> */}
-     
-
+      
       </div>
     );
 }
@@ -187,8 +194,6 @@ const Person = () =>{
         -리뷰 입력 화면 
 
 
-8. 리뷰 페이지 ui 반응형으로 바꾸기 
--grid 사용
 
 
 9. 
