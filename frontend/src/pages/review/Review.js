@@ -6,6 +6,21 @@ import Rating from '@material-ui/lab/Rating';
 import {makeStyles} from '@material-ui/core/styles';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import Button from '@material-ui/core/Button';
+import Box from '@material-ui/core/Box';
+
+
+const labels ={
+  0.5: '별로예요',
+  1: '별로예요',
+  1.5: '별로예요',
+  2: '그저그래요',
+  2.5: '그저그래요',
+  3: '괜찮아요',
+  3.5: '괜찮아요',
+  4: '좋아요',
+  4.5: '좋아요',
+  5: '최고예요',
+}
 
 const useStyles = makeStyles((theme)=>({ //css 
   //theme
@@ -18,19 +33,20 @@ const useStyles = makeStyles((theme)=>({ //css
         '& > * + *': {
             marginTop: theme.spacing(1),
           },
-         
-
-
+    
     }
 }))
 
 //pros로 받아온 데이터(판매자,유저 정보)를 axios로 이용해서 서버로 보내기
 const Review = ({user_id,seller_id,userName}) => { //판매자,구매자(리뷰 작성자) props
 
+    const [value, setValue] = React.useState(2);
+    const [hover, setHover] = React.useState(-1);
+
     const[text, setText] = useState('');
     const[rating, setRating] = useState('');
 
-    //테스트(props 안 받았을 때)
+    // 테스트(props 안 받았을 때)
     // const user_id = '123123123';
     // const seller_id = '12314345';
     // const userName = '김동제'
@@ -43,7 +59,11 @@ const Review = ({user_id,seller_id,userName}) => { //판매자,구매자(리뷰 
     }
     const ratingChangeHandler = (e) =>{
         setRating(e.currentTarget.value)
-    
+        hoverCahngeHandler();
+    }
+
+    const hoverCahngeHandler = (e,newValue) =>{
+           setValue(newValue);
     }
 
   
@@ -58,6 +78,7 @@ const Review = ({user_id,seller_id,userName}) => { //판매자,구매자(리뷰 
             user_id: user_id,//props
             seller_id: seller_id,//props
             userName: userName,//props
+            //username 없앰
             
         })
         .then(function(response){
@@ -101,9 +122,16 @@ const Review = ({user_id,seller_id,userName}) => { //판매자,구매자(리뷰 
           size="large"
           align="center"
           onChange={ratingChangeHandler}
+          // onChange={(event,newValue)=>{
+          //   setValue(newValue);
+          // }}
+          onChangeActive={(event, newHover)=>{
+            setHover(newHover);
+          }}
         />
+        {value !== null && <Box ml={2}>{labels[hover !== -1 ? hover: value]}</Box>}
        </div>
-        선택하세요
+        
         <br/>
         <br/>
 
@@ -120,6 +148,8 @@ const Review = ({user_id,seller_id,userName}) => { //판매자,구매자(리뷰 
         />
         <br/>
         <br/>
+
+
 
         <div>
         <Button

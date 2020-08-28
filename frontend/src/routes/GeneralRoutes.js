@@ -14,8 +14,10 @@ import MyPage from "../pages/MyPage";
 import UploadPage from "../pages/UploadPage/UploadPage";
 import Landing from "../pages/Landing/Landing";
 import DetailPage from '../pages/Detail/DetailPage';
-import Payment from '../components/utils/Payment'
-import Review from '../pages/review/Review'
+import Payment from '../components/utils/Payment';
+import Review from '../pages/review/Review';
+import Board from '../pages/Board/Board';
+
 function GeneralRoutes() {
   const dispatch = useDispatch();
 
@@ -67,7 +69,7 @@ function GeneralRoutes() {
           <Route path="/landing" component={Landing}/>
           <Route path="/payment" component={Payment}/>
           <Route path="/review" component={Review}/>
-
+          <Route path="/board" component={Board}/>
 
         </Switch>
         <Footer />
